@@ -1,0 +1,12 @@
+{
+  "data_path": "data/processed/time_series_data.csv",
+  "model_params": {
+    "changepoint_prior_scale": 0.05,
+    "seasonality_prior_scale": 10,
+    "holidays_prior_scale": 10,
+    "seasonality_mode": "additive"
+  },
+  "test_size": 0.2,
+  "forecast_periods": 30,
+  "evaluation_metrics": ["mae", "mse", "rmse", "mape"]
+} 

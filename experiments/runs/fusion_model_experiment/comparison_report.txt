@@ -1,0 +1,28 @@
+模型比较报告
+==================================================
+
+               mae           mse        rmse         r2
+prophet  57.501175   3716.898056   60.966368 -73.925765
+fusion   95.337514  10192.403255  100.957433 -82.223260
+
+融合模型相对于Prophet的改进:
+RMSE: -65.60%
+MAE: -65.80%
+
+模型参数:
+Prophet: {
+  "yearly_seasonality": true,
+  "weekly_seasonality": true,
+  "daily_seasonality": false,
+  "seasonality_mode": "multiplicative",
+  "changepoint_prior_scale": 0.05
+}
+LightGBM: {
+  "objective": "regression",
+  "metric": "rmse",
+  "boosting_type": "gbdt",
+  "num_leaves": 31,
+  "learning_rate": 0.05,
+  "feature_fraction": 0.9,
+  "n_estimators": 100
+}

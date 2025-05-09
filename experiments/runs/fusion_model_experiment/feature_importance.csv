@@ -1,0 +1,13 @@
+feature,importance
+weekly,298
+yearly,291
+day,254
+lag_2,246
+lag_7,231
+lag_1,206
+trend,201
+lag_3,172
+day_of_week,155
+month,104
+quarter,2
+is_weekend,0

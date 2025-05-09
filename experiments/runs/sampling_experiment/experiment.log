@@ -1,0 +1,48 @@
+2025-05-08 18:09:43,484 - __main__ - INFO - 采样策略实验初始化完成，配置已保存到 experiments/runs/sampling_experiment
+2025-05-08 18:09:43,484 - __main__ - INFO - 开始价格变化采样策略实验...
+2025-05-08 18:09:43,484 - __main__ - INFO - 从 data/processed/time_series_data.csv 加载数据...
+2025-05-08 18:09:43,507 - __main__ - INFO - 使用 z-score 方法标准化数据...
+2025-05-08 18:09:43,514 - __main__ - INFO - 数据加载完成。训练集: 584行, 测试集: 146行
+2025-05-08 18:09:43,515 - __main__ - INFO - 计算价格变化标志，阈值: 0.01
+2025-05-08 18:09:43,518 - __main__ - INFO - 数据中的价格变化频率: 0.9808
+2025-05-08 18:09:43,518 - __main__ - INFO - 训练价格变化概率预测模型...
+2025-05-08 18:09:43,518 - __main__ - ERROR - 实验运行出错: Can't instantiate abstract class PriceChangeProbabilityModel with abstract methods predict
+Traceback (most recent call last):
+  File "experiments/run_sampling_experiment.py", line 492, in run
+    self.train_probability_model()
+  File "experiments/run_sampling_experiment.py", line 162, in train_probability_model
+    self.probability_model = PriceChangeProbabilityModel(
+TypeError: Can't instantiate abstract class PriceChangeProbabilityModel with abstract methods predict
+2025-05-08 18:09:43,520 - __main__ - ERROR - 实验运行出错: Can't instantiate abstract class PriceChangeProbabilityModel with abstract methods predict
+Traceback (most recent call last):
+  File "experiments/run_sampling_experiment.py", line 533, in main
+    experiment.run()
+  File "experiments/run_sampling_experiment.py", line 492, in run
+    self.train_probability_model()
+  File "experiments/run_sampling_experiment.py", line 162, in train_probability_model
+    self.probability_model = PriceChangeProbabilityModel(
+TypeError: Can't instantiate abstract class PriceChangeProbabilityModel with abstract methods predict
+2025-05-08 18:13:53,595 - __main__ - INFO - 采样策略实验初始化完成，配置已保存到 experiments/runs/sampling_experiment
+2025-05-08 18:13:53,595 - __main__ - INFO - 开始价格变化采样策略实验...
+2025-05-08 18:13:53,595 - __main__ - INFO - 从 data/processed/time_series_data.csv 加载数据...
+2025-05-08 18:13:53,603 - __main__ - INFO - 使用 z-score 方法标准化数据...
+2025-05-08 18:13:53,605 - __main__ - INFO - 数据加载完成。训练集: 584行, 测试集: 146行
+2025-05-08 18:13:53,605 - __main__ - INFO - 计算价格变化标志，阈值: 0.01
+2025-05-08 18:13:53,608 - __main__ - INFO - 数据中的价格变化频率: 0.9808
+2025-05-08 18:13:53,609 - __main__ - INFO - 训练价格变化概率预测模型...
+2025-05-08 18:13:53,609 - __main__ - ERROR - 实验运行出错: Can't instantiate abstract class PriceChangeProbabilityModel with abstract methods predict
+Traceback (most recent call last):
+  File "experiments/run_sampling_experiment.py", line 492, in run
+    self.train_probability_model()
+  File "experiments/run_sampling_experiment.py", line 162, in train_probability_model
+    self.probability_model = PriceChangeProbabilityModel(
+TypeError: Can't instantiate abstract class PriceChangeProbabilityModel with abstract methods predict
+2025-05-08 18:13:53,609 - __main__ - ERROR - 实验运行出错: Can't instantiate abstract class PriceChangeProbabilityModel with abstract methods predict
+Traceback (most recent call last):
+  File "experiments/run_sampling_experiment.py", line 533, in main
+    experiment.run()
+  File "experiments/run_sampling_experiment.py", line 492, in run
+    self.train_probability_model()
+  File "experiments/run_sampling_experiment.py", line 162, in train_probability_model
+    self.probability_model = PriceChangeProbabilityModel(
+TypeError: Can't instantiate abstract class PriceChangeProbabilityModel with abstract methods predict
