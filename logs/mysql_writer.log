@@ -1,0 +1,17 @@
+2025-05-16 01:18:05,970 - __main__ - INFO - 开始运行完整数据管道
+2025-05-16 01:18:05,971 - __main__ - INFO - 开始获取数据
+2025-05-16 01:18:06,311 - thrift.transport.TSocket - ERROR - failed to resolve sockaddr for your_impala_host:21050
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/venv/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 123, in open
+    addrs = self._resolveAddr()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/venv/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 37, in _resolveAddr
+    return socket.getaddrinfo(self.host,
+  File "/Users/apple/opt/anaconda3/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+2025-05-16 01:18:06,319 - __main__ - ERROR - 获取数据失败
+2025-05-16 01:18:06,341 - __main__ - ERROR - 获取数据失败，终止管道
+2025-05-16 02:53:59,398 - __main__ - INFO - 启动数据管道
+2025-05-16 02:53:59,398 - __main__ - INFO - 阶段1: 数据获取
+2025-05-16 02:53:59,399 - __main__ - ERROR - 数据获取失败: 'DataFetcher' object has no attribute 'logger'
+2025-05-16 02:53:59,403 - __main__ - ERROR - 数据管道执行失败: 获取的数据为空

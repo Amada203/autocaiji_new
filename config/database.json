@@ -1,7 +1,17 @@
 {
-    "host": "impala.db.yimiandata.com",
-    "port": 21051,
-    "database": "ms_libai",
-    "user": "liruixue",
-    "password": "VAN8je7J"
+  "impala": {
+    "host": "impala.db.yimiandata.com",  // 替换为实际Impala服务器地址
+    "port": 21051,              // 默认Impala端口
+    "user": "liruixue",    // 替换为实际用户名
+    "password": "VAN8je7J", // 替换为实际密码
+    "database": "ms_libai",     // 默认数据库
+    "auth_mechanism": "PLAIN"    // 认证机制
+  },
+  "mysql": {
+    "host": "localhost",
+    "port": 13306,
+    "user": "root",
+    "password": "mypassword123",
+    "database": "price_prediction"
+  }
 }
