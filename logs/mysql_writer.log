@@ -15,3 +15,36 @@ socket.gaierror: [Errno 8] nodename nor servname provided, or not known
 2025-05-16 02:53:59,398 - __main__ - INFO - 阶段1: 数据获取
 2025-05-16 02:53:59,399 - __main__ - ERROR - 数据获取失败: 'DataFetcher' object has no attribute 'logger'
 2025-05-16 02:53:59,403 - __main__ - ERROR - 数据管道执行失败: 获取的数据为空
+2025-05-17 11:03:44,653 - __main__ - INFO - 开始执行定时任务
+2025-05-17 11:03:44,654 - __main__ - INFO - 开始运行数据管道
+2025-05-17 11:03:44,654 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-17 11:03:44,654 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-17 11:03:44,656 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-17 11:03:44,936 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
+2025-05-17 11:03:44,936 - src.data.data_pipeline - ERROR - 数据获取失败: TSocket read 0 bytes
+2025-05-17 11:03:44,939 - src.data.data_pipeline - ERROR - 数据管道执行失败: 获取的数据为空
+2025-05-17 11:03:44,939 - __main__ - ERROR - 数据管道运行失败
+2025-05-17 11:03:44,939 - __main__ - INFO - 数据管道运行耗时: 0.29 秒
+2025-05-17 11:03:44,940 - __main__ - ERROR - 定时任务执行失败
+2025-05-17 11:09:34,898 - __main__ - INFO - 开始执行定时任务
+2025-05-17 11:09:34,898 - __main__ - INFO - 开始运行数据管道
+2025-05-17 11:09:34,898 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-17 11:09:34,898 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-17 11:09:34,899 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-17 11:09:35,144 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
+2025-05-17 11:09:35,144 - src.data.data_pipeline - ERROR - 数据获取失败: TSocket read 0 bytes
+2025-05-17 11:09:35,145 - src.data.data_pipeline - ERROR - 数据管道执行失败: 获取的数据为空
+2025-05-17 11:09:35,145 - __main__ - ERROR - 数据管道运行失败
+2025-05-17 11:09:35,145 - __main__ - INFO - 数据管道运行耗时: 0.25 秒
+2025-05-17 11:09:35,145 - __main__ - ERROR - 定时任务执行失败
+2025-05-17 11:10:56,222 - __main__ - INFO - 开始执行定时任务
+2025-05-17 11:10:56,223 - __main__ - INFO - 开始运行数据管道
+2025-05-17 11:10:56,223 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-17 11:10:56,223 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-17 11:10:56,224 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-17 11:10:56,454 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
+2025-05-17 11:10:56,454 - src.data.data_pipeline - ERROR - 数据获取失败: TSocket read 0 bytes
+2025-05-17 11:10:56,456 - src.data.data_pipeline - ERROR - 数据管道执行失败: 获取的数据为空
+2025-05-17 11:10:56,456 - __main__ - ERROR - 数据管道运行失败
+2025-05-17 11:10:56,457 - __main__ - INFO - 数据管道运行耗时: 0.23 秒
+2025-05-17 11:10:56,457 - __main__ - ERROR - 定时任务执行失败

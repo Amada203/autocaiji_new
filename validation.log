@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "scripts/validate_model_migration.py", line 11, in <module>
+    from src.validation.run_validation import run_full_validation
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/validation/__init__.py", line 6, in <module>
+    from .model_validator import validate_model_migration, compare_model_performance
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/validation/model_validator.py", line 55
+    [保留原有的函数实现...]
+              ^
+SyntaxError: invalid syntax

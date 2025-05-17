@@ -485,7 +485,7 @@ class SamplingScheduler:
                          start_date: Optional[datetime] = None,
                          days: int = 7) -> pd.DataFrame:
         """
-        优化采样计划以达到目标捕获率
+        增强版采样计划优化
         
         Args:
             probabilities: 含概率的DataFrame
@@ -494,14 +494,20 @@ class SamplingScheduler:
             days: 计划天数
             
         Returns:
-            优化后的采样计划
+            优化后的采样计划，包含'sku_id', 'ds', 'sample_flag', 'sampling_reason'列
         """
         logger.info(f"开始优化采样计划，目标捕获率: {self.capture_rate_target}")
         
+        # 边界条件检查
+        if len(probabilities) == 0:
+            logger.warning("空概率数据集")
+            return pd.DataFrame(columns=['sku_id', 'ds', 'sample_flag', 'sampling_reason'])
+            
+        if self.capture_rate_target <= 0 or self.capture_rate_target > 1:
+            raise ValueError("无效捕获率目标值")
+            
         # 生成初始计划
-        schedule = self.generate_schedule(
-            probabilities, sku_clusters, start_date, days
-        )
+        schedule = self.generate_schedule(probabilities, sku_clusters, start_date, days)
         
         # 确保schedule包含change_probability列
         if 'change_probability' not in schedule.columns:
@@ -511,6 +517,8 @@ class SamplingScheduler:
                 on=['sku_id', 'ds'],
                 how='left'
             )
+            # 填充缺失概率
+            schedule['change_probability'] = schedule['change_probability'].fillna(0.5)
         
         # 计算初始捕获率
         initial_capture_rate = self.estimate_capture_rate(schedule)
@@ -521,26 +529,54 @@ class SamplingScheduler:
             logger.info("初始计划已达到目标捕获率")
             return schedule[['sku_id', 'ds', 'sample_flag', 'sampling_reason']]
             
-        # 增加采样直到达到目标捕获率
+        # 进度监控设置
+        n_skus = schedule['sku_id'].nunique()
+        progress_interval = max(1, n_skus // 10)  # 每10%记录一次进度
+        processed_skus = 0
+        
+        # 优化采样计划
         while initial_capture_rate < self.capture_rate_target:
-            # 找出潜在价格变化但未采样的条目，按概率排序
+            # 找出潜在价格变化但未采样的条目，按概率和簇优先级排序
             potential_additions = schedule[
                 (schedule['sample_flag'] == 0) & 
                 (schedule['change_probability'] > 0)
-            ].sort_values('change_probability', ascending=False)
+            ].copy()
+            
+            # 添加簇优先级信息
+            if sku_clusters:
+                potential_additions['cluster'] = potential_additions['sku_id'].map(sku_clusters)
+                cluster_priority = {
+                    cluster: i for i, cluster in 
+                    enumerate(sorted(potential_additions['cluster'].unique()))
+                }
+                potential_additions['cluster_priority'] = potential_additions['cluster'].map(cluster_priority)
+                potential_additions = potential_additions.sort_values(
+                    ['cluster_priority', 'change_probability'], 
+                    ascending=[True, False]
+                )
+            else:
+                potential_additions = potential_additions.sort_values(
+                    'change_probability', 
+                    ascending=False
+                )
             
             if len(potential_additions) == 0:
                 logger.warning("无法达到目标捕获率，已采样所有可能的日期")
                 break
                 
-            # 添加最高概率的未采样条目
+            # 添加最高优先级的未采样条目
             add_idx = potential_additions.index[0]
             schedule.loc[add_idx, 'sample_flag'] = 1
             schedule.loc[add_idx, 'sampling_reason'] = 'optimization'
             
+            # 进度报告
+            processed_skus += 1
+            if processed_skus % progress_interval == 0:
+                logger.info(f"优化进度: 已处理 {processed_skus}/{n_skus} 个SKU")
+            
             # 重新计算捕获率
             new_capture_rate = self.estimate_capture_rate(schedule)
-            logger.debug(f"添加采样后捕获率: {new_capture_rate:.4f}")
+            logger.debug(f"当前捕获率: {new_capture_rate:.4f}")
             
             # 如果已达到目标，结束循环
             if new_capture_rate >= self.capture_rate_target:
@@ -550,23 +586,27 @@ class SamplingScheduler:
             # 更新捕获率
             initial_capture_rate = new_capture_rate
             
-        # 如果设置了每日最大采样数，确保不超限
+        # 结果后处理
+        if sku_clusters:
+            # 按簇和优先级排序
+            schedule['cluster'] = schedule['sku_id'].map(sku_clusters)
+            schedule = schedule.sort_values(['cluster', 'change_probability'], ascending=[True, False])
+            schedule.drop(columns=['cluster'], inplace=True)
+        
+        # 应用每日采样限制
         if self.max_samples_per_day is not None:
             schedule = self._limit_daily_samples(schedule)
-            # 重新计算捕获率
             final_capture_rate = self.estimate_capture_rate(schedule)
             logger.info(f"应用每日采样限制后的捕获率: {final_capture_rate:.4f}")
             
-        logger.info(f"采样计划优化完成，最终捕获率: {initial_capture_rate:.4f}")
-        
-        # 统计采样次数和采样比例
+        # 最终统计
         total_days = len(schedule) / schedule['sku_id'].nunique()
         total_samples = schedule['sample_flag'].sum()
         sampling_rate = total_samples / len(schedule)
         
-        logger.info(f"采样计划统计: 总SKU数={schedule['sku_id'].nunique()}, " 
-                   f"总天数={total_days}, 总采样次数={total_samples}, " 
-                   f"采样比例={sampling_rate:.4f}")
+        logger.info(f"优化完成 - 最终捕获率: {initial_capture_rate:.4f}")
+        logger.info(f"采样统计: {schedule['sku_id'].nunique()} SKUs, {total_days} 天, "
+                  f"{total_samples} 次采样, 采样率: {sampling_rate:.2%}")
         
         return schedule[['sku_id', 'ds', 'sample_flag', 'sampling_reason']]
     

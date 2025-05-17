@@ -76,4 +76,4 @@ async def api_root():
     return {"message": "价格变动预测系统API服务正常运行"}
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("api.main:app", host="0.0.0.0", port=8002, reload=True)

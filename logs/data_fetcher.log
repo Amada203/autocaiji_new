@@ -1,0 +1,64 @@
+2025-05-16 13:49:08,817 - DataFetcher - INFO - 开始获取最近30天的价格数据
+2025-05-16 13:49:10,409 - DataFetcher - ERROR - 获取最近价格数据失败: AnalysisException: ms_libai.current_date() unknown
+
+2025-05-16 13:49:44,787 - DataFetcher - INFO - 开始获取最近30天的价格数据
+2025-05-16 13:50:35,656 - DataFetcher - INFO - 成功获取 533839 条最近30天的价格记录
+2025-05-16 13:51:43,890 - DataFetcher - INFO - 开始获取最近30天的价格数据
+2025-05-16 13:52:32,570 - DataFetcher - INFO - 成功获取 533839 条最近30天的价格记录
+2025-05-16 13:54:11,928 - DataFetcher - INFO - 开始获取最近30天的价格数据
+2025-05-16 13:55:01,803 - DataFetcher - INFO - 成功获取 533839 条最近30天的价格记录
+2025-05-16 13:55:46,784 - DataFetcher - INFO - 开始获取最近30天的价格数据
+2025-05-16 13:56:40,260 - DataFetcher - INFO - 成功获取 533839 条最近30天的价格记录
+2025-05-16 13:58:13,980 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 13:58:15,034 - DataFetcher - ERROR - 获取数据失败: AnalysisException: Syntax error in line 10:
+                b.dt AS date,
+                        ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-16 14:00:00,818 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 14:01:24,684 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 14:08:06,057 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 14:09:12,085 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 14:11:04,641 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 14:11:58,541 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 14:13:59,583 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 14:14:37,757 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 14:17:44,270 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 14:18:29,966 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 14:20:33,403 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 14:21:56,863 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 14:24:49,245 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 14:25:37,113 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 14:28:39,870 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 14:29:25,298 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 14:44:35,181 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 14:45:19,962 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 15:01:58,869 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 15:02:34,162 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 15:18:19,287 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 15:19:37,540 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 15:56:59,597 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 15:57:55,472 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-16 16:07:16,943 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-16 16:07:47,002 - DataFetcher - ERROR - 获取数据失败: Could not connect to any of [('198.18.0.206', 21051)]
+2025-05-16 16:31:31,829 - DataFetcher - INFO - 测试Impala连接...
+2025-05-16 16:31:32,144 - DataFetcher - INFO - Impala连接测试成功
+2025-05-16 16:48:51,535 - DataFetcher - INFO - 开始生成采样数据集: start_date=2023-01-01, end_date=2025-04-30
+2025-05-16 16:48:52,519 - DataFetcher - ERROR - 生成采样数据集失败: AnalysisException: Syntax error in line 4:
+                dt AS date,
+                      ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-16 16:48:52,520 - DataFetcher - INFO - DataFetcher资源清理完成
+2025-05-17 11:03:44,656 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-17 11:03:44,936 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
+2025-05-17 11:09:34,899 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-17 11:09:35,144 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
+2025-05-17 11:10:56,224 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-17 11:10:56,454 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes

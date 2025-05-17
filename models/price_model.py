@@ -41,7 +41,14 @@ class PriceModel:
         self.change_threshold = change_threshold
         
         # 初始化子模型
-        self.prophet_model = Prophet(**self.prophet_params)
+        # 确保启用必要的季节性组件
+        prophet_params = self.prophet_params.copy()
+        prophet_params.update({
+            'yearly_seasonality': True,
+            'weekly_seasonality': True,
+            'daily_seasonality': False
+        })
+        self.prophet_model = Prophet(**prophet_params)
         self.lgbm_model = None
         
         # 状态标志
@@ -94,8 +101,22 @@ class PriceModel:
         
         # 4. 训练LightGBM模型预测价格变化概率
         logger.info("训练LightGBM模型预测价格变化概率...")
+        
+        # 确保数据一致性
+        y_train = train_df['change_flag'].values
+        if len(X_train) != len(y_train):
+            error_msg = (f"特征和标签长度不匹配: "
+                        f"X_train({len(X_train)}) vs y_train({len(y_train)})")
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+            
+        # 移除可能的空值
+        valid_idx = ~pd.isna(y_train)
+        X_train = X_train[valid_idx]
+        y_train = y_train[valid_idx]
+        
         self.lgbm_model = lgb.LGBMClassifier(**self.lgbm_params)
-        self.lgbm_model.fit(X_train, train_df['change_flag'])
+        self.lgbm_model.fit(X_train, y_train)
         
         self.fitted = True
         logger.info("价格变化概率预测模型训练完成")
@@ -260,18 +281,28 @@ class PriceModel:
         # 使用Prophet模型进行预测，提取组件特征
         prophet_forecast = self.prophet_model.predict(data[['ds']])
         
-        # 提取关键组件
-        features = prophet_forecast[['ds', 'trend', 'yearly', 'weekly']]
+        # 初始化特征集
+        features = prophet_forecast[['ds', 'trend']].copy()
+        
+        # 添加季节性组件（如果存在）
+        seasonal_components = ['yearly', 'weekly']
+        for component in seasonal_components:
+            if component in prophet_forecast.columns:
+                features[component] = prophet_forecast[component]
+            else:
+                features[component] = 0  # 默认值
         
         # 添加节假日效应（如果存在）
         if 'holidays' in prophet_forecast.columns:
             features['holiday_effect'] = prophet_forecast['holidays']
+        else:
+            features['holiday_effect'] = 0
         
         return features
     
     def _build_features(self, data, prophet_features):
         """
-        构建完整特征集
+        构建完整特征集（保持原始数据顺序）
         
         Args:
             data: 原始数据
@@ -280,8 +311,13 @@ class PriceModel:
         Returns:
             特征DataFrame
         """
-        # 合并Prophet特征
-        features = pd.merge(data, prophet_features, on='ds')
+        # 创建特征副本保持原始索引
+        features = data.copy()
+        
+        # 合并Prophet特征（不改变顺序）
+        for col in prophet_features.columns:
+            if col != 'ds':  # 避免重复合并ds列
+                features[col] = prophet_features[col]
         
         # 添加时间特征
         features['day_of_week'] = features['ds'].dt.dayofweek
@@ -292,39 +328,40 @@ class PriceModel:
         features['is_month_start'] = features['ds'].dt.is_month_start.astype(int)
         features['is_month_end'] = features['ds'].dt.is_month_end.astype(int)
         
-        # 计算历史变化频率特征（如果有足够数据）
-        if 'change_flag' in data.columns and len(data) > 10:
-            if 'sku_id' in data.columns:
-                # 按SKU计算滚动变化频率
-                for window in [7, 14, 30]:
-                    features[f'change_freq_{window}d'] = features.groupby('sku_id')['change_flag'].transform(
+        # 计算历史变化频率特征（确保不引入NA）
+        if 'change_flag' in features.columns:
+            for window in [7, 14, 30]:
+                col_name = f'change_freq_{window}d'
+                if 'sku_id' in features.columns:
+                    features[col_name] = features.groupby('sku_id')['change_flag'].transform(
                         lambda x: x.rolling(window, min_periods=1).mean()
-                    )
-            else:
-                # 单一时间序列
-                for window in [7, 14, 30]:
-                    features[f'change_freq_{window}d'] = features['change_flag'].rolling(
+                    ).fillna(0)
+                else:
+                    features[col_name] = features['change_flag'].rolling(
                         window, min_periods=1
-                    ).mean()
+                    ).mean().fillna(0)
         
-        # 如果有价格数据，计算价格波动特征
-        if 'y' in data.columns:
-            if 'sku_id' in data.columns:
-                # 按SKU计算
+        # 计算价格波动特征
+        if 'y' in features.columns:
+            if 'sku_id' in features.columns:
                 features['price_volatility_7d'] = features.groupby('sku_id')['y'].transform(
                     lambda x: x.rolling(7, min_periods=1).std() / (x.rolling(7, min_periods=1).mean() + 1e-10)
-                )
+                ).fillna(0)
             else:
-                # 单一时间序列
-                features['price_volatility_7d'] = features['y'].rolling(7, min_periods=1).std() / (
-                    features['y'].rolling(7, min_periods=1).mean() + 1e-10
-                )
+                features['price_volatility_7d'] = features['y'].rolling(
+                    7, min_periods=1
+                ).std() / (features['y'].rolling(7, min_periods=1).mean() + 1e-10).fillna(0)
         
-        # 移除非特征列
-        drop_cols = ['ds', 'y', 'prev_y', 'change_ratio', 'change_flag']
-        feature_cols = [col for col in features.columns if col not in drop_cols]
+        # 移除非特征列并确保无NA
+        feature_cols = [col for col in features.columns 
+                       if col not in ['ds', 'y', 'prev_y', 'change_ratio', 'change_flag']]
+        features = features[feature_cols].fillna(0)
         
-        return features[feature_cols]
+        # 最终一致性检查
+        if len(features) != len(data):
+            raise ValueError(f"特征构建改变了数据长度: 原始{len(data)} -> 特征{len(features)}")
+            
+        return features
     
     def save(self, path):
         """
