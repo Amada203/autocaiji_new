@@ -62,3 +62,118 @@ CAUSED BY: Exception: Syntax error
 2025-05-17 11:09:35,144 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
 2025-05-17 11:10:56,224 - DataFetcher - INFO - 开始从Impala获取训练数据
 2025-05-17 11:10:56,454 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
+2025-05-19 16:50:22,007 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 16:51:23,479 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 16:56:40,087 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 16:57:30,518 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:00:08,406 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:00:56,471 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:27:12,013 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:28:13,072 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:29:05,169 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:29:48,448 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:31:31,849 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:32:17,013 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:38:16,095 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:39:13,610 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:40:11,344 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:41:01,233 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:42:26,514 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:43:08,058 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:44:19,949 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:45:02,370 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:59:18,361 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:00:00,649 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:03:22,357 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:03:59,673 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:04:48,789 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:05:30,565 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:07:27,024 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:08:08,888 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:08:56,803 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:09:41,086 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:34:09,863 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:34:51,542 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:46:51,542 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:47:32,718 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:54:36,271 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:55:17,981 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 19:03:56,598 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 19:04:37,360 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 20:31:42,722 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 20:32:57,019 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 20:39:23,484 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 20:40:30,739 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 20:47:05,597 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 20:47:08,888 - DataFetcher - ERROR - 获取数据失败: ExecQueryFInstances rpc query_id=6a4d0ed16f685e3a:d04ac87f00000000 failed: Failed to get minimum memory reservation of 232.62 MB on daemon ym-017:22000 for query 6a4d0ed16f685e3a:d04ac87f00000000 because it would exceed an applicable memory limit. Memory is likely oversubscribed. Reducing query concurrency or configuring admission control may help avoid this error. Memory usage:
+Process: Limit=40.00 GB Total=37.24 GB Peak=41.14 GB
+  Buffer Pool: Free Buffers: Total=1.41 GB
+  Buffer Pool: Clean Pages: Total=3.20 GB
+  Buffer Pool: Unused Reservation: Total=-5.04 GB
+  Free Disk IO Buffers: Total=1.05 GB Peak=1.99 GB
+  RequestPool=root.ymetl: Total=29.61 GB Peak=34.50 GB
+    Query(d4499316facd7071:26be806500000000): Limit=30.00 GB Reservation=18.43 GB ReservationLimit=24.00 GB OtherMemory=4.37 MB Total=18.44 GB Peak=18.52 GB
+    Query(1d4af4d4c606603c:94ea528d00000000): Limit=30.00 GB Reservation=10.95 GB ReservationLimit=24.00 GB OtherMemory=235.26 MB Total=11.18 GB Peak=11.22 GB
+  RequestPool=root.ymtest: Total=0 Peak=20.58 GB
+  RequestPool=root.ymda: Total=4.32 GB Peak=18.71 GB
+    Query(6945bbfc0e8e1e02:a1d0aee200000000): Limit=20.00 GB Reservation=2.62 GB ReservationLimit=16.00 GB OtherMemory=3.17 MB Total=2.62 GB Peak=3.06 GB
+    Query(7943845f6adc8701:ed21995d00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=1.70 GB Total=1.70 GB Peak=1.71 GB
+  RequestPool=root.default: Total=0 Peak=19.24 GB
+    Query(6a4d0ed16f685e3a:d04ac87f00000000): Limit=8.00 GB Reservation=0 ReservationLimit=6.40 GB OtherMemory=0 Total=0 Peak=0
+  RequestPool=root.ymreadonly: Total=0 Peak=30.58 GB
+  RequestPool=root.ymspider: Total=0 Peak=9.30 GB
+  RequestPool=root.ymai: Total=0 Peak=4.76 GB
+  RequestPool=root.weiweibao: Total=0 Peak=16.26 GB
+  RequestPool=root.zhangbenqiang: Total=0 Peak=200.64 MB
+  Untracked Memory: Total=2.68 GB
+
+
+2025-05-19 20:49:31,481 - DataFetcher - INFO - 开始从Impala分批获取训练数据，每批50000条
+2025-05-19 20:49:33,198 - DataFetcher - ERROR - 获取数据失败: ExecQueryFInstances rpc query_id=a446530f367be3a6:7676398a00000000 failed: Failed to get minimum memory reservation of 120.62 MB on daemon ym-017:22000 for query a446530f367be3a6:7676398a00000000 because it would exceed an applicable memory limit. Memory is likely oversubscribed. Reducing query concurrency or configuring admission control may help avoid this error. Memory usage:
+Process: Limit=40.00 GB Total=33.52 GB Peak=41.14 GB
+  Buffer Pool: Free Buffers: Total=610.00 MB
+  Buffer Pool: Clean Pages: Total=3.20 GB
+  Buffer Pool: Unused Reservation: Total=-7.91 GB
+  Free Disk IO Buffers: Total=1.16 GB Peak=1.99 GB
+  RequestPool=root.ymetl: Total=29.48 GB Peak=34.50 GB
+    Query(d4499316facd7071:26be806500000000): Limit=30.00 GB Reservation=18.43 GB ReservationLimit=24.00 GB OtherMemory=14.56 MB Total=18.45 GB Peak=18.52 GB
+    Query(1d4af4d4c606603c:94ea528d00000000): Limit=30.00 GB Reservation=10.95 GB ReservationLimit=24.00 GB OtherMemory=89.80 MB Total=11.03 GB Peak=11.22 GB
+  RequestPool=root.ymtest: Total=0 Peak=20.58 GB
+  RequestPool=root.ymda: Total=4.33 GB Peak=18.71 GB
+    Query(6945bbfc0e8e1e02:a1d0aee200000000): Limit=20.00 GB Reservation=2.62 GB ReservationLimit=16.00 GB OtherMemory=3.17 MB Total=2.62 GB Peak=3.06 GB
+    Query(7943845f6adc8701:ed21995d00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=1.71 GB Total=1.71 GB Peak=1.71 GB
+  RequestPool=root.default: Total=0 Peak=19.24 GB
+    Query(a446530f367be3a6:7676398a00000000): Limit=8.00 GB Reservation=0 ReservationLimit=6.40 GB OtherMemory=0 Total=0 Peak=0
+  RequestPool=root.ymreadonly: Total=0 Peak=30.58 GB
+  RequestPool=root.ymspider: Total=0 Peak=9.30 GB
+  RequestPool=root.ymai: Total=0 Peak=4.76 GB
+  RequestPool=root.weiweibao: Total=0 Peak=16.26 GB
+  RequestPool=root.zhangbenqiang: Total=0 Peak=200.64 MB
+  Untracked Memory: Total=2.67 GB
+
+
+2025-05-19 20:53:07,651 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 20:53:09,336 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: ms_libai.current_date() unknown
+
+2025-05-19 20:53:09,337 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-19 20:54:27,314 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 20:54:29,709 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: ms_libai.current_date() unknown
+
+2025-05-19 20:54:29,710 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-19 20:55:29,717 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-19 20:55:31,351 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: ms_libai.current_date() unknown
+
+2025-05-19 20:55:31,352 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-19 20:56:32,153 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-19 20:56:33,790 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: ms_libai.current_date() unknown
+
+2025-05-19 21:10:37,794 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 21:22:58,735 - DataFetcher - INFO - 成功获取 3306728 条记录
+2025-05-19 22:10:16,784 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 22:10:24,478 - DataFetcher - INFO - 成功获取 8222 条记录
+2025-05-19 22:12:52,074 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 22:13:01,469 - DataFetcher - INFO - 成功获取 8222 条记录
+2025-05-19 22:17:51,765 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 22:18:06,600 - DataFetcher - INFO - 成功获取 8222 条记录
+2025-05-19 22:21:54,281 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 22:22:12,636 - DataFetcher - INFO - 成功获取 8222 条记录

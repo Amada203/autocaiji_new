@@ -40,7 +40,7 @@ class MySQLWriter:
         }
 
     def connect(self) -> bool:
-        """连接到MySQL数据库"""
+        """连接到MySQL数据库并确保表存在"""
         try:
             self.connection = mysql.connector.connect(
                 **self.db_config,
@@ -48,9 +48,60 @@ class MySQLWriter:
                 autocommit=False
             )
             logger.info("成功连接到MySQL数据库")
+            
+            # 检查并创建必要的表
+            cursor = self.connection.cursor()
+            
+            # 强制重建预测结果表
+            cursor.execute("DROP TABLE IF EXISTS sku_predictions")
+            cursor.execute("""
+                CREATE TABLE sku_predictions (
+                    sku VARCHAR(50) NOT NULL PRIMARY KEY,
+                    date DATETIME,
+                    price DECIMAL(10,2),
+                    confidence FLOAT,
+                    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            """)
+            logger.info("已重建sku_predictions表")
+            
+            # 强制重建历史数据表
+            cursor.execute("DROP TABLE IF EXISTS sku_history")
+            cursor.execute("""
+                CREATE TABLE sku_history (
+                    sku_id VARCHAR(50) NOT NULL,
+                    date DATE NOT NULL,
+                    price DECIMAL(10,2) NOT NULL,
+                    is_promotion BOOLEAN DEFAULT FALSE,
+                    PRIMARY KEY (sku_id, date)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            """)
+            logger.info("已重建sku_history表，使用sku_id作为主键字段")
+            
+            # 创建模型训练日志表
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS model_training_logs (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    sku VARCHAR(50) NOT NULL,
+                    training_date DATETIME NOT NULL,
+                    metrics JSON,
+                    model_version VARCHAR(50),
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    UNIQUE KEY unique_training (sku, training_date)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+            """)
+            
+            self.connection.commit()
+            cursor.close()
+            logger.info("数据库表结构检查完成")
+            
             return True
+            
         except mysql.connector.Error as err:
             logger.error(f"连接MySQL失败 (错误 {err.errno}): {err.msg}")
+            return False
+        except Exception as e:
+            logger.error(f"初始化数据库表结构失败: {str(e)}")
             return False
 
     def write_predictions(self, predictions_df: pd.DataFrame) -> bool:
@@ -64,18 +115,18 @@ class MySQLWriter:
             # 准备批量插入语句
             query = """
             INSERT INTO sku_predictions 
-            (sku_id, sku_name, current_price, predicted_prob)
+            (sku, date, price, confidence)
             VALUES (%s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE
-            sku_name = VALUES(sku_name),
-            current_price = VALUES(current_price),
-            predicted_prob = VALUES(predicted_prob),
+            date = VALUES(date),
+            price = VALUES(price),
+            confidence = VALUES(confidence),
             last_updated = CURRENT_TIMESTAMP
             """
             
             # 分批处理大数据集
             records = [
-                (row['sku_id'], row['sku_name'], row['current_price'], row['predicted_prob'])
+                (row['sku'], row['date'], row['price'], row['confidence'])
                 for _, row in predictions_df.iterrows()
             ]
             
@@ -105,13 +156,13 @@ class MySQLWriter:
         try:
             cursor = self.connection.cursor()
             query = """
-            INSERT IGNORE INTO sku_history 
+            INSERT IGNORE INTO sku_history
             (sku_id, date, price, is_promotion)
             VALUES (%s, %s, %s, %s)
             """
-            
+
             records = [
-                (row['sku_id'], row['date'], row['price'], row['is_promotion'])
+                (row['sku_id'], row['date'], row['price'], row.get('is_promotion', False))
                 for _, row in history_df.iterrows()
             ]
             
@@ -136,22 +187,29 @@ class MySQLWriter:
 if __name__ == "__main__":
     # 测试用例
     writer = MySQLWriter()
-    
-    # 测试数据
+
+    # 测试数据 - 预测结果
     test_pred = pd.DataFrame({
-        'sku_id': ['test_001', 'test_002'],
-        'sku_name': ['测试商品A', '测试商品B'],
-        'current_price': [99.9, 199.9],
-        'predicted_prob': [0.85, 0.72]
+        'sku': ['test_001', 'test_002'],
+        'date': [datetime.now(), datetime.now()],
+        'price': [99.9, 199.9],
+        'confidence': [0.85, 0.72]
     })
-    
+
+    # 测试数据 - 历史数据
     test_hist = pd.DataFrame({
         'sku_id': ['test_001', 'test_002'],
         'date': ['2023-01-01', '2023-01-02'],
         'price': [89.9, 179.9],
         'is_promotion': [True, False]
     })
-    
-    # 执行测试
-    writer.write_predictions(test_pred)
-    writer.write_history(test_hist)
+
+    # 执行测试并捕获详细错误
+    try:
+        logger.info("开始写入测试数据...")
+        if writer.write_predictions(test_pred):
+            logger.info("预测数据写入成功")
+        if writer.write_history(test_hist):
+            logger.info("历史数据写入成功")
+    except Exception as e:
+        logger.error(f"测试失败: {str(e)}", exc_info=True)

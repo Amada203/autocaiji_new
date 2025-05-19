@@ -48,18 +48,11 @@ class PredictionService:
             conn = self._get_connection()
             cursor = conn.cursor(dictionary=True)
             
-            # 放宽查询条件，确保至少返回一些数据
+            # 只查询真实的预测数据
             query = """
-            SELECT * FROM (
-                SELECT * FROM sku_predictions 
-                UNION ALL
-                SELECT 
-                    'test_sku' as sku, 
-                    100 as predicted_price,
-                    NOW() as prediction_date,
-                    0.9 as confidence
-                LIMIT 1
-            ) t LIMIT %s
+            SELECT * FROM sku_predictions 
+            ORDER BY prediction_date DESC 
+            LIMIT %s
             """
             cursor.execute(query, (limit,))
             
@@ -69,21 +62,15 @@ class PredictionService:
             cursor.close()
             conn.close()
             
-            return results if results else [{
-                "sku": "default_sku",
-                "predicted_price": 100,
-                "prediction_date": "2023-01-01",
-                "confidence": 0.9
-            }]
+            if not results:
+                logger.warning("数据库中没有找到预测数据")
+                return []
+            
+            return results
             
         except Exception as e:
             logger.error(f"查询失败: {str(e)}", exc_info=True)
-            return [{
-                "sku": "default_sku",
-                "predicted_price": 100,
-                "prediction_date": "2023-01-01",
-                "confidence": 0.9
-            }]
+            raise RuntimeError(f"获取预测数据失败: {str(e)}")
 
     def get_training_logs(self) -> Dict[str, List[Dict]]:
         """获取所有SKU的训练记录"""

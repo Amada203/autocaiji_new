@@ -13,6 +13,44 @@ class FeatureEngineering:
         """
         self.df = df.copy()
         
+        # 处理日期列（支持ds或date列名）
+        if 'ds' in self.df.columns:
+            try:
+                self.df['date'] = pd.to_datetime(self.df['ds'])
+            except Exception as e:
+                raise ValueError(f"无法将ds列转换为日期类型: {str(e)}")
+        elif 'date' not in self.df.columns:
+            raise ValueError("输入数据必须包含日期列（'ds'或'date'）")
+        else:
+            try:
+                self.df['date'] = pd.to_datetime(self.df['date'])
+            except Exception as e:
+                raise ValueError(f"无法将date列转换为日期类型: {str(e)}")
+            
+        # 重命名y列为price（如果存在）
+        if 'y' in self.df.columns and 'price' not in self.df.columns:
+            self.df['price'] = self.df['y']
+            
+        # 计算价格变化相关指标（如果不存在）
+        if 'price' in self.df.columns:
+            # 基本价格变化指标
+            if 'price_change_flag' not in self.df.columns:
+                self.df['price_change_flag'] = (self.df.groupby('sku_id')['price'].diff() != 0).astype(int)
+            
+            if 'price_change_amount' not in self.df.columns:
+                self.df['price_change_amount'] = self.df.groupby('sku_id')['price'].diff()
+            
+            if 'price_change_ratio' not in self.df.columns:
+                self.df['price_change_ratio'] = self.df.groupby('sku_id')['price'].pct_change()
+                
+            # 价格变化方向
+            self.df['price_change_direction'] = np.where(self.df['price_change_amount'] > 0, 1,
+                                                       np.where(self.df['price_change_amount'] < 0, -1, 0))
+            
+            # 价格变化类型
+            self.df['price_change_type'] = np.where(self.df['price_change_flag'] == 0, 'no_change',
+                                                   np.where(self.df['price_change_direction'] > 0, 'increase', 'decrease'))
+        
     def build_time_features(self) -> pd.DataFrame:
         """
         构建时间特征
@@ -100,19 +138,56 @@ class FeatureEngineering:
         
         return self.df
     
-    def build_all_features(self) -> pd.DataFrame:
+    def process(self) -> pd.DataFrame:
         """
-        构建所有特征
+        处理数据并构建所有特征
         
         Returns:
-            pd.DataFrame: 添加所有特征后的数据框
+            pd.DataFrame: 处理后的数据框，包含所有特征
         """
-        self.build_time_features()
-        self.build_price_trend_features()
-        self.build_product_features()
-        self.build_cross_features()
+        try:
+            # 构建所有特征
+            self.build_time_features()
+            self.build_price_trend_features()
+            self.build_product_features()
+            self.build_cross_features()
+            
+            # 移除包含空值的行
+            self.df = self.df.dropna()
+            
+            # 确保数据类型正确
+            self._ensure_data_types()
+            
+            return self.df
+            
+        except Exception as e:
+            raise RuntimeError(f"特征工程处理失败: {str(e)}")
+            
+    def _ensure_data_types(self):
+        """确保数据类型正确"""
+        # 数值型特征
+        numeric_features = [
+            'price_change_freq_3d', 'price_change_freq_7d', 'price_change_freq_14d', 'price_change_freq_30d',
+            'price_change_amount_3d', 'price_change_amount_7d', 'price_change_amount_14d', 'price_change_amount_30d',
+            'price_change_ratio_3d', 'price_change_ratio_7d', 'price_change_ratio_14d', 'price_change_ratio_30d',
+            'price_stability', 'price_change_frequency'
+        ]
         
-        return self.df
+        # 类别型特征
+        categorical_features = [
+            'weekday', 'is_weekend', 'is_month_start', 'is_month_end',
+            'price_range', 'price_range_weekend', 'price_direction_weekend', 'price_type_weekend'
+        ]
+        
+        # 转换数值型特征
+        for col in numeric_features:
+            if col in self.df.columns:
+                self.df[col] = pd.to_numeric(self.df[col], errors='coerce')
+                
+        # 转换类别型特征
+        for col in categorical_features:
+            if col in self.df.columns:
+                self.df[col] = self.df[col].astype('category')
     
     def get_feature_columns(self) -> List[str]:
         """

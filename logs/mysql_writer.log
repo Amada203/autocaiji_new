@@ -48,3 +48,836 @@ socket.gaierror: [Errno 8] nodename nor servname provided, or not known
 2025-05-17 11:10:56,456 - __main__ - ERROR - 数据管道运行失败
 2025-05-17 11:10:56,457 - __main__ - INFO - 数据管道运行耗时: 0.23 秒
 2025-05-17 11:10:56,457 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 16:49:23,825 - __main__ - INFO - 开始执行定时任务
+2025-05-19 16:49:23,826 - __main__ - INFO - 系统资源检查通过
+2025-05-19 16:49:23,827 - __main__ - ERROR - 数据库连接测试失败: Unsupported argument 'impala'
+2025-05-19 16:49:23,827 - __main__ - ERROR - 数据库连接检查失败，终止执行
+2025-05-19 16:50:21,941 - __main__ - INFO - 开始执行定时任务
+2025-05-19 16:50:21,942 - __main__ - INFO - 系统资源检查通过
+2025-05-19 16:50:22,005 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 16:50:22,006 - __main__ - INFO - 开始运行数据管道
+2025-05-19 16:50:22,006 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 16:50:22,006 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 16:50:22,007 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 16:50:22,007 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 16:50:22,391 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 16:51:23,479 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 16:51:23,484 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 16:51:23,494 - src.data.data_pipeline - ERROR - 数据管道执行失败: 'FeatureEngineering' object has no attribute 'process'
+2025-05-19 16:51:23,509 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 16:51:23,941 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 16:56:40,012 - __main__ - INFO - 开始执行定时任务
+2025-05-19 16:56:40,012 - __main__ - INFO - 系统资源检查通过
+2025-05-19 16:56:40,084 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 16:56:40,084 - __main__ - INFO - 开始运行数据管道
+2025-05-19 16:56:40,084 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 16:56:40,085 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 16:56:40,085 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 16:56:40,087 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 16:56:40,461 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 16:57:30,518 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 16:57:30,521 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 16:57:31,123 - src.data.data_pipeline - ERROR - 数据管道执行失败: 特征工程处理失败: 'date'
+2025-05-19 16:57:31,148 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 16:57:31,148 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 17:00:08,340 - __main__ - INFO - 开始执行定时任务
+2025-05-19 17:00:08,341 - __main__ - INFO - 系统资源检查通过
+2025-05-19 17:00:08,401 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 17:00:08,402 - __main__ - INFO - 开始运行数据管道
+2025-05-19 17:00:08,403 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 17:00:08,403 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 17:00:08,405 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 17:00:08,406 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:00:08,787 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 17:00:56,471 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:00:56,473 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 17:00:56,899 - src.data.data_pipeline - ERROR - 数据管道执行失败: 'Column not found: price'
+2025-05-19 17:00:56,914 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 17:00:56,914 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 17:27:11,928 - __main__ - INFO - 开始执行定时任务
+2025-05-19 17:27:11,928 - __main__ - INFO - 系统资源检查通过
+2025-05-19 17:27:12,009 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 17:27:12,010 - __main__ - INFO - 开始运行数据管道
+2025-05-19 17:27:12,010 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 17:27:12,011 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 17:27:12,011 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 17:27:12,013 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:27:12,497 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 17:28:13,072 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:28:13,073 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 17:28:13,557 - src.data.data_pipeline - ERROR - 数据管道执行失败: 特征工程处理失败: Can only use .dt accessor with datetimelike values
+2025-05-19 17:28:13,578 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 17:28:13,578 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 17:29:05,097 - __main__ - INFO - 开始执行定时任务
+2025-05-19 17:29:05,098 - __main__ - INFO - 系统资源检查通过
+2025-05-19 17:29:05,166 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 17:29:05,166 - __main__ - INFO - 开始运行数据管道
+2025-05-19 17:29:05,167 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 17:29:05,167 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 17:29:05,167 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 17:29:05,169 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:29:05,577 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 17:29:48,448 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:29:48,449 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 17:29:50,277 - src.data.data_pipeline - ERROR - 数据管道执行失败: 特征工程处理失败: 'price_change_direction'
+2025-05-19 17:29:50,306 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 17:29:50,306 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 17:31:31,764 - __main__ - INFO - 开始执行定时任务
+2025-05-19 17:31:31,765 - __main__ - INFO - 系统资源检查通过
+2025-05-19 17:31:31,846 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 17:31:31,847 - __main__ - INFO - 开始运行数据管道
+2025-05-19 17:31:31,847 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 17:31:31,848 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 17:31:31,848 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 17:31:31,849 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:31:32,315 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 17:32:17,013 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:32:17,014 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 17:32:26,394 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 17:32:26,395 - src.data.data_pipeline - ERROR - 模型训练失败: No module named 'src.models.fusion_model'
+2025-05-19 17:32:26,395 - src.data.data_pipeline - ERROR - 数据管道执行失败: No module named 'src.models.fusion_model'
+2025-05-19 17:32:26,422 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 17:32:26,434 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 17:38:16,021 - __main__ - INFO - 开始执行定时任务
+2025-05-19 17:38:16,022 - __main__ - INFO - 系统资源检查通过
+2025-05-19 17:38:16,092 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 17:38:16,092 - __main__ - INFO - 开始运行数据管道
+2025-05-19 17:38:16,093 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 17:38:16,093 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 17:38:16,094 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 17:38:16,095 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:38:16,506 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 17:39:13,610 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:39:13,612 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 17:39:23,522 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 17:39:24,882 - src.data.data_pipeline - ERROR - 模型训练失败: cannot import name 'BasePredictor' from 'src.models.predictors' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/predictors/__init__.py)
+2025-05-19 17:39:24,883 - src.data.data_pipeline - ERROR - 数据管道执行失败: cannot import name 'BasePredictor' from 'src.models.predictors' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/predictors/__init__.py)
+2025-05-19 17:39:24,904 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 17:39:24,905 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 17:40:11,292 - __main__ - INFO - 开始执行定时任务
+2025-05-19 17:40:11,293 - __main__ - INFO - 系统资源检查通过
+2025-05-19 17:40:11,343 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 17:40:11,343 - __main__ - INFO - 开始运行数据管道
+2025-05-19 17:40:11,343 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 17:40:11,344 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 17:40:11,344 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 17:40:11,344 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:40:11,727 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 17:41:01,233 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:41:01,235 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 17:41:11,034 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 17:41:12,224 - src.data.data_pipeline - ERROR - 模型训练失败: cannot import name 'FusionModel' from 'src.models.fusion_model' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/fusion_model.py)
+2025-05-19 17:41:12,225 - src.data.data_pipeline - ERROR - 数据管道执行失败: cannot import name 'FusionModel' from 'src.models.fusion_model' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/fusion_model.py)
+2025-05-19 17:41:12,267 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 17:41:12,267 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 17:42:26,453 - __main__ - INFO - 开始执行定时任务
+2025-05-19 17:42:26,453 - __main__ - INFO - 系统资源检查通过
+2025-05-19 17:42:26,511 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 17:42:26,511 - __main__ - INFO - 开始运行数据管道
+2025-05-19 17:42:26,512 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 17:42:26,512 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 17:42:26,513 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 17:42:26,514 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:42:26,901 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 17:43:08,058 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:43:08,063 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 17:43:18,879 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 17:43:20,479 - src.data.data_pipeline - ERROR - 模型训练失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 17:43:20,480 - src.data.data_pipeline - ERROR - 数据管道执行失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 17:43:20,520 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 17:43:20,521 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 17:44:19,879 - __main__ - INFO - 开始执行定时任务
+2025-05-19 17:44:19,880 - __main__ - INFO - 系统资源检查通过
+2025-05-19 17:44:19,945 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 17:44:19,946 - __main__ - INFO - 开始运行数据管道
+2025-05-19 17:44:19,947 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 17:44:19,947 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 17:44:19,947 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 17:44:19,949 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:44:20,451 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 17:45:02,370 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 17:45:02,372 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 17:45:13,002 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 17:45:14,198 - src.data.data_pipeline - ERROR - 模型训练失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 17:45:14,199 - src.data.data_pipeline - ERROR - 数据管道执行失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 17:45:14,231 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 17:45:14,232 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 17:59:18,289 - __main__ - INFO - 开始执行定时任务
+2025-05-19 17:59:18,290 - __main__ - INFO - 系统资源检查通过
+2025-05-19 17:59:18,359 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 17:59:18,359 - __main__ - INFO - 开始运行数据管道
+2025-05-19 17:59:18,360 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 17:59:18,360 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 17:59:18,360 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 17:59:18,361 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 17:59:18,746 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 18:00:00,649 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:00:00,649 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 18:00:11,076 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 18:00:12,297 - src.data.data_pipeline - ERROR - 模型训练失败: No module named 'src.models.base_model'
+2025-05-19 18:00:12,298 - src.data.data_pipeline - ERROR - 数据管道执行失败: No module named 'src.models.base_model'
+2025-05-19 18:00:12,329 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 18:00:12,329 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 18:03:22,299 - __main__ - INFO - 开始执行定时任务
+2025-05-19 18:03:22,299 - __main__ - INFO - 系统资源检查通过
+2025-05-19 18:03:22,355 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 18:03:22,355 - __main__ - INFO - 开始运行数据管道
+2025-05-19 18:03:22,356 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 18:03:22,356 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 18:03:22,356 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 18:03:22,357 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:03:22,902 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 18:03:59,673 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:03:59,675 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 18:04:09,669 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 18:04:10,855 - src.data.data_pipeline - ERROR - 模型训练失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 18:04:10,855 - src.data.data_pipeline - ERROR - 数据管道执行失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 18:04:10,888 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 18:04:10,889 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 18:04:48,717 - __main__ - INFO - 开始执行定时任务
+2025-05-19 18:04:48,718 - __main__ - INFO - 系统资源检查通过
+2025-05-19 18:04:48,786 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 18:04:48,787 - __main__ - INFO - 开始运行数据管道
+2025-05-19 18:04:48,788 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 18:04:48,788 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 18:04:48,788 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 18:04:48,789 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:04:49,187 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 18:05:30,565 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:05:30,567 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 18:05:40,827 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 18:05:42,198 - src.data.data_pipeline - ERROR - 模型训练失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 18:05:42,199 - src.data.data_pipeline - ERROR - 数据管道执行失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 18:05:42,236 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 18:05:42,237 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 18:07:26,920 - __main__ - INFO - 开始执行定时任务
+2025-05-19 18:07:26,921 - __main__ - INFO - 系统资源检查通过
+2025-05-19 18:07:27,022 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 18:07:27,022 - __main__ - INFO - 开始运行数据管道
+2025-05-19 18:07:27,023 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 18:07:27,023 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 18:07:27,023 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 18:07:27,024 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:07:28,144 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 18:08:08,888 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:08:08,891 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 18:08:17,617 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 18:08:18,931 - src.data.data_pipeline - ERROR - 模型训练失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 18:08:18,931 - src.data.data_pipeline - ERROR - 数据管道执行失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 18:08:18,960 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 18:08:18,960 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 18:08:56,750 - __main__ - INFO - 开始执行定时任务
+2025-05-19 18:08:56,751 - __main__ - INFO - 系统资源检查通过
+2025-05-19 18:08:56,801 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 18:08:56,802 - __main__ - INFO - 开始运行数据管道
+2025-05-19 18:08:56,802 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 18:08:56,802 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 18:08:56,802 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 18:08:56,803 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:08:57,172 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 18:09:41,086 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:09:41,087 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 18:09:50,382 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 18:09:51,908 - src.data.data_pipeline - ERROR - 模型训练失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 18:09:51,908 - src.data.data_pipeline - ERROR - 数据管道执行失败: name 'ProphetLGBMFusion' is not defined
+2025-05-19 18:09:51,938 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 18:09:51,939 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 18:34:09,817 - __main__ - INFO - 开始执行定时任务
+2025-05-19 18:34:09,818 - __main__ - INFO - 系统资源检查通过
+2025-05-19 18:34:09,862 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 18:34:09,862 - __main__ - INFO - 开始运行数据管道
+2025-05-19 18:34:09,863 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 18:34:09,863 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 18:34:09,863 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 18:34:09,863 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:34:10,250 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 18:34:51,542 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:34:51,543 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 18:34:59,515 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 18:35:00,386 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 18:35:00,464 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 18:35:00,607 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 18:35:00,697 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 18:35:01,778 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpt1eyfd2k/zrgrb_52.json
+2025-05-19 18:35:16,775 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpt1eyfd2k/oemuyp73.json
+2025-05-19 18:35:16,777 - cmdstanpy - DEBUG - idx 0
+2025-05-19 18:35:16,777 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 18:35:16,777 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=15717', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpt1eyfd2k/zrgrb_52.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpt1eyfd2k/oemuyp73.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpt1eyfd2k/prophet_modelcehgtm0y/prophet_model-20250519183516.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 18:35:16,777 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 18:35:37,978 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 18:37:24,116 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 18:37:25,146 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 18:37:25,189 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 18:37:26,202 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 18:37:26,202 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 18:39:04,066 - src.data.data_pipeline - ERROR - 预测生成失败: 'sku'
+2025-05-19 18:39:04,074 - src.data.data_pipeline - ERROR - 数据管道执行失败: 'sku'
+2025-05-19 18:39:04,277 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 18:39:04,281 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 18:46:51,488 - __main__ - INFO - 开始执行定时任务
+2025-05-19 18:46:51,488 - __main__ - INFO - 系统资源检查通过
+2025-05-19 18:46:51,541 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 18:46:51,541 - __main__ - INFO - 开始运行数据管道
+2025-05-19 18:46:51,541 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 18:46:51,542 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 18:46:51,542 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 18:46:51,542 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:46:52,010 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 18:47:32,718 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:47:32,719 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 18:47:40,882 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 18:47:41,972 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 18:47:42,047 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 18:47:42,280 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 18:47:42,354 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 18:47:43,858 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpjh5h08ix/fny97k94.json
+2025-05-19 18:48:00,566 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpjh5h08ix/4bl50ex7.json
+2025-05-19 18:48:00,569 - cmdstanpy - DEBUG - idx 0
+2025-05-19 18:48:00,569 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 18:48:00,569 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=85270', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpjh5h08ix/fny97k94.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpjh5h08ix/4bl50ex7.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpjh5h08ix/prophet_model539oesfj/prophet_model-20250519184800.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 18:48:00,570 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 18:48:26,044 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 18:50:36,010 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 18:50:38,761 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 18:50:38,862 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 18:50:40,027 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 18:50:40,028 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 18:53:49,866 - src.data.data_pipeline - ERROR - 预测生成失败: 'ProphetLGBMFusion' object has no attribute 'get_confidence_scores'
+2025-05-19 18:53:49,875 - src.data.data_pipeline - ERROR - 数据管道执行失败: 'ProphetLGBMFusion' object has no attribute 'get_confidence_scores'
+2025-05-19 18:53:50,170 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 18:53:50,174 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 18:54:36,197 - __main__ - INFO - 开始执行定时任务
+2025-05-19 18:54:36,198 - __main__ - INFO - 系统资源检查通过
+2025-05-19 18:54:36,268 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 18:54:36,269 - __main__ - INFO - 开始运行数据管道
+2025-05-19 18:54:36,269 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 18:54:36,269 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 18:54:36,269 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 18:54:36,271 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 18:54:36,646 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 18:55:17,981 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 18:55:17,985 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 18:55:30,026 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 18:55:31,188 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 18:55:31,267 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 18:55:31,415 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 18:55:31,489 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 18:55:32,706 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp0zubhelf/grrevy7a.json
+2025-05-19 18:55:47,989 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp0zubhelf/s4x68eeg.json
+2025-05-19 18:55:47,991 - cmdstanpy - DEBUG - idx 0
+2025-05-19 18:55:47,992 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 18:55:47,992 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=4936', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp0zubhelf/grrevy7a.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp0zubhelf/s4x68eeg.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp0zubhelf/prophet_model5c6c08d9/prophet_model-20250519185547.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 18:55:47,992 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 18:56:10,772 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 18:58:08,321 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 18:58:09,001 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 18:58:09,062 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 18:58:10,141 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 18:58:10,141 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 19:00:33,904 - src.data.data_pipeline - ERROR - 预测生成失败: Buffer has wrong number of dimensions (expected 1, got 2)
+2025-05-19 19:00:33,905 - src.data.data_pipeline - ERROR - 数据管道执行失败: Buffer has wrong number of dimensions (expected 1, got 2)
+2025-05-19 19:00:34,215 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 19:00:34,222 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 19:03:56,545 - __main__ - INFO - 开始执行定时任务
+2025-05-19 19:03:56,546 - __main__ - INFO - 系统资源检查通过
+2025-05-19 19:03:56,597 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 19:03:56,597 - __main__ - INFO - 开始运行数据管道
+2025-05-19 19:03:56,598 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 19:03:56,598 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 19:03:56,598 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 19:03:56,598 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 19:03:57,148 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 19:04:37,360 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 19:04:37,361 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 19:04:46,137 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 19:04:47,324 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 19:04:47,395 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 19:04:47,581 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 19:04:47,663 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 19:04:48,867 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpv6xk4akr/507s5tyx.json
+2025-05-19 19:05:09,057 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpv6xk4akr/u3hxgk6y.json
+2025-05-19 19:05:09,060 - cmdstanpy - DEBUG - idx 0
+2025-05-19 19:05:09,060 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 19:05:09,060 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=20110', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpv6xk4akr/507s5tyx.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpv6xk4akr/u3hxgk6y.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpv6xk4akr/prophet_modelpmnaepr2/prophet_model-20250519190509.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 19:05:09,061 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 19:05:31,352 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 19:08:32,434 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 19:08:54,959 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 19:08:55,371 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 19:08:58,644 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 19:08:58,644 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 20:13:06,108 - src.data.data_pipeline - INFO - 成功生成 241961 条预测
+2025-05-19 20:13:06,114 - src.data.data_pipeline - INFO - 阶段5: 存储结果
+2025-05-19 20:13:06,115 - src.data.data_pipeline - INFO - 保存预测结果到数据库...
+2025-05-19 20:13:06,351 - src.data.mysql_writer - INFO - 成功连接到MySQL数据库
+2025-05-19 20:13:07,193 - src.data.mysql_writer - INFO - 数据库表结构检查完成
+2025-05-19 20:13:08,405 - src.data.mysql_writer - ERROR - 写入预测结果失败: 'sku'
+2025-05-19 20:13:08,428 - src.data.data_pipeline - ERROR - 结果保存失败: 写入预测结果失败
+2025-05-19 20:13:08,428 - src.data.data_pipeline - ERROR - 数据管道执行失败: 写入预测结果失败
+2025-05-19 20:13:09,132 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 20:13:09,133 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 20:31:42,589 - __main__ - INFO - 开始执行定时任务
+2025-05-19 20:31:42,590 - __main__ - INFO - 系统资源检查通过
+2025-05-19 20:31:42,707 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 20:31:42,707 - __main__ - INFO - 开始运行数据管道
+2025-05-19 20:31:42,708 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 20:31:42,710 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 20:31:42,710 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 20:31:42,722 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 20:31:43,460 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 20:32:57,019 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 20:32:57,021 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 20:33:04,823 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 20:33:05,915 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 20:33:05,987 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 20:33:06,120 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 20:33:06,203 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 20:33:07,243 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpti4obuzd/g7gmae_w.json
+2025-05-19 20:33:23,484 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpti4obuzd/krk4g65y.json
+2025-05-19 20:33:23,490 - cmdstanpy - DEBUG - idx 0
+2025-05-19 20:33:23,490 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 20:33:23,490 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=37104', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpti4obuzd/g7gmae_w.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpti4obuzd/krk4g65y.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpti4obuzd/prophet_modelic__hwp7/prophet_model-20250519203323.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 20:33:23,490 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 20:33:45,880 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 20:35:50,067 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 20:35:51,240 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 20:35:51,286 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 20:35:52,359 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 20:35:52,360 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 20:38:00,167 - src.data.data_pipeline - INFO - 成功生成 241961 条预测
+2025-05-19 20:38:00,173 - src.data.data_pipeline - INFO - 阶段5: 存储结果
+2025-05-19 20:38:00,174 - src.data.data_pipeline - INFO - 保存预测结果到数据库...
+2025-05-19 20:38:00,217 - src.data.mysql_writer - INFO - 成功连接到MySQL数据库
+2025-05-19 20:38:00,414 - src.data.mysql_writer - INFO - 数据库表结构检查完成
+2025-05-19 20:38:15,298 - src.data.mysql_writer - ERROR - 写入预测结果失败: 1054 (42S22): Unknown column 'sku' in 'field list'
+2025-05-19 20:38:15,356 - src.data.data_pipeline - ERROR - 结果保存失败: 写入预测结果失败
+2025-05-19 20:38:15,356 - src.data.data_pipeline - ERROR - 数据管道执行失败: 写入预测结果失败
+2025-05-19 20:38:15,480 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 20:38:15,484 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 20:39:23,437 - __main__ - INFO - 开始执行定时任务
+2025-05-19 20:39:23,439 - __main__ - INFO - 系统资源检查通过
+2025-05-19 20:39:23,482 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 20:39:23,483 - __main__ - INFO - 开始运行数据管道
+2025-05-19 20:39:23,483 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 20:39:23,483 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 20:39:23,484 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 20:39:23,484 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 20:39:24,151 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 20:40:30,739 - DataFetcher - INFO - 成功获取 242136 条记录
+2025-05-19 20:40:30,741 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 20:40:37,768 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 20:40:38,817 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 20:40:38,895 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 20:40:39,028 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 20:40:39,114 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 20:40:40,159 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp1xywac9y/x60liajk.json
+2025-05-19 20:40:54,909 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp1xywac9y/bhx3i66c.json
+2025-05-19 20:40:54,916 - cmdstanpy - DEBUG - idx 0
+2025-05-19 20:40:54,916 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 20:40:54,916 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=83094', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp1xywac9y/x60liajk.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp1xywac9y/bhx3i66c.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp1xywac9y/prophet_modelv33bz_di/prophet_model-20250519204054.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 20:40:54,916 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 20:41:16,995 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 20:43:27,963 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 20:43:29,821 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 20:43:29,943 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 20:43:31,259 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 20:43:31,259 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 20:45:49,176 - src.data.data_pipeline - INFO - 成功生成 241961 条预测
+2025-05-19 20:45:49,187 - src.data.data_pipeline - INFO - 阶段5: 存储结果
+2025-05-19 20:45:49,190 - src.data.data_pipeline - INFO - 保存预测结果到数据库...
+2025-05-19 20:45:49,297 - src.data.mysql_writer - INFO - 成功连接到MySQL数据库
+2025-05-19 20:45:49,380 - src.data.mysql_writer - INFO - 数据库表结构检查完成
+2025-05-19 20:45:50,405 - src.data.mysql_writer - ERROR - 写入预测结果失败: 'sku'
+2025-05-19 20:45:50,429 - src.data.data_pipeline - ERROR - 结果保存失败: 写入预测结果失败
+2025-05-19 20:45:50,429 - src.data.data_pipeline - ERROR - 数据管道执行失败: 写入预测结果失败
+2025-05-19 20:45:50,614 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 20:45:50,615 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 20:47:05,543 - __main__ - INFO - 开始执行定时任务
+2025-05-19 20:47:05,544 - __main__ - INFO - 系统资源检查通过
+2025-05-19 20:47:05,595 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 20:47:05,595 - __main__ - INFO - 开始运行数据管道
+2025-05-19 20:47:05,595 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 20:47:05,595 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 20:47:05,596 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 20:47:05,597 - DataFetcher - INFO - 开始从Impala获取训练数据
+2025-05-19 20:47:06,270 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 20:47:08,888 - DataFetcher - ERROR - 获取数据失败: ExecQueryFInstances rpc query_id=6a4d0ed16f685e3a:d04ac87f00000000 failed: Failed to get minimum memory reservation of 232.62 MB on daemon ym-017:22000 for query 6a4d0ed16f685e3a:d04ac87f00000000 because it would exceed an applicable memory limit. Memory is likely oversubscribed. Reducing query concurrency or configuring admission control may help avoid this error. Memory usage:
+Process: Limit=40.00 GB Total=37.24 GB Peak=41.14 GB
+  Buffer Pool: Free Buffers: Total=1.41 GB
+  Buffer Pool: Clean Pages: Total=3.20 GB
+  Buffer Pool: Unused Reservation: Total=-5.04 GB
+  Free Disk IO Buffers: Total=1.05 GB Peak=1.99 GB
+  RequestPool=root.ymetl: Total=29.61 GB Peak=34.50 GB
+    Query(d4499316facd7071:26be806500000000): Limit=30.00 GB Reservation=18.43 GB ReservationLimit=24.00 GB OtherMemory=4.37 MB Total=18.44 GB Peak=18.52 GB
+    Query(1d4af4d4c606603c:94ea528d00000000): Limit=30.00 GB Reservation=10.95 GB ReservationLimit=24.00 GB OtherMemory=235.26 MB Total=11.18 GB Peak=11.22 GB
+  RequestPool=root.ymtest: Total=0 Peak=20.58 GB
+  RequestPool=root.ymda: Total=4.32 GB Peak=18.71 GB
+    Query(6945bbfc0e8e1e02:a1d0aee200000000): Limit=20.00 GB Reservation=2.62 GB ReservationLimit=16.00 GB OtherMemory=3.17 MB Total=2.62 GB Peak=3.06 GB
+    Query(7943845f6adc8701:ed21995d00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=1.70 GB Total=1.70 GB Peak=1.71 GB
+  RequestPool=root.default: Total=0 Peak=19.24 GB
+    Query(6a4d0ed16f685e3a:d04ac87f00000000): Limit=8.00 GB Reservation=0 ReservationLimit=6.40 GB OtherMemory=0 Total=0 Peak=0
+  RequestPool=root.ymreadonly: Total=0 Peak=30.58 GB
+  RequestPool=root.ymspider: Total=0 Peak=9.30 GB
+  RequestPool=root.ymai: Total=0 Peak=4.76 GB
+  RequestPool=root.weiweibao: Total=0 Peak=16.26 GB
+  RequestPool=root.zhangbenqiang: Total=0 Peak=200.64 MB
+  Untracked Memory: Total=2.68 GB
+
+
+2025-05-19 20:47:08,890 - src.data.data_pipeline - ERROR - 数据获取失败: ExecQueryFInstances rpc query_id=6a4d0ed16f685e3a:d04ac87f00000000 failed: Failed to get minimum memory reservation of 232.62 MB on daemon ym-017:22000 for query 6a4d0ed16f685e3a:d04ac87f00000000 because it would exceed an applicable memory limit. Memory is likely oversubscribed. Reducing query concurrency or configuring admission control may help avoid this error. Memory usage:
+Process: Limit=40.00 GB Total=37.24 GB Peak=41.14 GB
+  Buffer Pool: Free Buffers: Total=1.41 GB
+  Buffer Pool: Clean Pages: Total=3.20 GB
+  Buffer Pool: Unused Reservation: Total=-5.04 GB
+  Free Disk IO Buffers: Total=1.05 GB Peak=1.99 GB
+  RequestPool=root.ymetl: Total=29.61 GB Peak=34.50 GB
+    Query(d4499316facd7071:26be806500000000): Limit=30.00 GB Reservation=18.43 GB ReservationLimit=24.00 GB OtherMemory=4.37 MB Total=18.44 GB Peak=18.52 GB
+    Query(1d4af4d4c606603c:94ea528d00000000): Limit=30.00 GB Reservation=10.95 GB ReservationLimit=24.00 GB OtherMemory=235.26 MB Total=11.18 GB Peak=11.22 GB
+  RequestPool=root.ymtest: Total=0 Peak=20.58 GB
+  RequestPool=root.ymda: Total=4.32 GB Peak=18.71 GB
+    Query(6945bbfc0e8e1e02:a1d0aee200000000): Limit=20.00 GB Reservation=2.62 GB ReservationLimit=16.00 GB OtherMemory=3.17 MB Total=2.62 GB Peak=3.06 GB
+    Query(7943845f6adc8701:ed21995d00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=1.70 GB Total=1.70 GB Peak=1.71 GB
+  RequestPool=root.default: Total=0 Peak=19.24 GB
+    Query(6a4d0ed16f685e3a:d04ac87f00000000): Limit=8.00 GB Reservation=0 ReservationLimit=6.40 GB OtherMemory=0 Total=0 Peak=0
+  RequestPool=root.ymreadonly: Total=0 Peak=30.58 GB
+  RequestPool=root.ymspider: Total=0 Peak=9.30 GB
+  RequestPool=root.ymai: Total=0 Peak=4.76 GB
+  RequestPool=root.weiweibao: Total=0 Peak=16.26 GB
+  RequestPool=root.zhangbenqiang: Total=0 Peak=200.64 MB
+  Untracked Memory: Total=2.68 GB
+
+
+2025-05-19 20:47:09,472 - src.data.data_pipeline - ERROR - 数据管道执行失败: 获取的数据为空
+2025-05-19 20:47:09,472 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 20:47:09,472 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 20:49:31,276 - __main__ - INFO - 开始执行定时任务
+2025-05-19 20:49:31,278 - __main__ - INFO - 系统资源检查通过
+2025-05-19 20:49:31,479 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 20:49:31,479 - __main__ - INFO - 开始运行数据管道
+2025-05-19 20:49:31,480 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 20:49:31,480 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 20:49:31,480 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 20:49:31,481 - DataFetcher - INFO - 开始从Impala分批获取训练数据，每批50000条
+2025-05-19 20:49:32,122 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 20:49:33,198 - DataFetcher - ERROR - 获取数据失败: ExecQueryFInstances rpc query_id=a446530f367be3a6:7676398a00000000 failed: Failed to get minimum memory reservation of 120.62 MB on daemon ym-017:22000 for query a446530f367be3a6:7676398a00000000 because it would exceed an applicable memory limit. Memory is likely oversubscribed. Reducing query concurrency or configuring admission control may help avoid this error. Memory usage:
+Process: Limit=40.00 GB Total=33.52 GB Peak=41.14 GB
+  Buffer Pool: Free Buffers: Total=610.00 MB
+  Buffer Pool: Clean Pages: Total=3.20 GB
+  Buffer Pool: Unused Reservation: Total=-7.91 GB
+  Free Disk IO Buffers: Total=1.16 GB Peak=1.99 GB
+  RequestPool=root.ymetl: Total=29.48 GB Peak=34.50 GB
+    Query(d4499316facd7071:26be806500000000): Limit=30.00 GB Reservation=18.43 GB ReservationLimit=24.00 GB OtherMemory=14.56 MB Total=18.45 GB Peak=18.52 GB
+    Query(1d4af4d4c606603c:94ea528d00000000): Limit=30.00 GB Reservation=10.95 GB ReservationLimit=24.00 GB OtherMemory=89.80 MB Total=11.03 GB Peak=11.22 GB
+  RequestPool=root.ymtest: Total=0 Peak=20.58 GB
+  RequestPool=root.ymda: Total=4.33 GB Peak=18.71 GB
+    Query(6945bbfc0e8e1e02:a1d0aee200000000): Limit=20.00 GB Reservation=2.62 GB ReservationLimit=16.00 GB OtherMemory=3.17 MB Total=2.62 GB Peak=3.06 GB
+    Query(7943845f6adc8701:ed21995d00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=1.71 GB Total=1.71 GB Peak=1.71 GB
+  RequestPool=root.default: Total=0 Peak=19.24 GB
+    Query(a446530f367be3a6:7676398a00000000): Limit=8.00 GB Reservation=0 ReservationLimit=6.40 GB OtherMemory=0 Total=0 Peak=0
+  RequestPool=root.ymreadonly: Total=0 Peak=30.58 GB
+  RequestPool=root.ymspider: Total=0 Peak=9.30 GB
+  RequestPool=root.ymai: Total=0 Peak=4.76 GB
+  RequestPool=root.weiweibao: Total=0 Peak=16.26 GB
+  RequestPool=root.zhangbenqiang: Total=0 Peak=200.64 MB
+  Untracked Memory: Total=2.67 GB
+
+
+2025-05-19 20:49:33,199 - src.data.data_pipeline - ERROR - 数据获取失败: ExecQueryFInstances rpc query_id=a446530f367be3a6:7676398a00000000 failed: Failed to get minimum memory reservation of 120.62 MB on daemon ym-017:22000 for query a446530f367be3a6:7676398a00000000 because it would exceed an applicable memory limit. Memory is likely oversubscribed. Reducing query concurrency or configuring admission control may help avoid this error. Memory usage:
+Process: Limit=40.00 GB Total=33.52 GB Peak=41.14 GB
+  Buffer Pool: Free Buffers: Total=610.00 MB
+  Buffer Pool: Clean Pages: Total=3.20 GB
+  Buffer Pool: Unused Reservation: Total=-7.91 GB
+  Free Disk IO Buffers: Total=1.16 GB Peak=1.99 GB
+  RequestPool=root.ymetl: Total=29.48 GB Peak=34.50 GB
+    Query(d4499316facd7071:26be806500000000): Limit=30.00 GB Reservation=18.43 GB ReservationLimit=24.00 GB OtherMemory=14.56 MB Total=18.45 GB Peak=18.52 GB
+    Query(1d4af4d4c606603c:94ea528d00000000): Limit=30.00 GB Reservation=10.95 GB ReservationLimit=24.00 GB OtherMemory=89.80 MB Total=11.03 GB Peak=11.22 GB
+  RequestPool=root.ymtest: Total=0 Peak=20.58 GB
+  RequestPool=root.ymda: Total=4.33 GB Peak=18.71 GB
+    Query(6945bbfc0e8e1e02:a1d0aee200000000): Limit=20.00 GB Reservation=2.62 GB ReservationLimit=16.00 GB OtherMemory=3.17 MB Total=2.62 GB Peak=3.06 GB
+    Query(7943845f6adc8701:ed21995d00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=1.71 GB Total=1.71 GB Peak=1.71 GB
+  RequestPool=root.default: Total=0 Peak=19.24 GB
+    Query(a446530f367be3a6:7676398a00000000): Limit=8.00 GB Reservation=0 ReservationLimit=6.40 GB OtherMemory=0 Total=0 Peak=0
+  RequestPool=root.ymreadonly: Total=0 Peak=30.58 GB
+  RequestPool=root.ymspider: Total=0 Peak=9.30 GB
+  RequestPool=root.ymai: Total=0 Peak=4.76 GB
+  RequestPool=root.weiweibao: Total=0 Peak=16.26 GB
+  RequestPool=root.zhangbenqiang: Total=0 Peak=200.64 MB
+  Untracked Memory: Total=2.67 GB
+
+
+2025-05-19 20:49:34,552 - src.data.data_pipeline - ERROR - 数据管道执行失败: 获取的数据为空
+2025-05-19 20:49:34,552 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 20:49:34,553 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 20:53:07,591 - __main__ - INFO - 开始执行定时任务
+2025-05-19 20:53:07,592 - __main__ - INFO - 系统资源检查通过
+2025-05-19 20:53:07,636 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 20:53:07,638 - __main__ - INFO - 开始运行数据管道
+2025-05-19 20:53:07,639 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 20:53:07,639 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 20:53:07,639 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 20:53:07,651 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 20:53:08,368 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 20:53:09,336 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: ms_libai.current_date() unknown
+
+2025-05-19 20:53:09,337 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-19 20:53:09,337 - src.data.data_pipeline - ERROR - 数据获取失败: name 'time' is not defined
+2025-05-19 20:53:09,437 - src.data.data_pipeline - ERROR - 数据管道执行失败: 获取的数据为空
+2025-05-19 20:53:09,437 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 20:53:09,437 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 20:54:27,262 - __main__ - INFO - 开始执行定时任务
+2025-05-19 20:54:27,263 - __main__ - INFO - 系统资源检查通过
+2025-05-19 20:54:27,312 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 20:54:27,312 - __main__ - INFO - 开始运行数据管道
+2025-05-19 20:54:27,313 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 20:54:27,313 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 20:54:27,313 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 20:54:27,314 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 20:54:28,783 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 20:54:29,709 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: ms_libai.current_date() unknown
+
+2025-05-19 20:54:29,710 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-19 20:55:29,717 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-19 20:55:30,484 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 20:55:31,351 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: ms_libai.current_date() unknown
+
+2025-05-19 20:55:31,352 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-19 20:56:32,153 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-19 20:56:32,893 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 20:56:33,790 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: ms_libai.current_date() unknown
+
+2025-05-19 20:56:33,791 - src.data.data_pipeline - ERROR - 数据获取失败: 经过 3 次尝试后仍无法获取数据
+2025-05-19 20:56:33,795 - src.data.data_pipeline - ERROR - 数据管道执行失败: 获取的数据为空
+2025-05-19 20:56:33,796 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 20:56:33,796 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 20:56:33,950 - impala.hiveserver2 - ERROR - Failed to open transport (tries_left=3)
+Traceback (most recent call last):
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 90, in isOpen
+    self.handle.settimeout(0)
+OSError: [Errno 9] Bad file descriptor
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/impala/hiveserver2.py", line 1195, in _execute
+    open_transport(transport)
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/impala/hiveserver2.py", line 1258, in open_transport
+    if not transport.isOpen():
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/thrift_sasl/__init__.py", line 67, in isOpen
+    return is_open()
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/thrift/transport/TSocket.py", line 98, in isOpen
+    self.handle.settimeout(original_timeout)
+OSError: [Errno 9] Bad file descriptor
+2025-05-19 21:10:37,743 - __main__ - INFO - 开始执行定时任务
+2025-05-19 21:10:37,744 - __main__ - INFO - 系统资源检查通过
+2025-05-19 21:10:37,792 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 21:10:37,792 - __main__ - INFO - 开始运行数据管道
+2025-05-19 21:10:37,792 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 21:10:37,793 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 21:10:37,793 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 21:10:37,794 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 21:10:39,436 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 21:22:58,735 - DataFetcher - INFO - 成功获取 3306728 条记录
+2025-05-19 21:22:58,861 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 21:47:20,039 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 21:47:21,250 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 21:47:21,334 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 21:47:23,083 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 21:47:24,731 - prophet - INFO - Disabling yearly seasonality. Run prophet with yearly_seasonality=True to override this.
+2025-05-19 21:47:24,732 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 21:47:29,786 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp70rv9knl/5e9ghhph.json
+2025-05-19 21:48:29,139 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp70rv9knl/0gwqznjn.json
+2025-05-19 21:48:29,147 - cmdstanpy - DEBUG - idx 0
+2025-05-19 21:48:29,148 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 21:48:29,148 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=50519', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp70rv9knl/5e9ghhph.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp70rv9knl/0gwqznjn.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmp70rv9knl/prophet_modela5iyfnjw/prophet_model-20250519214829.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 21:48:29,148 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 21:50:17,306 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 22:10:16,669 - __main__ - INFO - 开始执行定时任务
+2025-05-19 22:10:16,670 - __main__ - INFO - 系统资源检查通过
+2025-05-19 22:10:16,780 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 22:10:16,781 - __main__ - INFO - 开始运行数据管道
+2025-05-19 22:10:16,783 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 22:10:16,783 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 22:10:16,784 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 22:10:16,784 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 22:10:17,681 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 22:10:24,478 - DataFetcher - INFO - 成功获取 8222 条记录
+2025-05-19 22:10:24,681 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 22:10:28,212 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 22:10:29,153 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 22:10:29,222 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 22:10:29,232 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 22:10:29,258 - prophet - INFO - Disabling yearly seasonality. Run prophet with yearly_seasonality=True to override this.
+2025-05-19 22:10:29,258 - prophet - INFO - Disabling weekly seasonality. Run prophet with weekly_seasonality=True to override this.
+2025-05-19 22:10:29,258 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 22:10:29,279 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpknlmo382/jmjvnfkw.json
+2025-05-19 22:10:29,425 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpknlmo382/p4j0pjuo.json
+2025-05-19 22:10:29,428 - cmdstanpy - DEBUG - idx 0
+2025-05-19 22:10:29,429 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 22:10:29,429 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=98825', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpknlmo382/jmjvnfkw.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpknlmo382/p4j0pjuo.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpknlmo382/prophet_modelaq6nykau/prophet_model-20250519221029.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 22:10:29,429 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 22:10:29,735 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 22:10:31,446 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 22:10:31,572 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 22:10:31,574 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 22:10:31,643 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 22:10:31,644 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 22:10:33,313 - src.data.data_pipeline - INFO - 成功生成 7222 条预测
+2025-05-19 22:10:33,313 - src.data.data_pipeline - INFO - 阶段5: 存储结果
+2025-05-19 22:10:33,314 - src.data.data_pipeline - INFO - 保存预测结果到数据库...
+2025-05-19 22:10:33,348 - src.data.mysql_writer - INFO - 成功连接到MySQL数据库
+2025-05-19 22:10:33,447 - src.data.mysql_writer - INFO - 数据库表结构检查完成
+2025-05-19 22:10:33,945 - src.data.mysql_writer - ERROR - 写入预测结果失败: 1054 (42S22): Unknown column 'predicted_price' in 'field list'
+2025-05-19 22:10:33,953 - src.data.data_pipeline - ERROR - 结果保存失败: 写入预测结果失败
+2025-05-19 22:10:33,953 - src.data.data_pipeline - ERROR - 数据管道执行失败: 写入预测结果失败
+2025-05-19 22:10:33,957 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 22:10:33,957 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 22:12:52,017 - __main__ - INFO - 开始执行定时任务
+2025-05-19 22:12:52,018 - __main__ - INFO - 系统资源检查通过
+2025-05-19 22:12:52,072 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 22:12:52,072 - __main__ - INFO - 开始运行数据管道
+2025-05-19 22:12:52,073 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 22:12:52,073 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 22:12:52,074 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 22:12:52,074 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 22:12:52,845 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 22:13:01,469 - DataFetcher - INFO - 成功获取 8222 条记录
+2025-05-19 22:13:01,644 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 22:13:05,392 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 22:13:06,230 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 22:13:06,294 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 22:13:06,301 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 22:13:06,319 - prophet - INFO - Disabling yearly seasonality. Run prophet with yearly_seasonality=True to override this.
+2025-05-19 22:13:06,319 - prophet - INFO - Disabling weekly seasonality. Run prophet with weekly_seasonality=True to override this.
+2025-05-19 22:13:06,319 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 22:13:06,340 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpx_kejuqc/22vu362v.json
+2025-05-19 22:13:06,500 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpx_kejuqc/rbu2rrw7.json
+2025-05-19 22:13:06,501 - cmdstanpy - DEBUG - idx 0
+2025-05-19 22:13:06,501 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 22:13:06,501 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=82662', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpx_kejuqc/22vu362v.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpx_kejuqc/rbu2rrw7.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpx_kejuqc/prophet_model7jokdu2h/prophet_model-20250519221306.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 22:13:06,501 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 22:13:06,682 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 22:13:08,453 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 22:13:08,656 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 22:13:08,657 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 22:13:08,712 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 22:13:08,712 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 22:13:10,442 - src.data.data_pipeline - INFO - 成功生成 7222 条预测
+2025-05-19 22:13:10,443 - src.data.data_pipeline - INFO - 阶段5: 存储结果
+2025-05-19 22:13:10,443 - src.data.data_pipeline - INFO - 保存预测结果到数据库...
+2025-05-19 22:13:10,468 - src.data.mysql_writer - INFO - 成功连接到MySQL数据库
+2025-05-19 22:13:10,525 - src.data.mysql_writer - INFO - 数据库表结构检查完成
+2025-05-19 22:13:11,059 - src.data.mysql_writer - ERROR - 写入预测结果失败: 1054 (42S22): Unknown column 'predicted_price' in 'field list'
+2025-05-19 22:13:11,063 - src.data.data_pipeline - ERROR - 结果保存失败: 写入预测结果失败
+2025-05-19 22:13:11,063 - src.data.data_pipeline - ERROR - 数据管道执行失败: 写入预测结果失败
+2025-05-19 22:13:11,065 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 22:13:11,066 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 22:17:51,720 - __main__ - INFO - 开始执行定时任务
+2025-05-19 22:17:51,721 - __main__ - INFO - 系统资源检查通过
+2025-05-19 22:17:51,763 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 22:17:51,764 - __main__ - INFO - 开始运行数据管道
+2025-05-19 22:17:51,764 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 22:17:51,765 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 22:17:51,765 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 22:17:51,765 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 22:17:52,624 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 22:18:06,600 - DataFetcher - INFO - 成功获取 8222 条记录
+2025-05-19 22:18:06,760 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 22:18:10,188 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 22:18:11,051 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 22:18:11,110 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 22:18:11,117 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 22:18:11,137 - prophet - INFO - Disabling yearly seasonality. Run prophet with yearly_seasonality=True to override this.
+2025-05-19 22:18:11,137 - prophet - INFO - Disabling weekly seasonality. Run prophet with weekly_seasonality=True to override this.
+2025-05-19 22:18:11,137 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 22:18:11,159 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpiwy99e2_/yg0d2qbq.json
+2025-05-19 22:18:11,318 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpiwy99e2_/n79k427_.json
+2025-05-19 22:18:11,319 - cmdstanpy - DEBUG - idx 0
+2025-05-19 22:18:11,319 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 22:18:11,319 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=42238', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpiwy99e2_/yg0d2qbq.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpiwy99e2_/n79k427_.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpiwy99e2_/prophet_modelarw6se7v/prophet_model-20250519221811.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 22:18:11,320 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 22:18:11,572 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 22:18:13,235 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 22:18:13,338 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 22:18:13,339 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 22:18:13,378 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 22:18:13,378 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 22:18:14,919 - src.data.data_pipeline - INFO - 成功生成 7222 条预测
+2025-05-19 22:18:14,919 - src.data.data_pipeline - INFO - 阶段5: 存储结果
+2025-05-19 22:18:14,919 - src.data.data_pipeline - INFO - 保存预测结果到数据库...
+2025-05-19 22:18:14,945 - src.data.mysql_writer - INFO - 成功连接到MySQL数据库
+2025-05-19 22:18:15,156 - src.data.mysql_writer - INFO - 数据库表结构检查完成
+2025-05-19 22:18:15,525 - src.data.mysql_writer - ERROR - 写入预测结果失败: 1054 (42S22): Unknown column 'predicted_price' in 'field list'
+2025-05-19 22:18:15,531 - src.data.data_pipeline - ERROR - 结果保存失败: 写入预测结果失败
+2025-05-19 22:18:15,549 - src.data.data_pipeline - ERROR - 数据管道执行失败: 写入预测结果失败
+2025-05-19 22:18:15,551 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 22:18:15,551 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 22:21:54,222 - __main__ - INFO - 开始执行定时任务
+2025-05-19 22:21:54,223 - __main__ - INFO - 系统资源检查通过
+2025-05-19 22:21:54,278 - __main__ - INFO - 数据库连接测试成功
+2025-05-19 22:21:54,279 - __main__ - INFO - 开始运行数据管道
+2025-05-19 22:21:54,279 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-19 22:21:54,280 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-19 22:21:54,280 - src.data.data_pipeline - INFO - 阶段1: 数据获取
+2025-05-19 22:21:54,281 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-19 22:21:55,707 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-19 22:22:12,636 - DataFetcher - INFO - 成功获取 8222 条记录
+2025-05-19 22:22:12,805 - src.data.data_pipeline - INFO - 阶段2: 数据处理
+2025-05-19 22:22:16,084 - src.data.data_pipeline - INFO - 阶段3: 模型训练
+2025-05-19 22:22:16,892 - src.data.data_pipeline - INFO - 开始训练模型...
+2025-05-19 22:22:16,947 - src.models.fusion_model - INFO - 开始训练Prophet+LightGBM融合模型
+2025-05-19 22:22:16,953 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-19 22:22:16,968 - prophet - INFO - Disabling yearly seasonality. Run prophet with yearly_seasonality=True to override this.
+2025-05-19 22:22:16,968 - prophet - INFO - Disabling weekly seasonality. Run prophet with weekly_seasonality=True to override this.
+2025-05-19 22:22:16,969 - prophet - INFO - Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
+2025-05-19 22:22:16,986 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpnud499n4/9pjimu9v.json
+2025-05-19 22:22:17,128 - cmdstanpy - DEBUG - input tempfile: /var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpnud499n4/tmg0t5bd.json
+2025-05-19 22:22:17,130 - cmdstanpy - DEBUG - idx 0
+2025-05-19 22:22:17,130 - cmdstanpy - DEBUG - running CmdStan, num_threads: None
+2025-05-19 22:22:17,130 - cmdstanpy - DEBUG - CmdStan args: ['/Users/apple/opt/anaconda3/lib/python3.8/site-packages/prophet/stan_model/prophet_model.bin', 'random', 'seed=55710', 'data', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpnud499n4/9pjimu9v.json', 'init=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpnud499n4/tmg0t5bd.json', 'output', 'file=/var/folders/hh/_6z1vywx24xg3jgllzmx7v_r0000gn/T/tmpnud499n4/prophet_modelmdm2we2_/prophet_model-20250519222217.csv', 'method=optimize', 'algorithm=lbfgs', 'iter=10000']
+2025-05-19 22:22:17,130 - cmdstanpy - INFO - Chain [1] start processing
+2025-05-19 22:22:17,393 - cmdstanpy - INFO - Chain [1] done processing
+2025-05-19 22:22:18,878 - src.models.fusion_model - INFO - 训练LightGBM模型预测残差...
+2025-05-19 22:22:19,007 - src.models.fusion_model - INFO - Prophet+LightGBM融合模型训练完成
+2025-05-19 22:22:19,008 - src.data.data_pipeline - INFO - 保存模型到 models/fusion_model.pkl
+2025-05-19 22:22:19,051 - src.data.data_pipeline - INFO - 阶段4: 生成预测
+2025-05-19 22:22:19,051 - src.data.data_pipeline - INFO - 开始生成预测...
+2025-05-19 22:22:20,588 - src.data.data_pipeline - INFO - 成功生成 7222 条预测
+2025-05-19 22:22:20,588 - src.data.data_pipeline - INFO - 阶段5: 存储结果
+2025-05-19 22:22:20,589 - src.data.data_pipeline - INFO - 保存预测结果到数据库...
+2025-05-19 22:22:20,608 - src.data.mysql_writer - INFO - 成功连接到MySQL数据库
+2025-05-19 22:22:20,684 - src.data.mysql_writer - INFO - 数据库表结构检查完成
+2025-05-19 22:22:20,693 - src.data.mysql_writer - ERROR - 写入预测结果失败: 'sku_id'
+2025-05-19 22:22:20,698 - src.data.data_pipeline - ERROR - 结果保存失败: 写入预测结果失败
+2025-05-19 22:22:20,698 - src.data.data_pipeline - ERROR - 数据管道执行失败: 写入预测结果失败
+2025-05-19 22:22:20,701 - __main__ - ERROR - 数据管道运行失败
+2025-05-19 22:22:20,701 - __main__ - ERROR - 定时任务执行失败
+2025-05-19 23:44:13,118 - __main__ - INFO - 开始写入测试数据...
+2025-05-19 23:44:13,159 - __main__ - INFO - 成功连接到MySQL数据库
+2025-05-19 23:44:13,200 - __main__ - INFO - 数据库表结构检查完成
+2025-05-19 23:44:13,226 - __main__ - ERROR - 写入预测结果失败: 1054 (42S22): Unknown column 'sku' in 'field list'
+2025-05-19 23:44:13,258 - __main__ - INFO - 成功连接到MySQL数据库
+2025-05-19 23:44:13,296 - __main__ - INFO - 数据库表结构检查完成
+2025-05-19 23:44:13,301 - __main__ - ERROR - 写入历史数据失败: 1054 (42S22): Unknown column 'sku' in 'field list'
+2025-05-19 23:47:20,803 - __main__ - INFO - 开始写入测试数据...
+2025-05-19 23:47:20,842 - __main__ - INFO - 成功连接到MySQL数据库
+2025-05-19 23:47:21,014 - __main__ - INFO - 已重建sku_predictions表
+2025-05-19 23:47:21,035 - __main__ - INFO - 数据库表结构检查完成
+2025-05-19 23:47:21,091 - __main__ - INFO - 已写入 2 条记录 (总计: 2/2)
+2025-05-19 23:47:21,093 - __main__ - INFO - 预测数据写入成功
+2025-05-19 23:47:21,119 - __main__ - INFO - 成功连接到MySQL数据库
+2025-05-19 23:47:21,268 - __main__ - INFO - 已重建sku_predictions表
+2025-05-19 23:47:21,280 - __main__ - INFO - 数据库表结构检查完成
+2025-05-19 23:47:21,287 - __main__ - ERROR - 写入历史数据失败: 1054 (42S22): Unknown column 'sku' in 'field list'
+2025-05-19 23:51:07,518 - __main__ - INFO - 开始写入测试数据...
+2025-05-19 23:51:07,600 - __main__ - INFO - 成功连接到MySQL数据库
+2025-05-19 23:51:07,827 - __main__ - INFO - 已重建sku_predictions表
+2025-05-19 23:51:07,944 - __main__ - INFO - 已重建sku_history表，使用sku_id作为主键字段
+2025-05-19 23:51:07,955 - __main__ - INFO - 数据库表结构检查完成
+2025-05-19 23:51:07,975 - __main__ - INFO - 已写入 2 条记录 (总计: 2/2)
+2025-05-19 23:51:07,977 - __main__ - INFO - 预测数据写入成功
+2025-05-19 23:51:08,002 - __main__ - INFO - 成功连接到MySQL数据库
+2025-05-19 23:51:08,083 - __main__ - INFO - 已重建sku_predictions表
+2025-05-19 23:51:08,159 - __main__ - INFO - 已重建sku_history表，使用sku_id作为主键字段
+2025-05-19 23:51:08,165 - __main__ - INFO - 数据库表结构检查完成
+2025-05-19 23:51:08,181 - __main__ - INFO - 已写入 2 条历史记录 (总计: 2/2)
+2025-05-19 23:51:08,183 - __main__ - INFO - 历史数据写入成功

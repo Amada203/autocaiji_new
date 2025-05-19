@@ -10,7 +10,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import logging
 import os
 import pickle
-from models.base_model import BaseModel
+from .base_model import BaseModel
 
 logger = logging.getLogger(__name__)
 
@@ -289,4 +289,4 @@ class ProphetLGBMFusion(BaseModel):
         self.fitted = model_dict['fitted']
         
         logger.info(f"模型已从 {path} 加载")
-        return self 
+        return self
