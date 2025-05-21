@@ -1,5 +1,9 @@
 import os
 import sys
+import json
+import time
+import psutil
+import socket
 import logging
 import pandas as pd
 import joblib
@@ -34,7 +38,13 @@ class DataPipeline:
         
         # 初始化监控
         from src.utils.monitoring import start_monitoring_server
-        start_monitoring_server(port=8000)
+        try:
+            self.monitor_port = start_monitoring_server(start_port=8000)
+            logger.info(f"监控服务器启动在端口 {self.monitor_port}")
+        except Exception as e:
+            logger.error(f"无法启动监控服务器: {str(e)}")
+            self.monitor_port = None
+            
         self.stats = {
             "processed_records": 0,
             "predictions_generated": 0,
@@ -49,39 +59,64 @@ class DataPipeline:
         logger.info("启动数据管道")
         attempt = 0
         
+        # 初始化变量
+        raw_data = None
+        processed_data = None
+        model = None
+        predictions = None
+        
         while attempt < max_retries:
             try:
                 # 检查恢复点
                 recovery_point = self._get_recovery_point()
                 
+                # 如果从高级恢复点开始，确保必要的数据存在
+                if recovery_point > 1 and raw_data is None:
+                    logger.info("从较高恢复点启动，重新获取数据...")
+                    recovery_point = 1  # 强制从数据获取开始
+                
                 # 1. 数据获取
                 if recovery_point <= 1:
                     logger.info(f"阶段1: 数据获取 (尝试 {attempt+1}/{max_retries})")
                     raw_data = self._fetch_data()
-                    if raw_data.empty:
+                    if raw_data is None or raw_data.empty:
                         raise ValueError("获取的数据为空")
                     self._update_recovery_point(2)
 
                 # 2. 数据处理
                 if recovery_point <= 2:
+                    if raw_data is None or raw_data.empty:
+                        raise ValueError("缺少原始数据，无法进行处理")
                     logger.info(f"阶段2: 数据处理 (尝试 {attempt+1}/{max_retries})")
                     processed_data = self._process_data(raw_data)
+                    if processed_data is None or processed_data.empty:
+                        raise ValueError("数据处理结果为空")
                     processed_data.to_csv(self.processed_data_path, index=False)
                     self._update_recovery_point(3)
 
                 # 3. 模型训练
                 if recovery_point <= 3:
+                    if processed_data is None or processed_data.empty:
+                        raise ValueError("缺少处理后的数据，无法训练模型")
                     logger.info(f"阶段3: 模型训练 (尝试 {attempt+1}/{max_retries})")
                     model = self._train_model(processed_data)
+                    if model is None:
+                        raise ValueError("模型训练失败")
                     self._update_recovery_point(4)
 
                 # 4. 生成预测
                 if recovery_point <= 4:
+                    if processed_data is None or model is None:
+                        raise ValueError("缺少必要数据或模型，无法生成预测")
                     logger.info(f"阶段4: 生成预测 (尝试 {attempt+1}/{max_retries})")
                     predictions = self._generate_predictions(processed_data, model)
+                    if predictions is None or predictions.empty:
+                        raise ValueError("预测生成失败")
                     self._update_recovery_point(5)
 
                 # 5. 存储结果
+                if predictions is None or raw_data is None:
+                    raise ValueError("缺少必要数据，无法保存结果")
                 logger.info(f"阶段5: 存储结果 (尝试 {attempt+1}/{max_retries})")
                 self._save_results(predictions, raw_data)
                 
@@ -124,8 +159,49 @@ class DataPipeline:
 
     def _process_data(self, raw_data: pd.DataFrame) -> pd.DataFrame:
         """处理原始数据"""
-        processor = FeatureEngineering(raw_data)
-        return processor.process()
+        processor = None
+        try:
+            # 记录原始数据统计信息
+            self._log_data_stats(raw_data, "原始数据")
+            
+            # 处理数据
+            from src.data.data_processor import DataProcessor
+            processor = DataProcessor(raw_data)
+            processed_data = processor.process()
+            
+            # 验证处理结果
+            if processed_data is None or processed_data.empty:
+                raise ValueError("数据处理结果为空")
+                
+            # 记录处理后数据统计信息
+            self._log_data_stats(processed_data, "处理后数据")
+            
+            return processed_data
+            
+        except Exception as e:
+            error_msg = f"数据处理失败: {str(e)}"
+            if processor and hasattr(processor, 'df'):
+                error_msg += f", 部分处理数据形状: {processor.df.shape}"
+            logger.error(error_msg)
+            raise ValueError(error_msg)
+            
+    def _log_data_stats(self, df: pd.DataFrame, stage: str):
+        """记录数据统计信息"""
+        if df is None or df.empty:
+            logger.warning(f"{stage}: 无数据")
+            return
+            
+        stats = {
+            "记录数": len(df),
+            "列数": len(df.columns),
+            "开始日期": df['dt'].min(),
+            "结束日期": df['dt'].max(),
+            "SKU数量": df['sku_id'].nunique(),
+            "平均价格": df['page_price'].mean(),
+            "价格标准差": df['page_price'].std()
+        }
+        
+        logger.info(f"{stage}统计: {json.dumps(stats, indent=2, default=str)}")
 
     def _train_model(self, data: pd.DataFrame):
         """训练模型，支持模型缓存"""
@@ -186,19 +262,43 @@ class DataPipeline:
             self.stats["errors"].append(error_msg)
             raise
 
-    def _save_results(self, predictions: pd.DataFrame, raw_data: pd.DataFrame):
-        """保存结果到MySQL"""
+    def _save_results(self, predictions: pd.DataFrame, raw_data: pd.DataFrame, rebuild_tables=False):
+        """
+        保存结果到MySQL
+        
+        Args:
+            predictions: 预测结果DataFrame
+            raw_data: 原始数据DataFrame
+            rebuild_tables: 是否重建表，默认False（使用增量更新模式）
+        """
         try:
-            writer = MySQLWriter()
+            # 从配置文件加载数据库配置
+            db_config = {}
+            try:
+                with open("config/database.json", "r") as f:
+                    config = json.load(f)
+                    db_config = {
+                        'host': config['mysql']['host'],
+                        'port': config['mysql']['port'],
+                        'user': config['mysql']['user'],
+                        'password': config['mysql']['password'],
+                        'database': config['mysql']['database']
+                    }
+            except Exception as e:
+                logger.warning(f"加载数据库配置失败，使用默认配置: {str(e)}")
             
-            # 保存预测结果
-            logger.info("保存预测结果到数据库...")
-            if not writer.write_predictions(predictions):
+            # 创建MySQL写入器
+            writer = MySQLWriter(**db_config)
+            
+            # 保存预测结果（使用增量更新模式）
+            logger.info(f"保存预测结果到数据库... (模式: {'重建表' if rebuild_tables else '增量更新'})")
+            if not writer.write_predictions(predictions, rebuild_table=rebuild_tables):
                 raise Exception("写入预测结果失败")
                 
-            # 保存历史数据
-            logger.info("保存历史数据到数据库...")
-            if not writer.write_history(raw_data):
+            # 保存历史数据（使用增量更新模式）
+            logger.info(f"保存历史数据到数据库... (模式: {'重建表' if rebuild_tables else '增量更新'})")
+            logger.info("测试模式：仅处理前50条记录")
+            if not writer.write_history(raw_data, rebuild_table=rebuild_tables, limit=50):
                 raise Exception("写入历史数据失败")
                 
             self.stats["success"] = True

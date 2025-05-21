@@ -143,11 +143,35 @@ class DataFetcher:
                 if df.empty:
                     raise ValueError("获取的数据为空")
                 
+                # 验证获取的列
+                required_columns = ['sku_id', 'ds', 'y', 'is_promotion']
+                missing_cols = [col for col in required_columns if col not in df.columns]
+                if missing_cols:
+                    raise ValueError(f"查询结果缺少必要列: {missing_cols}")
+                
+                # 重命名列以匹配处理器期望的格式
+                df = df.rename(columns={
+                    'ds': 'dt',
+                    'y': 'page_price',
+                    'is_promotion': 'discount_price'  # 临时映射，实际需要调整查询
+                })
+                
                 # 计算价格变化标志
-                df['change_flag'] = (df.groupby('sku_id')['y'].diff() != 0).astype(int)
+                df['change_flag'] = (df.groupby('sku_id')['page_price'].diff() != 0).astype(int)
+                
+                # 记录数据统计信息
+                stats = {
+                    "记录数": len(df),
+                    "SKU数量": df['sku_id'].nunique(),
+                    "开始日期": df['dt'].min(),
+                    "结束日期": df['dt'].max(),
+                    "平均价格": df['page_price'].mean(),
+                    "价格标准差": df['page_price'].std()
+                }
+                self.logger.info(f"获取数据统计: {json.dumps(stats, indent=2, default=str)}")
                 
                 # 获取最新日期作为下次运行的起始点
-                latest_date = df['ds'].max()
+                latest_date = df['dt'].max()
                 self._update_last_run_date(latest_date)
                 
                 self.logger.info(f"成功获取 {len(df)} 条记录，最新日期: {latest_date}")

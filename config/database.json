@@ -14,15 +14,15 @@
     "password": "mypassword123",
     "database": "price_prediction"
   },
-  "notification": {
-    "email": {
-      "enabled": true,
-      "smtp_server": "smtp.example.com",
-      "smtp_port": 587,
-      "username": "alerts@example.com",
-      "password": "your_password",
-      "from_addr": "alerts@example.com",
-      "to_addrs": ["admin@example.com"]
-    }
+      "notification": {
+        "email": {
+          "enabled": false,
+          "smtp_server": "your.smtp.server.com",
+          "smtp_port": 587,
+          "username": "your_username",
+          "password": "your_password",
+          "from_addr": "your_email@domain.com",
+          "to_addrs": ["recipient@domain.com"]
+        }
   }
 }

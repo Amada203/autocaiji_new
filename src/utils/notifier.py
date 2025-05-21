@@ -66,7 +66,9 @@ def send_pipeline_notification(success: bool, stats: dict):
         """
         
         if not success:
-            message += f"\n错误信息: {stats.get('errors', ['未知错误'])[0]}"
+            errors = stats.get('errors', [])
+            error_message = errors[0] if errors else "未知错误"
+            message += f"\n错误信息: {error_message}"
             
         notifier.send(subject, message.strip())
     except Exception as e:

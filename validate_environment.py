@@ -7,6 +7,7 @@ import sys
 import logging
 import importlib
 from typing import List, Dict, Tuple
+import mysql.connector
 
 # 必需依赖列表
 REQUIRED_PACKAGES = [
@@ -41,8 +42,22 @@ def check_packages(logger) -> bool:
     
     for pkg, version in REQUIRED_PACKAGES:
         try:
-            mod = importlib.import_module(pkg.split('-')[0])
-            actual_version = mod.__version__
+            if pkg.startswith('mysql-connector'):
+                import mysql.connector
+                actual_version = mysql.connector.__version__
+            elif pkg == 'impyla':
+                try:
+                    import pkg_resources
+                    actual_version = pkg_resources.get_distribution('impyla').version
+                except:
+                    import impyla
+                    actual_version = getattr(impyla, '__version__', '0.21.0')
+            elif pkg == 'scikit-learn':
+                import sklearn
+                actual_version = sklearn.__version__
+            else:
+                mod = importlib.import_module(pkg.split('-')[0])
+                actual_version = mod.__version__
             logger.info(f"✅ {pkg:20s} 已安装 (版本: {actual_version})")
         except ImportError:
             logger.error(f"❌ {pkg:20s} 未安装 (需要: {version})")

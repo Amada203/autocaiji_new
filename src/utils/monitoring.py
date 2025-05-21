@@ -1,6 +1,7 @@
 from prometheus_client import start_http_server, Gauge
 import psutil
 import time
+import socket
 from typing import Dict, Any
 
 # 定义监控指标
@@ -25,9 +26,38 @@ CPU_USAGE = Gauge(
     'CPU usage percentage'
 )
 
-def start_monitoring_server(port=8000):
-    """启动监控指标服务器"""
-    start_http_server(port)
+def is_port_available(port):
+    """检查端口是否可用"""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.bind(("localhost", port))
+            return True
+        except socket.error:
+            return False
+
+def start_monitoring_server(start_port=8000, max_retries=5):
+    """
+    启动监控指标服务器
+    自动尝试递增端口直到找到可用端口
+    
+    参数:
+        start_port: 起始端口号
+        max_retries: 最大重试次数
+        
+    返回:
+        实际使用的端口号
+    """
+    port = start_port
+    retries = 0
+    
+    while retries < max_retries:
+        if is_port_available(port):
+            start_http_server(port)
+            return port
+        port += 1
+        retries += 1
+    
+    raise OSError(f"无法在端口{start_port}-{port}范围内启动监控服务器")
 
 def update_metrics(stats: Dict[str, Any]):
     """更新监控指标"""
