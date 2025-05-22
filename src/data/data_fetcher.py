@@ -211,30 +211,7 @@ class DataFetcher:
             self.logger.error(f"加载备用数据失败: {str(e)}")
             raise
 
-    def _add_price_change_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        """添加价格变动相关特征"""
-        if df.empty:
-            return df
-            
-        df = df.sort_values(['sku_id', 'date'])
-        
-        df['prev_price'] = df.groupby('sku_id')['discount_price'].shift(1)
-        df['price_change'] = (df['discount_price'] != df['prev_price']).astype(int)
-        df['price_change_amount'] = df['discount_price'] - df['prev_price']
-        df['price_change_ratio'] = df['price_change_amount'] / df['prev_price'].replace(0, np.nan)
-        df['price_change_direction'] = np.sign(df['price_change_amount'])
-        
-        df = df.fillna({
-            'prev_price': df['discount_price'],
-            'price_change': 0,
-            'price_change_amount': 0,
-            'price_change_ratio': 0,
-            'price_change_direction': 0
-        })
-        
-        return df
-
-    def fetch_training_data(self, 
+    def fetch_training_data(self,
                           train_end: Optional[str] = None,
                           val_end: Optional[str] = None,
                           test_end: Optional[str] = None,
@@ -242,10 +219,15 @@ class DataFetcher:
                           retry_delay: int = 20) -> Dict[str, pd.DataFrame]:
         """获取训练数据，按时间轴划分数据集"""
         if not all([train_end, val_end, test_end]):
-            end_date = datetime.now()
-            test_end = end_date.strftime('%Y-%m-%d')
-            val_end = (end_date - timedelta(days=30)).strftime('%Y-%m-%d')
-            train_end = (end_date - timedelta(days=90)).strftime('%Y-%m-%d')
+            # 计算上个月月末日期作为默认test_end
+            today = datetime.now()
+            first_of_month = today.replace(day=1)
+            last_month_end = first_of_month - timedelta(days=1)
+            test_end = last_month_end.strftime('%Y-%m-%d')
+            
+            # 计算验证集和训练集结束日期
+            val_end = (last_month_end - timedelta(days=30)).strftime('%Y-%m-%d')
+            train_end = (last_month_end - timedelta(days=90)).strftime('%Y-%m-%d')
 
         try:
             datetime.strptime(train_end, '%Y-%m-%d')
@@ -349,14 +331,18 @@ class DataFetcher:
                             if not (val_end < min_date <= max_date <= test_end):
                                 raise ValueError(f"测试集日期范围错误: {min_date} 到 {max_date}")
                         
-                        df = self._add_price_change_features(df)
-                        
                         self.logger.info(
                             f"{name}数据集 - 记录数: {len(df)}, SKU数: {df['sku_id'].nunique()}, "
                             f"日期范围: {df['date'].min()}至{df['date'].max()}, "
-                            f"平均价格: {df['discount_price'].mean():.2f}, "
-                            f"价格变动次数: {df['price_change'].sum()}"
+                            f"平均价格: {df['discount_price'].mean():.2f}"
                         )
+                        
+                        if not df.empty:
+                            first_row = df.iloc[0][['sku_id', 'date', 'discount_price', 'is_promotion']].to_dict()
+                            self.logger.info(
+                                f"{name}数据集首行预览 - " +
+                                ", ".join([f"{k}: {v}" for k, v in first_row.items()])
+                            )
                     
                     datasets[name] = df
                 
