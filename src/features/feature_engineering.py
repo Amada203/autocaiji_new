@@ -1,55 +1,164 @@
 import pandas as pd
 import numpy as np
-from typing import List, Optional
+from typing import List, Dict, Optional
 from datetime import datetime, timedelta
+import warnings
 
-class FeatureEngineering:
-    def __init__(self, df: pd.DataFrame):
+class FeatureEngineer:
+    """价格变动预测特征工程"""
+    
+    def __init__(self, cutoff_date: Optional[str] = None):
         """
-        初始化特征工程类
+        初始化特征工程
         
         Args:
-            df: 预处理后的数据框
+            cutoff_date: 截止日期(YYYY-MM-DD)，确保不使用未来数据
         """
-        self.df = df.copy()
+        self.cutoff_date = pd.to_datetime(cutoff_date) if cutoff_date else None
+        self.feature_columns = []  # 记录生成的特征列
         
-        # 处理日期列（支持ds或date列名）
-        if 'ds' in self.df.columns:
-            try:
-                self.df['date'] = pd.to_datetime(self.df['ds'])
-            except Exception as e:
-                raise ValueError(f"无法将ds列转换为日期类型: {str(e)}")
-        elif 'date' not in self.df.columns:
-            raise ValueError("输入数据必须包含日期列（'ds'或'date'）")
-        else:
-            try:
-                self.df['date'] = pd.to_datetime(self.df['date'])
-            except Exception as e:
-                raise ValueError(f"无法将date列转换为日期类型: {str(e)}")
-            
-        # 重命名y列为price（如果存在）
-        if 'y' in self.df.columns and 'price' not in self.df.columns:
-            self.df['price'] = self.df['y']
-            
-        # 计算价格变化相关指标（如果不存在）
-        if 'price' in self.df.columns:
-            # 基本价格变化指标
-            if 'price_change_flag' not in self.df.columns:
-                self.df['price_change_flag'] = (self.df.groupby('sku_id')['price'].diff() != 0).astype(int)
-            
-            if 'price_change_amount' not in self.df.columns:
-                self.df['price_change_amount'] = self.df.groupby('sku_id')['price'].diff()
-            
-            if 'price_change_ratio' not in self.df.columns:
-                self.df['price_change_ratio'] = self.df.groupby('sku_id')['price'].pct_change()
+    def transform(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        执行特征工程转换
+        
+        Args:
+            df: 输入数据框，需包含:
+                - sku_id: 商品ID
+                - date: 日期
+                - discount_price: 折扣价格
                 
-            # 价格变化方向
-            self.df['price_change_direction'] = np.where(self.df['price_change_amount'] > 0, 1,
-                                                       np.where(self.df['price_change_amount'] < 0, -1, 0))
+        Returns:
+            包含所有特征的数据框
+        """
+        df = df.copy()
+        
+        # 1. 基础验证
+        self._validate_input(df)
+        
+        # 2. 预处理
+        df = self._preprocess_data(df)
+        
+        # 3. 生成特征
+        df = self._build_time_features(df)
+        df = self._build_price_features(df)
+        df = self._build_trend_features(df)
+        
+        # 4. 后处理
+        df = self._postprocess_features(df)
+        
+        return df
+    
+    def _validate_input(self, df: pd.DataFrame):
+        """验证输入数据"""
+        required_cols = ['sku_id', 'date', 'discount_price']
+        missing_cols = [col for col in required_cols if col not in df.columns]
+        if missing_cols:
+            raise ValueError(f"缺少必要列: {missing_cols}")
             
-            # 价格变化类型
-            self.df['price_change_type'] = np.where(self.df['price_change_flag'] == 0, 'no_change',
-                                                   np.where(self.df['price_change_direction'] > 0, 'increase', 'decrease'))
+        # 验证日期不超过cutoff_date
+        if self.cutoff_date:
+            max_date = pd.to_datetime(df['date']).max()
+            if max_date > self.cutoff_date:
+                raise ValueError(f"数据包含未来日期({max_date})，超过截止日期({self.cutoff_date})")
+    
+    def _preprocess_data(self, df: pd.DataFrame) -> pd.DataFrame:
+        """数据预处理"""
+        # 确保日期类型
+        df['date'] = pd.to_datetime(df['date'])
+        
+        # 按SKU和日期排序
+        df = df.sort_values(['sku_id', 'date'])
+        
+        # 计算基础价格变动特征
+        df['prev_price'] = df.groupby('sku_id')['discount_price'].shift(1)
+        df['price_change'] = (df['discount_price'] != df['prev_price']).astype(int)
+        df['price_change_amount'] = df['discount_price'] - df['prev_price']
+        df['price_change_ratio'] = df['price_change_amount'] / df['prev_price']
+        
+        # 填充第一个记录的NaN
+        df = df.fillna({
+            'prev_price': df['discount_price'],
+            'price_change': 0,
+            'price_change_amount': 0,
+            'price_change_ratio': 0
+        })
+        
+        return df
+    
+    def _build_time_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        """构建时间特征"""
+        # 星期几 (0=周一, 6=周日)
+        df['day_of_week'] = df['date'].dt.dayofweek
+        df['is_weekend'] = df['day_of_week'].isin([5, 6]).astype(int)
+        
+        # 月份和日
+        df['month'] = df['date'].dt.month
+        df['day'] = df['date'].dt.day
+        
+        self.feature_columns.extend(['day_of_week', 'is_weekend', 'month', 'day'])
+        return df
+    
+    def _build_price_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        """构建价格相关特征"""
+        # 滑动窗口统计
+        windows = [3, 7, 14, 30]
+        for w in windows:
+            df[f'price_mean_{w}d'] = df.groupby('sku_id')['discount_price'].transform(
+                lambda x: x.rolling(w, min_periods=1).mean()
+            )
+            df[f'price_std_{w}d'] = df.groupby('sku_id')['discount_price'].transform(
+                lambda x: x.rolling(w, min_periods=1).std()
+            )
+            
+        # 价格变动频率
+        for w in [7, 30]:
+            df[f'change_freq_{w}d'] = df.groupby('sku_id')['price_change'].transform(
+                lambda x: x.rolling(w, min_periods=1).mean()
+            )
+            
+        # 距离上次价格变动的天数
+        df['days_since_last_change'] = df.groupby('sku_id').apply(
+            lambda group: group['price_change'].cumsum().groupby(
+                group['price_change'].cumsum()).cumcount()
+        ).reset_index(level=0, drop=True)
+        
+        self.feature_columns.extend(
+            [f'price_mean_{w}d' for w in windows] +
+            [f'price_std_{w}d' for w in windows] +
+            [f'change_freq_{w}d' for w in [7, 30]] +
+            ['days_since_last_change']
+        )
+        return df
+    
+    def _build_trend_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        """构建趋势特征"""
+        # 价格趋势 (线性回归斜率)
+        for w in [7, 14]:
+            df[f'price_trend_{w}d'] = df.groupby('sku_id')['discount_price'].transform(
+                lambda x: x.rolling(w, min_periods=1).apply(
+                    lambda y: np.polyfit(range(len(y)), y, 1)[0] if len(y) > 1 else 0
+                )
+            )
+            
+        self.feature_columns.extend([f'price_trend_{w}d' for w in [7, 14]])
+        return df
+    
+    def _postprocess_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        """特征后处理"""
+        # 确保所有特征列都存在
+        missing_features = set(self.feature_columns) - set(df.columns)
+        for f in missing_features:
+            df[f] = 0
+            warnings.warn(f"自动填充缺失特征: {f}")
+            
+        # 填充剩余NA
+        df = df.fillna(0)
+        
+        return df
+    
+    def get_feature_names(self) -> List[str]:
+        """获取所有特征列名"""
+        return self.feature_columns
         
     def build_time_features(self) -> pd.DataFrame:
         """

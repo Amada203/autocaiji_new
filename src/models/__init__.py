@@ -1,16 +1,13 @@
 # 使models目录成为Python包
 from .model_trainer import ModelTrainer
 from .predictors import BasePredictor, ProphetPredictor, ChangeDetector
-from .fusion_model import ProphetLGBMFusion
+from .fusion_model import PriceChangePredictor
 
-# 为保持向后兼容，同时导出FusionModel别名
-FusionModel = ProphetLGBMFusion
-
+# 新版本统一使用PriceChangePredictor
 __all__ = [
     'ModelTrainer', 
     'BasePredictor', 
     'ProphetPredictor', 
     'ChangeDetector',
-    'ProphetLGBMFusion',
-    'FusionModel'
+    'PriceChangePredictor'
 ]

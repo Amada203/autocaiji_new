@@ -1,13 +1,15 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from lightgbm import LGBMClassifier
-from sklearn.metrics import classification_report, roc_auc_score
+import argparse
 import joblib
 import os
 import sys
 import logging
+from datetime import datetime, timedelta
+from .fusion_model import PriceChangePredictor
+from ..data.data_fetcher import DataFetcher
+from ..data.mysql_writer import MySQLWriter
+from ..features.feature_engineering import FeatureEngineer
 
 # 配置日志
 logging.basicConfig(
@@ -22,54 +24,66 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 class ModelTrainer:
-    def __init__(self, data_path='data/processed_data.csv'):
-        """初始化模型训练器"""
-        self.data_path = data_path
-        self.model = None
-        self.features = None
-        self.target = 'significant_change'
+    def __init__(self, config):
+        """
+        初始化模型训练器
+        
+        Args:
+            config (dict): 配置字典，包含:
+                - impala_config: Impala连接配置
+                - mysql_config: MySQL连接配置
+                - model_params: 模型参数
+                - train_end: 训练集结束日期 (YYYY-MM-DD)
+                - val_end: 验证集结束日期 (YYYY-MM-DD)
+                - test_end: 测试集结束日期 (YYYY-MM-DD)
+        """
+        self.config = config
+        self.model = PriceChangePredictor(
+            prophet_params=config.get('prophet_params', {}),
+            lgbm_params=config.get('lgbm_params', {})
+        )
+        self.data_fetcher = DataFetcher(config['impala_config'])
+        self.mysql_writer = MySQLWriter(config['mysql_config'])
+        self.feature_engineer = FeatureEngineer()
         
     def train(self):
-        """训练模型"""
+        """训练价格变动预测模型"""
         try:
-            # 1. 加载数据
-            logger.info(f"加载数据: {self.data_path}")
-            df = pd.read_csv(self.data_path)
+            logger.info("开始训练价格变动预测模型")
             
-            # 2. 准备特征和目标
-            self._prepare_features(df)
-            
-            # 3. 划分训练集和测试集
-            X_train, X_test, y_train, y_test = train_test_split(
-                self.X, self.y, test_size=0.2, random_state=42
+            # 1. 获取数据
+            logger.info("从Impala获取训练数据...")
+            datasets = self.data_fetcher.fetch_training_data(
+                train_end=self.config['train_end'],
+                val_end=self.config['val_end'],
+                test_end=self.config['test_end']
             )
             
-            # 4. 特征标准化
-            scaler = StandardScaler()
-            X_train_scaled = scaler.fit_transform(X_train)
-            X_test_scaled = scaler.transform(X_test)
+            # 2. 特征工程
+            logger.info("执行特征工程...")
+            train_df = self.feature_engineer.transform(datasets['train'])
+            val_df = self.feature_engineer.transform(datasets['val'])
+            test_df = self.feature_engineer.transform(datasets['test'])
             
-            # 5. 训练模型
-            logger.info("开始训练模型")
-            self.model = LGBMClassifier(
-                n_estimators=100,
-                learning_rate=0.05,
-                max_depth=7,
-                random_state=42
-            )
-            self.model.fit(X_train_scaled, y_train)
+            # 3. 训练模型
+            logger.info("训练融合模型...")
+            self.model.fit(train_df, val_df)
             
-            # 6. 评估模型
-            self._evaluate_model(X_test_scaled, y_test)
+            # 4. 评估模型
+            logger.info("评估模型性能...")
+            metrics = self.model.evaluate(test_df)
             
-            # 7. 保存模型
-            self._save_model(scaler)
+            # 5. 保存模型和结果
+            logger.info("保存模型和评估结果...")
+            self._save_model()
+            self._save_results(metrics)
             
-            return self.model
+            logger.info("模型训练流程完成")
+            return metrics
             
         except Exception as e:
-            logger.error(f"模型训练失败: {str(e)}")
-            return None
+            logger.error(f"模型训练流程失败: {str(e)}", exc_info=True)
+            raise
     
     def _prepare_features(self, df):
         """准备特征和目标变量"""

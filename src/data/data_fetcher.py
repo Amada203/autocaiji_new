@@ -98,31 +98,82 @@ class DataFetcher:
             self.logger.error(f"Impala连接测试失败: {str(e)}")
             return False
 
-    def fetch_training_data(self, max_retries=3, retry_delay=60) -> pd.DataFrame:
-        """获取训练数据，带重试机制"""
+    def fetch_training_data(self, train_end, val_end, test_end, max_retries=3, retry_delay=60) -> Dict[str, pd.DataFrame]:
+        """获取训练数据，按时间轴划分数据集
+        
+        Args:
+            train_end: 训练集结束日期 (YYYY-MM-DD)
+            val_end: 验证集结束日期 (YYYY-MM-DD)
+            test_end: 测试集结束日期 (YYYY-MM-DD)
+            max_retries: 最大重试次数
+            retry_delay: 重试延迟(秒)
+            
+        Returns:
+            Dict[str, pd.DataFrame]: 包含三个数据集的字典
+        """
         for attempt in range(max_retries):
             try:
                 self.logger.info(f"尝试获取训练数据 (第{attempt+1}次尝试)")
                 
-                # 增量数据获取 - 只获取上次运行后的新数据
-                last_run_date = self._get_last_run_date()  # 获取上次成功运行的日期
-                
-                query = f"""
-                WITH incremental_skus AS (
-                    SELECT DISTINCT sku_id
-                    FROM jd_daily_price
-                    WHERE dt >= '{last_run_date}'
-                )
+                # 基础查询 - 获取所有必要字段
+                base_query = """
                 SELECT 
-                    p.sku_id,
-                    p.dt AS ds,
-                    p.page_price AS y,
-                    CASE WHEN p.raw_promotion_detail IS NOT NULL THEN 1 ELSE 0 END AS is_promotion
-                FROM jd_daily_price p
-                JOIN incremental_skus t ON p.sku_id = t.sku_id
-                WHERE p.dt >= '{last_run_date}'
-                ORDER BY p.sku_id, p.dt
+                    sku_id,
+                    dt AS date,
+                    page_price AS discount_price,
+                    category,
+                    CASE WHEN raw_promotion_detail IS NOT NULL THEN 1 ELSE 0 END AS is_promotion
+                FROM jd_daily_price
+                WHERE dt BETWEEN '{start_date}' AND '{end_date}'
+                ORDER BY sku_id, dt
                 """
+                
+                # 获取三个时间段的数据
+                datasets = {}
+                date_ranges = {
+                    'train': (None, train_end),
+                    'val': (train_end, val_end),
+                    'test': (val_end, test_end)
+                }
+                
+                for name, (start, end) in date_ranges.items():
+                    query = base_query.format(
+                        start_date=start if start else '2000-01-01',  # 默认最早日期
+                        end_date=end
+                    )
+                    
+                    # 执行查询
+                    conn = connect(
+                        host=self.config['host'],
+                        port=self.config['port'],
+                        database=self.config['database'],
+                        user=self.config.get('user'),
+                        password=self.config.get('password'),
+                        auth_mechanism='PLAIN',
+                        timeout=60
+                    )
+                    cursor = conn.cursor()
+                    cursor.execute(query)
+                    df = as_pandas(cursor)
+                    
+                    # 验证数据
+                    if df.empty:
+                        self.logger.warning(f"{name}数据集为空")
+                    else:
+                        # 添加价格变动特征
+                        df = self._add_price_change_features(df)
+                        
+                        # 记录统计信息
+                        stats = {
+                            "记录数": len(df),
+                            "SKU数量": df['sku_id'].nunique(),
+                            "开始日期": df['date'].min(),
+                            "结束日期": df['date'].max()
+                        }
+                        self.logger.info(f"{name}数据集统计: {json.dumps(stats, indent=2, default=str)}")
+                    
+                    datasets[name] = df
+                    conn.close()
                 
                 # 建立连接
                 conn_params = {
@@ -318,6 +369,41 @@ class DataFetcher:
         finally:
             if 'conn' in locals():
                 conn.close()
+
+    def _add_price_change_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        """添加价格变动相关特征
+        
+        Args:
+            df: 原始数据框
+            
+        Returns:
+            添加了特征的数据框
+        """
+        if df.empty:
+            return df
+            
+        # 确保按SKU和日期排序
+        df = df.sort_values(['sku_id', 'date'])
+        
+        # 计算价格变动标志
+        df['prev_price'] = df.groupby('sku_id')['discount_price'].shift(1)
+        df['price_change'] = (df['discount_price'] != df['prev_price']).astype(int)
+        
+        # 计算价格变动量和比率
+        df['price_change_amount'] = df['discount_price'] - df['prev_price']
+        df['price_change_ratio'] = df['price_change_amount'] / df['prev_price']
+        df['price_change_direction'] = np.sign(df['price_change_amount'])
+        
+        # 填充第一个记录的NaN值
+        df = df.fillna({
+            'prev_price': df['discount_price'],
+            'price_change': 0,
+            'price_change_amount': 0,
+            'price_change_ratio': 0,
+            'price_change_direction': 0
+        })
+        
+        return df
 
     def close(self):
         """关闭资源"""

@@ -11,7 +11,7 @@ from datetime import datetime
 from typing import Dict, Any
 from .data_fetcher import DataFetcher
 from .mysql_writer import MySQLWriter
-from ..features.feature_engineering import FeatureEngineering
+from ..features.feature_engineering import FeatureEngineer
 
 # 配置日志
 logging.basicConfig(

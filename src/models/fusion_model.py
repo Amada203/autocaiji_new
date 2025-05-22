@@ -1,201 +1,291 @@
 """
 Prophet + LightGBM 融合模型
-基于残差处理方法，将Prophet模型的预测残差交给LightGBM继续学习
+基于并行预测架构，同时使用Prophet和LightGBM预测价格变动概率
 """
 import pandas as pd
 import numpy as np
 from prophet import Prophet
 import lightgbm as lgb
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, 
+    f1_score, roc_auc_score, confusion_matrix
+)
 import logging
 import os
 import pickle
+from typing import Dict, List
 from .base_model import BaseModel
 
 logger = logging.getLogger(__name__)
 
-class ProphetLGBMFusion(BaseModel):
+class PriceChangePredictor(BaseModel):
     """
-    Prophet + LightGBM 融合模型
-    利用Prophet捕获时间序列的趋势和季节性，然后使用LightGBM预测残差
+    价格变动预测模型
+    使用Prophet预测时间序列模式，LightGBM预测价格变动概率
     """
     
     def __init__(self, prophet_params=None, lgbm_params=None):
         """
-        初始化融合模型
+        初始化预测模型
         
         Args:
             prophet_params: Prophet模型参数字典
             lgbm_params: LightGBM模型参数字典
         """
-        self.prophet_params = prophet_params or {}
+        self.prophet_params = prophet_params or {
+            'yearly_seasonality': True,
+            'weekly_seasonality': True,
+            'daily_seasonality': False
+        }
         self.lgbm_params = lgbm_params or {
-            'objective': 'regression',
-            'metric': 'rmse',
-            'boosting_type': 'gbdt',
-            'num_leaves': 31,
+            'objective': 'binary',
+            'metric': 'auc',
             'learning_rate': 0.05,
-            'feature_fraction': 0.9
+            'num_leaves': 31,
+            'feature_fraction': 0.8,
+            'scale_pos_weight': 3  # 处理样本不平衡
         }
         
-        # 初始化子模型
-        self.prophet_model = Prophet(**self.prophet_params)
-        self.lgbm_model = None
+        # 模型组件
+        self.prophet_models = {}  # 每个SKU一个Prophet模型
+        self.lgbm_model = None    # 全局LightGBM分类器
+        self.threshold = 0.5      # 初始分类阈值
+        
+        # 特征配置
+        self.features = [
+            # 时间特征
+            'day_of_week', 'is_weekend', 'month', 'day',
+            
+            # 历史价格特征
+            'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d',
+            
+            # 价格变动模式
+            'days_since_last_change', 'change_freq_7d', 'change_freq_30d',
+            
+            # 价格趋势特征
+            'price_trend_7d', 'price_trend_14d',
+            
+            # Prophet特征
+            'prophet_trend', 'prophet_yhat'
+        ]
         
         # 状态标志
         self.fitted = False
-        self.feature_names = None
         
-    def fit(self, data, y=None):
+    def fit(self, train_df, val_df=None):
         """
-        训练融合模型
+        训练价格变动预测模型
         
         Args:
-            data: 包含'ds'和'y'列的DataFrame，或者包含特征的DataFrame和目标变量y
-            y: 目标变量，当data不包含'y'列时使用
+            train_df: 训练数据DataFrame，需包含:
+                - sku_id: SKU标识
+                - date: 日期
+                - discount_price: 折扣价格
+            val_df: 验证数据DataFrame（可选），结构与train_df相同
             
         Returns:
             self
         """
-        logger.info("开始训练Prophet+LightGBM融合模型")
+        logger.info("开始训练价格变动预测模型")
         
-        # 处理输入格式
-        if y is not None:
-            # 特征矩阵和目标变量分开传入的情况
-            if 'ds' not in data.columns:
-                raise ValueError("数据必须包含'ds'列")
-            train_df = data.copy()
-            train_df['y'] = y
-        else:
-            # ds和y在同一个DataFrame的情况
-            if 'ds' not in data.columns or 'y' not in data.columns:
-                raise ValueError("数据必须包含'ds'和'y'列")
-            train_df = data.copy()
+        # 数据预处理
+        train_df = self._preprocess_data(train_df)
+        if val_df is not None:
+            val_df = self._preprocess_data(val_df)
         
-        # 确保日期格式正确
-        train_df['ds'] = pd.to_datetime(train_df['ds'])
-        
-        # 1. 训练Prophet模型
+        # 1. 训练Prophet模型（按SKU分组）
         logger.info("训练Prophet模型...")
-        self.prophet_model.fit(train_df[['ds', 'y']])
+        for sku_id, group in train_df.groupby('sku_id'):
+            if len(group) >= 30:  # 数据充足才训练
+                prophet_data = group[['date', 'discount_price']].rename(
+                    columns={'date': 'ds', 'discount_price': 'y'}
+                )
+                model = Prophet(**self.prophet_params)
+                model.fit(prophet_data)
+                self.prophet_models[sku_id] = model
         
-        # 2. 生成Prophet预测
-        prophet_pred = self.prophet_model.predict(train_df[['ds']])
+        # 2. 生成Prophet特征
+        logger.info("生成Prophet特征...")
+        train_df = self._add_prophet_features(train_df)
+        if val_df is not None:
+            val_df = self._add_prophet_features(val_df)
         
-        # 3. 计算残差
-        residuals = train_df['y'].values - prophet_pred['yhat'].values
+        # 3. 训练LightGBM模型
+        logger.info("训练LightGBM分类器...")
+        self.lgbm_model = lgb.LGBMClassifier(**self.lgbm_params)
         
-        # 4. 准备LightGBM训练特征
-        X_train = self._prepare_features(train_df, prophet_pred)
-        self.feature_names = X_train.columns.tolist()
-        
-        # 5. 训练LightGBM模型预测残差
-        logger.info("训练LightGBM模型预测残差...")
-        self.lgbm_model = lgb.LGBMRegressor(**self.lgbm_params)
-        self.lgbm_model.fit(X_train, residuals)
+        if val_df is not None:
+            self.lgbm_model.fit(
+                train_df[self.features],
+                train_df['price_change'],
+                eval_set=[(val_df[self.features], val_df['price_change'])],
+                early_stopping_rounds=50,
+                verbose=100
+            )
+            
+            # 4. 优化分类阈值（确保召回率≥95%）
+            logger.info("优化分类阈值...")
+            self.threshold = self._optimize_threshold(val_df)
+        else:
+            self.lgbm_model.fit(
+                train_df[self.features],
+                train_df['price_change']
+            )
         
         self.fitted = True
-        logger.info("Prophet+LightGBM融合模型训练完成")
+        logger.info("价格变动预测模型训练完成")
         return self
     
-    def predict(self, future_df):
+    def _preprocess_data(self, df):
+        """数据预处理：计算价格变动标签和特征"""
+        # 确保按SKU和日期排序
+        df = df.sort_values(['sku_id', 'date'])
+        
+        # 计算价格变动标签
+        df['prev_price'] = df.groupby('sku_id')['discount_price'].shift(1)
+        df['price_change'] = (df['discount_price'] != df['prev_price']).astype(int)
+        
+        # 填充第一个记录的NaN值
+        df['price_change'] = df['price_change'].fillna(0)
+        
+        return df
+    
+    def _add_prophet_features(self, df):
+        """为DataFrame添加Prophet预测特征"""
+        result_dfs = []
+        
+        for sku_id, group in df.groupby('sku_id'):
+            if sku_id in self.prophet_models:
+                # 预测
+                future = pd.DataFrame({'ds': group['date']})
+                forecast = self.prophet_models[sku_id].predict(future)
+                
+                # 添加特征
+                group_with_features = group.copy()
+                group_with_features['prophet_trend'] = forecast['trend'].values
+                group_with_features['prophet_yhat'] = forecast['yhat'].values
+                
+                result_dfs.append(group_with_features)
+            else:
+                # 没有Prophet模型的SKU
+                group_with_features = group.copy()
+                group_with_features['prophet_trend'] = group['discount_price']
+                group_with_features['prophet_yhat'] = group['discount_price']
+                result_dfs.append(group_with_features)
+        
+        return pd.concat(result_dfs)
+    
+    def _optimize_threshold(self, val_df):
+        """在验证集上优化分类阈值"""
+        # 预测验证集概率
+        val_probs = self.lgbm_model.predict_proba(val_df[self.features])[:, 1]
+        
+        # 寻找满足召回率≥95%的最高阈值
+        best_threshold = 0.5
+        best_precision = 0
+        min_recall = 0.95
+        
+        for threshold in np.linspace(0.01, 0.99, 99):
+            val_preds = (val_probs >= threshold).astype(int)
+            recall = recall_score(val_df['price_change'], val_preds)
+            
+            if recall >= min_recall:
+                precision = precision_score(val_df['price_change'], val_preds)
+                if precision > best_precision:
+                    best_precision = precision
+                    best_threshold = threshold
+        
+        logger.info(f"最优阈值: {best_threshold:.4f} (召回率≥{min_recall:.0%}, 精确度={best_precision:.4f})")
+        return best_threshold
+    
+    def predict(self, df):
         """
-        生成预测
+        预测价格变动概率和分类结果
         
         Args:
-            future_df: 包含'ds'列的DataFrame，表示要预测的未来时间点
-            
+            df: 包含预测数据的DataFrame，需包含:
+                - sku_id: SKU标识
+                - date: 日期
+                - discount_price: 折扣价格
+                
         Returns:
-            包含预测结果的DataFrame
+            Dict[str, np.ndarray]: 包含以下键的字典:
+                - 'probability': 价格变动概率数组 (0-1)
+                - 'predicted_change': 预测是否变动 (0或1)
         """
         if not self.fitted:
-            raise ValueError("模型尚未训练，请先调用fit方法")
+            raise RuntimeError("模型尚未训练，请先调用fit方法")
             
-        # 确保日期格式正确
-        future_df = future_df.copy()
-        future_df['ds'] = pd.to_datetime(future_df['ds'])
+        # 添加Prophet特征
+        df = self._add_prophet_features(df)
         
-        # 1. Prophet预测
-        prophet_forecast = self.prophet_model.predict(future_df[['ds']])
+        # 确保所有特征都存在
+        missing_features = set(self.features) - set(df.columns)
+        for feature in missing_features:
+            df[feature] = 0  # 填充默认值
+            
+        # 预测概率
+        probs = self.lgbm_model.predict_proba(df[self.features])[:, 1]
         
-        # 2. 准备LightGBM特征
-        X_future = self._prepare_features(future_df, prophet_forecast)
+        # 应用阈值生成分类结果
+        preds = (probs >= self.threshold).astype(int)
         
-        # 确保特征列匹配
-        missing_cols = set(self.feature_names) - set(X_future.columns)
-        for col in missing_cols:
-            X_future[col] = 0
-        X_future = X_future[self.feature_names]
-        
-        # 3. LightGBM预测残差
-        residual_forecast = self.lgbm_model.predict(X_future)
-        
-        # 4. 组合预测结果
-        final_forecast = prophet_forecast.copy()
-        final_forecast['residual'] = residual_forecast
-        final_forecast['yhat_original'] = final_forecast['yhat'].copy() 
-        final_forecast['yhat'] = final_forecast['yhat'] + residual_forecast
-        
-        return final_forecast
+        return {
+            'probability': probs,
+            'predicted_change': preds
+        }
     
-    def evaluate(self, test_df, y=None):
+    def evaluate(self, test_df):
         """
-        评估模型
+        评估模型性能
         
         Args:
-            test_df: 包含'ds'和'y'列的测试数据，或者包含特征的DataFrame
-            y: 当test_df不包含'y'列时的目标变量
-            
+            test_df: 测试数据DataFrame，需包含:
+                - sku_id: SKU标识
+                - date: 日期
+                - discount_price: 折扣价格
+                
         Returns:
-            包含评估指标的字典
+            Dict[str, float]: 包含评估指标的字典，包括:
+                - 标准分类指标: accuracy, precision, recall, f1, auc
+                - 业务指标: sampling_reduction, capture_rate
         """
-        # 处理输入格式
-        if y is not None:
-            if 'ds' not in test_df.columns:
-                raise ValueError("测试数据必须包含'ds'列")
-            eval_df = test_df.copy()
-            eval_df['y'] = y
-        else:
-            if 'ds' not in test_df.columns or 'y' not in test_df.columns:
-                raise ValueError("测试数据必须包含'ds'和'y'列")
-            eval_df = test_df.copy()
+        # 预处理测试数据
+        test_df = self._preprocess_data(test_df)
+        test_df = self._add_prophet_features(test_df)
         
-        # 生成预测
-        predictions = self.predict(eval_df)
+        # 获取真实标签和预测结果
+        y_true = test_df['price_change'].values
+        predictions = self.predict(test_df)
+        y_prob = predictions['probability']
+        y_pred = predictions['predicted_change']
         
-        # 计算指标
-        y_true = eval_df['y'].values
-        y_pred = predictions['yhat'].values
-        y_pred_prophet = predictions['yhat_original'].values
-        
-        # 计算各种指标
-        mae = mean_absolute_error(y_true, y_pred)
-        mse = mean_squared_error(y_true, y_pred)
-        rmse = np.sqrt(mse)
-        r2 = r2_score(y_true, y_pred)
-        
-        # 计算Prophet单独的指标用于对比
-        mae_prophet = mean_absolute_error(y_true, y_pred_prophet)
-        mse_prophet = mean_squared_error(y_true, y_pred_prophet)
-        rmse_prophet = np.sqrt(mse_prophet)
-        r2_prophet = r2_score(y_true, y_pred_prophet)
-        
-        # 计算改进百分比
-        improvement_mae = (mae_prophet - mae) / mae_prophet * 100
-        improvement_rmse = (rmse_prophet - rmse) / rmse_prophet * 100
-        
+        # 计算标准分类指标
         metrics = {
-            'mae': mae,
-            'mse': mse,
-            'rmse': rmse,
-            'r2': r2,
-            'mae_prophet': mae_prophet,
-            'mse_prophet': mse_prophet,
-            'rmse_prophet': rmse_prophet,
-            'r2_prophet': r2_prophet,
-            'improvement_mae_percent': improvement_mae,
-            'improvement_rmse_percent': improvement_rmse
+            'accuracy': accuracy_score(y_true, y_pred),
+            'precision': precision_score(y_true, y_pred),
+            'recall': recall_score(y_true, y_pred),
+            'f1': f1_score(y_true, y_pred),
+            'auc': roc_auc_score(y_true, y_prob),
+            'confusion_matrix': confusion_matrix(y_true, y_pred).tolist()
         }
+        
+        # 计算业务指标
+        total_samples = len(y_true)
+        true_changes = sum(y_true)
+        predicted_changes = sum(y_pred)
+        
+        metrics.update({
+            'sampling_reduction': 1 - predicted_changes/total_samples,
+            'capture_rate': sum((y_true == 1) & (y_pred == 1)) / true_changes,
+            'threshold': self.threshold
+        })
+        
+        # 记录评估结果
+        logger.info("模型评估结果:")
+        for name, value in metrics.items():
+            if name != 'confusion_matrix':
+                logger.info(f"{name}: {value:.4f}")
         
         return metrics
     

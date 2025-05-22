@@ -58,12 +58,24 @@ class MySQLWriter:
         """写入预测数据到sku_predictions表，使用批量插入提高性能
         
         Args:
-            predictions_df: 包含预测数据的DataFrame
+            predictions_df: 包含预测数据的DataFrame，需包含以下字段:
+                - sku_id: SKU标识
+                - date: 预测日期
+                - discount_price: 折扣价格
+                - probability: 价格变动概率 (0-1)
+                - predicted_change: 预测是否变动 (0或1)
             rebuild_table: 是否重建表，默认为False（增量更新）
         """
         # 强制限制为1000条
         predictions_df = predictions_df.head(1000)
         
+        # 验证必需字段
+        required_fields = ['sku_id', 'date', 'discount_price', 'probability', 'predicted_change']
+        missing_fields = [field for field in required_fields if field not in predictions_df.columns]
+        if missing_fields:
+            logger.error(f"缺少必需字段: {missing_fields}")
+            return False
+            
         if not self.connect():
             return False
 
@@ -100,9 +112,12 @@ class MySQLWriter:
                         CREATE TABLE sku_predictions (
                             sku_id VARCHAR(50),
                             date DATE,
-                            price DECIMAL(10,2),
-                            confidence FLOAT,
-                            PRIMARY KEY (sku_id, date)
+                            discount_price DECIMAL(10,2),
+                            probability FLOAT,
+                            predicted_change TINYINT,
+                            PRIMARY KEY (sku_id, date),
+                            INDEX idx_date (date),
+                            INDEX idx_sku (sku_id)
                         ) ENGINE=InnoDB
                     """)
                 logger.info("表准备完成")
@@ -111,8 +126,8 @@ class MySQLWriter:
 
             # 准备批量插入（使用REPLACE INTO支持增量更新）
             insert_sql = """
-                REPLACE INTO sku_predictions (sku_id, date, price, confidence)
-                VALUES (%s, %s, %s, %s)
+                REPLACE INTO sku_predictions (sku_id, date, discount_price, probability, predicted_change)
+                VALUES (%s, %s, %s, %s, %s)
             """
             
             # 批量处理，每1000条提交一次
@@ -131,11 +146,18 @@ class MySQLWriter:
                     else:
                         date_str = str(date_value)
                     
+                    # 验证数据
+                    probability = float(row['probability'])
+                    if not 0 <= probability <= 1:
+                        logger.warning(f"SKU {row['sku_id']} 的概率值超出范围: {probability}")
+                        probability = max(0, min(1, probability))  # 强制限制在0-1之间
+                    
                     record = (
-                        str(row['sku']),  # 使用'sku'而不是'sku_id'
+                        str(row['sku_id']),
                         date_str,
-                        float(row['price']),
-                        float(row['confidence'])
+                        float(row['discount_price']),
+                        probability,
+                        int(bool(row['predicted_change']))  # 确保是0或1
                     )
                     records.append(record)
                     
@@ -148,7 +170,7 @@ class MySQLWriter:
                         logger.info(f"已处理 {success_count}/{total_records} 条记录 ({(success_count/total_records*100):.2f}%)")
                         
                 except Exception as e:
-                    logger.error(f"处理行数据时出错 - SKU: {row.get('sku', 'N/A')}, 错误: {str(e)}")
+                    logger.error(f"处理行数据时出错 - SKU: {row.get('sku_id', 'N/A')}, 错误: {str(e)}")
                     continue
 
             # 处理剩余记录
