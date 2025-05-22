@@ -102,7 +102,7 @@ def check_configs(logger) -> bool:
         
     return all_ok
 
-def validate_data_pipeline(logger) -> bool:
+def _data_pipeline(logger) -> bool:
     """验证数据管道"""
     logger.info("验证数据管道...")
     try:
@@ -135,7 +135,7 @@ def main():
     
     if pkg_ok and config_ok:
         logger.info("基本检查通过，开始验证数据管道")
-        pipeline_ok = validate_data_pipeline(logger)
+        pipeline_ok = _data_pipeline(logger)
     else:
         logger.error("请先解决依赖和配置问题")
         pipeline_ok = False

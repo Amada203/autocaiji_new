@@ -26,14 +26,14 @@ def test_data_processor():
     """测试数据处理器"""
     logger.info("测试数据处理器...")
     
-    # 创建测试数据
+    # 创建符合要求的测试数据
     test_data = pd.DataFrame({
         'sku_id': ['SKU001', 'SKU001', 'SKU002'],
         'dt': [datetime.now() - timedelta(days=2), 
                datetime.now() - timedelta(days=1),
                datetime.now()],
-        'page_price': [100.0, 105.0, 200.0],
-        'discount_price': [90.0, 95.0, 180.0]
+        'discount_price': [90.0, 95.0, 180.0],
+        'is_promotion': [False, True, False]
     })
     
     # 测试正常数据
@@ -42,12 +42,13 @@ def test_data_processor():
     assert not result.empty, "处理器返回空结果"
     logger.info(f"处理器测试通过，结果形状: {result.shape}")
 
-    # 测试空数据
-    try:
-        DataProcessor(pd.DataFrame()).process()
-        assert False, "空数据测试失败"
-    except ValueError:
-        logger.info("空数据测试通过")
+    # 测试空数据处理
+    empty_result = DataProcessor(pd.DataFrame()).process()
+    if empty_result is False:
+        logger.info("空数据处理测试通过 - 返回False符合预期")
+    else:
+        logger.error(f"空数据处理测试失败，返回类型: {type(empty_result)}")
+        assert False, "空数据测试失败 - 期望返回False"
 
     # 测试缺失列
     try:
@@ -61,14 +62,14 @@ def test_pipeline_integration():
     """测试完整管道集成"""
     logger.info("测试完整数据管道...")
     
-    # 创建测试数据
+    # 创建符合要求的测试数据
     test_data = pd.DataFrame({
         'sku_id': ['SKU001', 'SKU001', 'SKU002'],
         'dt': [datetime.now() - timedelta(days=2), 
                datetime.now() - timedelta(days=1),
                datetime.now()],
-        'page_price': [100.0, 105.0, 200.0],
-        'discount_price': [90.0, 95.0, 180.0]
+        'discount_price': [90.0, 95.0, 180.0],
+        'is_promotion': [False, True, False]
     })
     
     # 模拟数据获取

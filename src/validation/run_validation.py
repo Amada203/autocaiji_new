@@ -21,8 +21,13 @@ def run_full_validation():
     from .data_utils import prepare_test_data
     from ..data.data_fetcher import DataFetcher
 
-    # 1. 准备训练集和测试集
-    train_data, test_data = prepare_test_data()
+    # 1. 准备数据集（使用阶段3时间轴）
+    train_data, val_data, test_data = prepare_test_data(
+        train_end='2024-12-31',
+        val_end='2025-03-31',
+        test_end='2025-04-30'
+    )
+    logger.info(f"数据集划分: 训练集({len(train_data)}) | 验证集({len(val_data)}) | 测试集({len(test_data)})")
     
     # 2. 初始化模型
     old_price_model = OldPricePredictor()

@@ -5,15 +5,24 @@ import pandas as pd
 import random
 from src.data.data_fetcher import DataFetcher
 
-def prepare_test_data():
-    """准备测试数据集（根据原始计划）
+def prepare_test_data(train_end='2024-12-31', val_end='2025-03-31', test_end='2025-04-30'):
+    """准备测试数据集（根据阶段3时间轴）
+    
+    Args:
+        train_end: 训练集结束日期 (YYYY-MM-DD)
+        val_end: 验证集结束日期
+        test_end: 测试集结束日期
     
     Returns:
-        tuple: (train_data, test_data) 训练集和测试集
+        tuple: (train_data, val_data, test_data) 训练集、验证集和测试集
     """
     # 1. 获取完整数据集
     fetcher = DataFetcher()
-    full_data = fetcher.fetch_training_data()
+    full_data = fetcher.fetch_training_data(
+        train_end=train_end,
+        val_end=val_end,
+        test_end=test_end
+    )
     
     # 2. 确保数据包含必要字段（接受ds或date作为日期列）
     required_cols = ['y', 'sku_id']
@@ -34,10 +43,11 @@ def prepare_test_data():
         if col not in full_data.columns:
             logger.warning(f"可选列 {col} 不存在，模型可能无法使用该特征")
     
-    # 3. 按原始计划划分数据集
+    # 3. 按阶段3时间轴划分数据集
     full_data[date_col] = pd.to_datetime(full_data[date_col])
-    train_data = full_data[full_data[date_col] <= '2024-12-31']
-    test_data = full_data[full_data[date_col] > '2024-12-31']
+    train_data = full_data[full_data[date_col] <= train_end]
+    val_data = full_data[(full_data[date_col] > train_end) & (full_data[date_col] <= val_end)]
+    test_data = full_data[(full_data[date_col] > val_end) & (full_data[date_col] <= test_end)]
     
     # 4. 计算变化标志（如果不存在）
     if 'change_flag' not in train_data.columns:

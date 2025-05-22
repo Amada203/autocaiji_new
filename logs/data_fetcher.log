@@ -1,282 +1,1201 @@
-2025-05-16 13:49:08,817 - DataFetcher - INFO - 开始获取最近30天的价格数据
-2025-05-16 13:49:10,409 - DataFetcher - ERROR - 获取最近价格数据失败: AnalysisException: ms_libai.current_date() unknown
-
-2025-05-16 13:49:44,787 - DataFetcher - INFO - 开始获取最近30天的价格数据
-2025-05-16 13:50:35,656 - DataFetcher - INFO - 成功获取 533839 条最近30天的价格记录
-2025-05-16 13:51:43,890 - DataFetcher - INFO - 开始获取最近30天的价格数据
-2025-05-16 13:52:32,570 - DataFetcher - INFO - 成功获取 533839 条最近30天的价格记录
-2025-05-16 13:54:11,928 - DataFetcher - INFO - 开始获取最近30天的价格数据
-2025-05-16 13:55:01,803 - DataFetcher - INFO - 成功获取 533839 条最近30天的价格记录
-2025-05-16 13:55:46,784 - DataFetcher - INFO - 开始获取最近30天的价格数据
-2025-05-16 13:56:40,260 - DataFetcher - INFO - 成功获取 533839 条最近30天的价格记录
-2025-05-16 13:58:13,980 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 13:58:15,034 - DataFetcher - ERROR - 获取数据失败: AnalysisException: Syntax error in line 10:
-                b.dt AS date,
-                        ^
+2025-05-22 16:33:57,797 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:33:59,211 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
 Encountered: DATE
 Expected: DEFAULT, IDENTIFIER
 
 CAUSED BY: Exception: Syntax error
 
-2025-05-16 14:00:00,818 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 14:01:24,684 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 14:08:06,057 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 14:09:12,085 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 14:11:04,641 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 14:11:58,541 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 14:13:59,583 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 14:14:37,757 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 14:17:44,270 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 14:18:29,966 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 14:20:33,403 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 14:21:56,863 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 14:24:49,245 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 14:25:37,113 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 14:28:39,870 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 14:29:25,298 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 14:44:35,181 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 14:45:19,962 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 15:01:58,869 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 15:02:34,162 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 15:18:19,287 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 15:19:37,540 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 15:56:59,597 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 15:57:55,472 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-16 16:07:16,943 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-16 16:07:47,002 - DataFetcher - ERROR - 获取数据失败: Could not connect to any of [('198.18.0.206', 21051)]
-2025-05-16 16:31:31,829 - DataFetcher - INFO - 测试Impala连接...
-2025-05-16 16:31:32,144 - DataFetcher - INFO - Impala连接测试成功
-2025-05-16 16:48:51,535 - DataFetcher - INFO - 开始生成采样数据集: start_date=2023-01-01, end_date=2025-04-30
-2025-05-16 16:48:52,519 - DataFetcher - ERROR - 生成采样数据集失败: AnalysisException: Syntax error in line 4:
-                dt AS date,
-                      ^
+2025-05-22 16:33:59,212 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:34:59,212 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:35:00,301 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
 Encountered: DATE
 Expected: DEFAULT, IDENTIFIER
 
 CAUSED BY: Exception: Syntax error
 
-2025-05-16 16:48:52,520 - DataFetcher - INFO - DataFetcher资源清理完成
-2025-05-17 11:03:44,656 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-17 11:03:44,936 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
-2025-05-17 11:09:34,899 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-17 11:09:35,144 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
-2025-05-17 11:10:56,224 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-17 11:10:56,454 - DataFetcher - ERROR - 获取数据失败: TSocket read 0 bytes
-2025-05-19 16:50:22,007 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 16:51:23,479 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 16:56:40,087 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 16:57:30,518 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 17:00:08,406 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 17:00:56,471 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 17:27:12,013 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 17:28:13,072 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 17:29:05,169 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 17:29:48,448 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 17:31:31,849 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 17:32:17,013 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 17:38:16,095 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 17:39:13,610 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 17:40:11,344 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 17:41:01,233 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 17:42:26,514 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 17:43:08,058 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 17:44:19,949 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 17:45:02,370 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 17:59:18,361 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 18:00:00,649 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 18:03:22,357 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 18:03:59,673 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 18:04:48,789 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 18:05:30,565 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 18:07:27,024 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 18:08:08,888 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 18:08:56,803 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 18:09:41,086 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 18:34:09,863 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 18:34:51,542 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 18:46:51,542 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 18:47:32,718 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 18:54:36,271 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 18:55:17,981 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 19:03:56,598 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 19:04:37,360 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 20:31:42,722 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 20:32:57,019 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 20:39:23,484 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 20:40:30,739 - DataFetcher - INFO - 成功获取 242136 条记录
-2025-05-19 20:47:05,597 - DataFetcher - INFO - 开始从Impala获取训练数据
-2025-05-19 20:47:08,888 - DataFetcher - ERROR - 获取数据失败: ExecQueryFInstances rpc query_id=6a4d0ed16f685e3a:d04ac87f00000000 failed: Failed to get minimum memory reservation of 232.62 MB on daemon ym-017:22000 for query 6a4d0ed16f685e3a:d04ac87f00000000 because it would exceed an applicable memory limit. Memory is likely oversubscribed. Reducing query concurrency or configuring admission control may help avoid this error. Memory usage:
-Process: Limit=40.00 GB Total=37.24 GB Peak=41.14 GB
-  Buffer Pool: Free Buffers: Total=1.41 GB
-  Buffer Pool: Clean Pages: Total=3.20 GB
-  Buffer Pool: Unused Reservation: Total=-5.04 GB
-  Free Disk IO Buffers: Total=1.05 GB Peak=1.99 GB
-  RequestPool=root.ymetl: Total=29.61 GB Peak=34.50 GB
-    Query(d4499316facd7071:26be806500000000): Limit=30.00 GB Reservation=18.43 GB ReservationLimit=24.00 GB OtherMemory=4.37 MB Total=18.44 GB Peak=18.52 GB
-    Query(1d4af4d4c606603c:94ea528d00000000): Limit=30.00 GB Reservation=10.95 GB ReservationLimit=24.00 GB OtherMemory=235.26 MB Total=11.18 GB Peak=11.22 GB
-  RequestPool=root.ymtest: Total=0 Peak=20.58 GB
-  RequestPool=root.ymda: Total=4.32 GB Peak=18.71 GB
-    Query(6945bbfc0e8e1e02:a1d0aee200000000): Limit=20.00 GB Reservation=2.62 GB ReservationLimit=16.00 GB OtherMemory=3.17 MB Total=2.62 GB Peak=3.06 GB
-    Query(7943845f6adc8701:ed21995d00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=1.70 GB Total=1.70 GB Peak=1.71 GB
-  RequestPool=root.default: Total=0 Peak=19.24 GB
-    Query(6a4d0ed16f685e3a:d04ac87f00000000): Limit=8.00 GB Reservation=0 ReservationLimit=6.40 GB OtherMemory=0 Total=0 Peak=0
-  RequestPool=root.ymreadonly: Total=0 Peak=30.58 GB
+2025-05-22 16:35:00,302 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:36:00,303 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:36:01,252 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:36:11,332 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:36:11,332 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:36:12,234 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:36:12,234 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:36:12,234 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:36:12,234 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:37:12,510 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:37:12,510 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:37:14,474 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:37:14,474 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:37:14,475 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:37:14,475 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:38:14,480 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:38:14,480 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:38:15,533 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:38:15,533 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:38:35,544 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:38:35,544 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:38:35,544 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:38:37,002 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:38:37,002 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:38:37,002 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:38:37,002 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:38:37,002 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:38:37,002 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:39:37,006 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:39:37,006 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:39:37,006 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:39:38,164 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:39:38,164 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:39:38,164 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:39:38,164 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:39:38,164 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:39:38,164 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:40:38,173 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:40:38,173 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:40:38,173 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:40:39,046 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:40:39,046 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:40:39,046 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Syntax error in line 4:
+                    dt AS date,
+                          ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-22 16:41:31,985 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:41:32,934 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:41:32,934 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:42:32,940 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:42:34,359 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:42:34,359 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:43:34,364 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:43:35,261 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:43:45,275 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:43:45,275 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:43:45,970 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:43:45,970 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:43:45,970 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:43:45,970 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:44:45,976 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:44:45,976 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:44:48,146 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:44:48,146 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:44:48,147 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:44:48,147 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:45:48,157 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:45:48,157 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:45:49,080 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:45:49,080 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:46:09,094 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:46:09,094 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:46:09,094 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 16:46:10,488 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:46:10,488 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:46:10,488 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:46:10,488 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:46:10,488 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:46:10,488 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:47:10,495 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:47:10,495 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:47:10,495 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 16:47:11,403 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:47:11,403 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:47:11,403 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:47:11,404 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:47:11,404 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:47:11,404 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 16:48:11,412 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:48:11,412 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:48:11,412 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 16:48:12,335 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:48:12,335 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 16:48:12,335 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Could not resolve column/field reference: 'category'
+
+2025-05-22 17:06:59,436 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 18:36:22,746 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 20:18:28,109 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 20:53:07,472 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 21:28:52,393 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 21:29:44,927 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 21:39:33,946 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 21:39:56,986 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): Memory limit exceeded: Error occurred on backend ym-012:22000 by fragment 32460a656b7919e5:db7e9f5400000006
+Memory left in process limit: -95.98 MB
+Memory left in query limit: 6.89 GB
+Query(32460a656b7919e5:db7e9f5400000000): Limit=8.00 GB Reservation=1.06 GB ReservationLimit=6.40 GB OtherMemory=44.25 MB Total=1.11 GB Peak=1.11 GB
+  Fragment 32460a656b7919e5:db7e9f5400000006: Reservation=1.06 GB OtherMemory=44.25 MB Total=1.11 GB Peak=1.11 GB
+    SORT_NODE (id=1): Reservation=1.06 GB OtherMemory=8.00 KB Total=1.06 GB Peak=1.06 GB
+    HDFS_SCAN_NODE (id=0): Total=44.23 MB Peak=74.83 MB
+      Exprs: Total=4.00 KB Peak=4.00 KB
+    DataStreamSender (dst_id=2): Total=2.61 KB Peak=2.61 KB
+    CodeGen: Total=1.43 KB Peak=509.00 KBProcess: memory limit exceeded. Limit=40.00 GB Total=40.09 GB Peak=41.01 GB
+  Buffer Pool: Free Buffers: Total=4.29 GB
+  Buffer Pool: Clean Pages: Total=2.85 GB
+  Buffer Pool: Unused Reservation: Total=-9.14 GB
+  Free Disk IO Buffers: Total=19.31 MB Peak=1.99 GB
+  RequestPool=root.default: Total=6.48 GB Peak=35.12 GB
+    Query(89420737c109056d:72621b2d00000000): Limit=8.00 GB Reservation=2.64 GB ReservationLimit=6.40 GB OtherMemory=20.04 KB Total=2.64 GB Peak=2.72 GB
+    Query(1c4fdb24e7952d96:679c111800000000): Limit=8.00 GB Reservation=2.62 GB ReservationLimit=6.40 GB OtherMemory=20.04 KB Total=2.63 GB Peak=2.70 GB
+    Query(32460a656b7919e5:db7e9f5400000000): Limit=8.00 GB Reservation=1.06 GB ReservationLimit=6.40 GB OtherMemory=33.05 MB Total=1.09 GB Peak=1.11 GB
+    Query(9d45eae6707be4d7:3e4c9acf00000000): Limit=8.00 GB Reservation=0 ReservationLimit=6.40 GB OtherMemory=119.10 MB Total=119.10 MB Peak=125.11 MB
+  RequestPool=root.ymetl: Total=23.98 GB Peak=36.40 GB
+    Query(a6452a4127a0c229:bdef5c6d00000000): Limit=30.00 GB Reservation=23.92 GB ReservationLimit=24.00 GB OtherMemory=61.82 MB Total=23.98 GB Peak=24.44 GB
+  RequestPool=root.ymtest: Total=6.71 GB Peak=34.26 GB
+    Query(714312fae3306f1c:cccac4a800000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=215.93 MB Total=215.93 MB Peak=244.65 MB
+    Query(354f14c72a1095e5:752db4b800000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=113.98 MB Total=113.98 MB Peak=458.86 MB
+    Query(c043999a39f1dc20:f78a6d9800000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=3.25 GB Total=3.25 GB Peak=3.26 GB
+    Query(81411c1ddb797138:359e38ed00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=530.96 MB Total=530.96 MB Peak=820.66 MB
+    Query(1b478e2884022a23:fb71f54e00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=1.43 GB Total=1.43 GB Peak=1.53 GB
+    Query(40453b29555cbb67:8860ca5500000000): Limit=20.00 GB Reservation=848.00 MB ReservationLimit=16.00 GB OtherMemory=19.44 KB Total=848.02 MB Peak=882.75 MB
+    Query(e44c827c40244cec:d2b62c5900000000): Limit=20.00 GB Reservation=162.00 MB ReservationLimit=16.00 GB OtherMemory=3.12 MB Total=165.12 MB Peak=200.50 MB
+    Query(84496657ff227a67:f91121f600000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=210.09 MB Total=210.09 MB Peak=210.09 MB
+  RequestPool=root.ymda: Total=0 Peak=18.27 GB
+  RequestPool=root.ymreadonly: Total=0 Peak=31.97 GB
   RequestPool=root.ymspider: Total=0 Peak=9.30 GB
-  RequestPool=root.ymai: Total=0 Peak=4.76 GB
-  RequestPool=root.weiweibao: Total=0 Peak=16.26 GB
-  RequestPool=root.zhangbenqiang: Total=0 Peak=200.64 MB
-  Untracked Memory: Total=2.68 GB
+  RequestPool=root.ymai: Total=0 Peak=10.20 GB
+  RequestPool=root.weiweibao: Total=0 Peak=12.27 GB
+  RequestPool=root.zhangbenqiang: Total=0 Peak=1.39 GB
+  Untracked Memory: Total=4.91 GB
 
-
-2025-05-19 20:49:31,481 - DataFetcher - INFO - 开始从Impala分批获取训练数据，每批50000条
-2025-05-19 20:49:33,198 - DataFetcher - ERROR - 获取数据失败: ExecQueryFInstances rpc query_id=a446530f367be3a6:7676398a00000000 failed: Failed to get minimum memory reservation of 120.62 MB on daemon ym-017:22000 for query a446530f367be3a6:7676398a00000000 because it would exceed an applicable memory limit. Memory is likely oversubscribed. Reducing query concurrency or configuring admission control may help avoid this error. Memory usage:
-Process: Limit=40.00 GB Total=33.52 GB Peak=41.14 GB
-  Buffer Pool: Free Buffers: Total=610.00 MB
-  Buffer Pool: Clean Pages: Total=3.20 GB
-  Buffer Pool: Unused Reservation: Total=-7.91 GB
-  Free Disk IO Buffers: Total=1.16 GB Peak=1.99 GB
-  RequestPool=root.ymetl: Total=29.48 GB Peak=34.50 GB
-    Query(d4499316facd7071:26be806500000000): Limit=30.00 GB Reservation=18.43 GB ReservationLimit=24.00 GB OtherMemory=14.56 MB Total=18.45 GB Peak=18.52 GB
-    Query(1d4af4d4c606603c:94ea528d00000000): Limit=30.00 GB Reservation=10.95 GB ReservationLimit=24.00 GB OtherMemory=89.80 MB Total=11.03 GB Peak=11.22 GB
-  RequestPool=root.ymtest: Total=0 Peak=20.58 GB
-  RequestPool=root.ymda: Total=4.33 GB Peak=18.71 GB
-    Query(6945bbfc0e8e1e02:a1d0aee200000000): Limit=20.00 GB Reservation=2.62 GB ReservationLimit=16.00 GB OtherMemory=3.17 MB Total=2.62 GB Peak=3.06 GB
-    Query(7943845f6adc8701:ed21995d00000000): Limit=20.00 GB Reservation=0 ReservationLimit=16.00 GB OtherMemory=1.71 GB Total=1.71 GB Peak=1.71 GB
-  RequestPool=root.default: Total=0 Peak=19.24 GB
-    Query(a446530f367be3a6:7676398a00000000): Limit=8.00 GB Reservation=0 ReservationLimit=6.40 GB OtherMemory=0 Total=0 Peak=0
-  RequestPool=root.ymreadonly: Total=0 Peak=30.58 GB
-  RequestPool=root.ymspider: Total=0 Peak=9.30 GB
-  RequestPool=root.ymai: Total=0 Peak=4.76 GB
-  RequestPool=root.weiweibao: Total=0 Peak=16.26 GB
-  RequestPool=root.zhangbenqiang: Total=0 Peak=200.64 MB
-  Untracked Memory: Total=2.67 GB
-
-
-2025-05-19 20:53:07,651 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-19 20:53:09,336 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: ms_libai.current_date() unknown
-
-2025-05-19 20:53:09,337 - DataFetcher - INFO - 等待 60 秒后重试...
-2025-05-19 20:54:27,314 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-19 20:54:29,709 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: ms_libai.current_date() unknown
-
-2025-05-19 20:54:29,710 - DataFetcher - INFO - 等待 60 秒后重试...
-2025-05-19 20:55:29,717 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
-2025-05-19 20:55:31,351 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: ms_libai.current_date() unknown
-
-2025-05-19 20:55:31,352 - DataFetcher - INFO - 等待 60 秒后重试...
-2025-05-19 20:56:32,153 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
-2025-05-19 20:56:33,790 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: ms_libai.current_date() unknown
-
-2025-05-19 21:10:37,794 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-19 21:22:58,735 - DataFetcher - INFO - 成功获取 3306728 条记录
-2025-05-19 22:10:16,784 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-19 22:10:24,478 - DataFetcher - INFO - 成功获取 8222 条记录
-2025-05-19 22:12:52,074 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-19 22:13:01,469 - DataFetcher - INFO - 成功获取 8222 条记录
-2025-05-19 22:17:51,765 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-19 22:18:06,600 - DataFetcher - INFO - 成功获取 8222 条记录
-2025-05-19 22:21:54,281 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-19 22:22:12,636 - DataFetcher - INFO - 成功获取 8222 条记录
-2025-05-20 15:59:48,579 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-20 16:00:53,484 - DataFetcher - INFO - 成功获取 447929 条记录，最新日期: 2025-04-30
-2025-05-20 19:00:46,371 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-20 19:01:07,838 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): RPC Error: Client for ym-011:22000 hit an unexpected exception: ECONNRESET, type: N6apache6thrift9transport19TTransportExceptionE, rpc: N6impala19TTransmitDataResultE, send: done
-
-2025-05-20 19:01:07,839 - DataFetcher - INFO - 等待 60 秒后重试...
-2025-05-20 19:02:07,824 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
-2025-05-20 19:03:23,399 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): unexpected exception
-2025-05-20 19:03:24,118 - DataFetcher - INFO - 等待 60 秒后重试...
-2025-05-20 19:36:09,656 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
-2025-05-20 19:36:09,665 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): failed to resolve sockaddr for impala.db.yimiandata.com:21051
-2025-05-20 22:07:51,559 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-20 22:09:24,957 - DataFetcher - INFO - 成功获取 447929 条记录，最新日期: 2025-04-30
-2025-05-20 23:27:22,551 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-20 23:28:32,960 - DataFetcher - INFO - 成功获取 447929 条记录，最新日期: 2025-04-30
-2025-05-21 09:55:26,610 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 09:56:28,677 - DataFetcher - INFO - 成功获取 447929 条记录，最新日期: 2025-04-30
-2025-05-21 11:48:10,692 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 11:50:00,599 - DataFetcher - INFO - 成功获取 447929 条记录，最新日期: 2025-04-30
-2025-05-21 12:44:19,484 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 12:44:32,643 - DataFetcher - INFO - 成功获取 79430 条记录，最新日期: 2025-04-30
-2025-05-21 13:40:19,587 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 13:40:50,114 - DataFetcher - INFO - 成功获取 79430 条记录，最新日期: 2025-04-30
-2025-05-21 18:24:24,660 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 18:24:37,796 - DataFetcher - INFO - 获取数据统计: {
-  "\u8bb0\u5f55\u6570": 79430,
-  "SKU\u6570\u91cf": 79430,
-  "\u5f00\u59cb\u65e5\u671f": "2025-04-30",
-  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
-  "\u5e73\u5747\u4ef7\u683c": 90.94535112677829,
-  "\u4ef7\u683c\u6807\u51c6\u5dee": 235.17775418643097
+2025-05-22 21:39:56,987 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 21:40:56,990 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 23:26:42,809 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): unexpected exception
+2025-05-22 23:26:42,854 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 23:27:30,202 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): read timeout
+2025-05-22 23:27:30,245 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-22 23:29:34,959 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-22 23:30:43,796 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-22 23:42:41,927 - DataFetcher - INFO - 测试Impala连接...
+2025-05-22 23:42:43,417 - DataFetcher - INFO - Impala连接测试成功
+2025-05-22 23:42:43,418 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 23:42:43,418 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-22)
+2025-05-22 23:42:44,106 - DataFetcher - ERROR - 获取有效SKU列表失败: not enough arguments for format string
+2025-05-22 23:42:44,106 - DataFetcher - ERROR - 从Impala获取数据失败 (尝试 1/3): not enough arguments for format string
+2025-05-22 23:42:44,106 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:25:37,240 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:25:39,480 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:25:39,481 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:25:39,481 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:25:45,237 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
 }
-2025-05-21 18:24:37,801 - DataFetcher - INFO - 成功获取 79430 条记录，最新日期: 2025-04-30
-2025-05-21 21:34:36,961 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 21:34:52,360 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 21:36:10,722 - DataFetcher - INFO - 获取数据统计: {
-  "\u8bb0\u5f55\u6570": 447929,
-  "SKU\u6570\u91cf": 185767,
-  "\u5f00\u59cb\u65e5\u671f": "2025-04-19",
-  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
-  "\u5e73\u5747\u4ef7\u683c": 84.81028723302127,
-  "\u4ef7\u683c\u6807\u51c6\u5dee": 224.77068381488164
+2025-05-23 00:25:45,248 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:25:45,249 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:25:46,137 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:25:46,137 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:26:46,126 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-23 00:26:46,127 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:26:52,004 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
 }
-2025-05-21 21:36:10,770 - DataFetcher - INFO - 成功获取 447929 条记录，最新日期: 2025-04-30
-2025-05-21 21:36:12,283 - DataFetcher - INFO - 获取数据统计: {
-  "\u8bb0\u5f55\u6570": 447929,
-  "SKU\u6570\u91cf": 185767,
-  "\u5f00\u59cb\u65e5\u671f": "2025-04-19",
-  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
-  "\u5e73\u5747\u4ef7\u683c": 84.81028723302127,
-  "\u4ef7\u683c\u6807\u51c6\u5dee": 224.77068381488164
+2025-05-23 00:26:52,009 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:26:52,009 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:26:52,946 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:26:52,947 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:27:52,950 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-23 00:27:52,951 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:27:59,543 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
 }
-2025-05-21 21:36:12,319 - DataFetcher - INFO - 成功获取 447929 条记录，最新日期: 2025-04-30
-2025-05-21 21:37:25,116 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 21:38:30,846 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 21:38:54,898 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 21:38:59,029 - DataFetcher - INFO - 获取数据统计: {
-  "\u8bb0\u5f55\u6570": 79430,
-  "SKU\u6570\u91cf": 79430,
-  "\u5f00\u59cb\u65e5\u671f": "2025-04-30",
-  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
-  "\u5e73\u5747\u4ef7\u683c": 90.94535112677829,
-  "\u4ef7\u683c\u6807\u51c6\u5dee": 235.17775418643097
+2025-05-23 00:27:59,547 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:27:59,547 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:28:02,032 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:28:12,039 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:28:12,039 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:28:14,084 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:28:14,084 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:28:14,084 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:28:14,084 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:28:14,085 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:28:14,085 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:28:17,400 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
 }
-2025-05-21 21:38:59,039 - DataFetcher - INFO - 成功获取 79430 条记录，最新日期: 2025-04-30
-2025-05-21 21:39:01,679 - DataFetcher - INFO - 获取数据统计: {
-  "\u8bb0\u5f55\u6570": 79430,
-  "SKU\u6570\u91cf": 79430,
-  "\u5f00\u59cb\u65e5\u671f": "2025-04-30",
-  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
-  "\u5e73\u5747\u4ef7\u683c": 90.94535112677829,
-  "\u4ef7\u683c\u6807\u51c6\u5dee": 235.17775418643097
+2025-05-23 00:28:17,400 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
 }
-2025-05-21 21:39:01,691 - DataFetcher - INFO - 成功获取 79430 条记录，最新日期: 2025-04-30
-2025-05-21 21:39:12,307 - DataFetcher - INFO - 获取数据统计: {
-  "\u8bb0\u5f55\u6570": 79430,
-  "SKU\u6570\u91cf": 79430,
-  "\u5f00\u59cb\u65e5\u671f": "2025-04-30",
-  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
-  "\u5e73\u5747\u4ef7\u683c": 90.94535112677829,
-  "\u4ef7\u683c\u6807\u51c6\u5dee": 235.17775418643097
+2025-05-23 00:28:17,403 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:28:17,403 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:28:17,404 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:28:17,404 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:28:18,408 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:28:18,408 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:28:18,408 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:28:18,408 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:29:18,413 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-23 00:29:18,413 - DataFetcher - INFO - 尝试获取训练数据 (第2次尝试)
+2025-05-23 00:29:18,414 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:29:18,414 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:30:20,809 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
 }
-2025-05-21 21:39:12,315 - DataFetcher - INFO - 成功获取 79430 条记录，最新日期: 2025-04-30
-2025-05-21 21:46:46,515 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 21:47:11,345 - DataFetcher - INFO - 获取数据统计: {
-  "\u8bb0\u5f55\u6570": 79430,
-  "SKU\u6570\u91cf": 79430,
-  "\u5f00\u59cb\u65e5\u671f": "2025-04-30",
-  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
-  "\u5e73\u5747\u4ef7\u683c": 90.94535112677829,
-  "\u4ef7\u683c\u6807\u51c6\u5dee": 235.17775418643097
+2025-05-23 00:30:20,809 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
 }
-2025-05-21 21:47:11,352 - DataFetcher - INFO - 成功获取 79430 条记录，最新日期: 2025-04-30
-2025-05-21 21:48:41,655 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
-2025-05-21 21:48:59,411 - DataFetcher - INFO - 获取数据统计: {
-  "\u8bb0\u5f55\u6570": 79430,
-  "SKU\u6570\u91cf": 79430,
-  "\u5f00\u59cb\u65e5\u671f": "2025-04-30",
-  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
-  "\u5e73\u5747\u4ef7\u683c": 90.94535112677829,
-  "\u4ef7\u683c\u6807\u51c6\u5dee": 235.17775418643097
+2025-05-23 00:30:20,821 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:30:20,821 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:30:20,822 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:30:20,822 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:30:23,618 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:30:23,618 - DataFetcher - ERROR - 获取数据失败 (尝试 2/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:30:23,618 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:30:23,618 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:31:23,624 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-23 00:31:23,624 - DataFetcher - INFO - 尝试获取训练数据 (第3次尝试)
+2025-05-23 00:31:23,627 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:31:23,627 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:31:27,579 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
 }
-2025-05-21 21:48:59,419 - DataFetcher - INFO - 成功获取 79430 条记录，最新日期: 2025-04-30
+2025-05-23 00:31:27,579 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:31:27,584 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:31:27,584 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:31:27,585 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:31:27,585 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:31:28,521 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:31:28,521 - DataFetcher - ERROR - 获取数据失败 (尝试 3/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:31:48,529 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:31:48,529 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:31:48,529 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:31:49,652 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:31:49,652 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:31:49,652 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:31:49,653 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:31:49,653 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:31:49,653 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:31:49,653 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:31:49,653 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:31:49,653 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:31:57,264 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:31:57,264 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:31:57,264 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:31:57,269 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:31:57,269 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:31:57,269 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:31:57,270 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:31:57,270 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:31:57,270 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:31:58,125 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:31:58,125 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:31:58,125 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:31:58,126 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:31:58,126 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:31:58,126 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:34:52,539 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:34:53,851 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:34:53,852 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:34:53,852 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:34:57,362 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:34:57,369 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:34:57,370 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:34:58,194 - DataFetcher - ERROR - 获取数据失败 (尝试 1/3): AnalysisException: Syntax error in line 4:
+                            dt AS date,
+                                  ^
+Encountered: DATE
+Expected: DEFAULT, IDENTIFIER
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-23 00:34:58,194 - DataFetcher - INFO - 等待 60 秒后重试...
+2025-05-23 00:36:38,392 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:36:39,727 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:36:39,728 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:36:39,728 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:36:43,487 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:36:43,491 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:36:43,492 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:36:44,472 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): AnalysisException: Incompatible return types 'BIGINT' and 'STRING' of exprs 'sku_id' and ''69487371426''.
+
+2025-05-23 00:36:44,472 - DataFetcher - INFO - DataFetcher资源清理完成
+2025-05-23 00:48:00,401 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:48:01,694 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:48:01,695 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:48:01,695 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:48:06,201 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:48:06,205 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:48:06,205 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:48:26,732 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 126853,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-02-22",
+  "\u5e73\u5747\u4ef7\u683c": "55.01",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "34009"
+}
+2025-05-23 00:48:28,981 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 8087,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2025-02-23",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "51.60",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "2276"
+}
+2025-05-23 00:48:31,492 - DataFetcher - INFO - test数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 00:48:31,519 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 00:48:31,519 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-02-22]",
+  "\u9a8c\u8bc1\u96c6": "(2025-02-22, 2025-04-23]",
+  "\u6d4b\u8bd5\u96c6": "(2025-04-23, 2025-05-23]"
+}
+2025-05-23 00:48:31,537 - DataFetcher - INFO - DataFetcher资源清理完成
+2025-05-23 00:50:00,560 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:50:02,234 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:50:02,235 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:50:02,235 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:50:06,805 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:50:06,810 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:50:06,810 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:50:31,815 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 00:50:35,131 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 00:50:39,498 - DataFetcher - WARNING - test数据集为空
+2025-05-23 00:50:39,543 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 00:50:39,543 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 00:54:52,123 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:54:53,417 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:54:53,419 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:54:53,419 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:54:57,783 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:54:57,789 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:54:57,790 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:55:14,969 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 00:55:16,645 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 00:55:18,209 - DataFetcher - WARNING - test数据集为空
+2025-05-23 00:55:18,237 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 00:55:18,238 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:02:39,824 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:02:42,632 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:02:42,633 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:02:42,634 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:02:47,327 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:02:47,330 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:02:47,331 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:03:06,049 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:03:09,226 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:03:10,773 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:03:10,799 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:03:10,799 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:09:24,610 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:09:26,056 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:09:26,057 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:09:26,057 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:09:30,585 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:09:30,590 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:09:30,591 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:09:51,770 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:09:53,671 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:09:55,343 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:09:55,368 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:09:55,368 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:12:38,273 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:12:40,789 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:12:40,790 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:12:40,790 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:12:47,430 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:12:47,435 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:12:47,436 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:13:07,725 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:13:11,433 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:13:13,245 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:13:13,333 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:13:13,333 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:27:18,577 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:27:20,428 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:27:20,429 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:27:20,429 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:27:29,844 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:27:29,850 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:27:29,852 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:27:53,580 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-23 01:28:03,590 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:28:03,590 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:28:04,939 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:28:04,939 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:28:04,940 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:28:04,940 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:28:04,940 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:28:04,940 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:28:11,386 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:28:11,386 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:28:11,395 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:28:11,395 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:28:11,396 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:28:11,396 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:28:35,198 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-23 01:28:35,198 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-23 01:28:55,208 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:28:55,208 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:28:55,208 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:28:58,276 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:28:58,276 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:28:58,276 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:28:58,276 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:28:58,276 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:28:58,276 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:28:58,277 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:28:58,277 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:28:58,277 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:29:03,171 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:29:03,171 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:29:03,171 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:29:03,176 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:29:03,176 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:29:03,176 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:29:03,177 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:29:03,177 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:29:03,177 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:29:27,466 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-23 01:29:27,466 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-23 01:29:27,466 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-23 01:31:22,831 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:31:24,564 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:31:24,565 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:31:24,565 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:31:29,526 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:31:29,533 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:31:29,533 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:31:54,043 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:31:56,745 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:31:58,256 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:31:58,760 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): Object of type Timestamp is not JSON serializable
+2025-05-23 01:32:08,769 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:32:08,769 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:32:10,445 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:32:10,445 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:32:10,448 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:32:10,448 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:32:10,448 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:32:10,448 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:32:15,299 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:32:15,299 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:32:15,314 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:32:15,314 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:32:15,314 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:32:15,314 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:32:35,192 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:32:35,192 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:32:38,379 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:32:38,379 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:32:40,066 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:32:40,066 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:32:40,339 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): Object of type Timestamp is not JSON serializable
+2025-05-23 01:32:40,339 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): Object of type Timestamp is not JSON serializable
+2025-05-23 01:33:00,346 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:33:00,346 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:33:00,346 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:33:02,836 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:33:02,836 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:33:02,836 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:33:02,837 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:33:02,837 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:33:02,837 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:33:02,837 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:33:02,837 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:33:02,837 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:33:08,063 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:33:08,063 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:33:08,063 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:33:08,067 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:33:08,067 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:33:08,067 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:33:08,068 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:33:08,068 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:33:08,068 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:33:29,485 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:33:29,485 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:33:29,485 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:33:31,269 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:33:31,269 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:33:31,269 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:33:33,243 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:33:33,243 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:33:33,243 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:33:33,440 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): Object of type Timestamp is not JSON serializable
+2025-05-23 01:33:33,440 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): Object of type Timestamp is not JSON serializable
+2025-05-23 01:33:33,440 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): Object of type Timestamp is not JSON serializable
+2025-05-23 01:35:47,745 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:35:49,182 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:35:49,183 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:35:49,183 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:35:53,239 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:35:53,246 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:35:53,247 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:36:14,390 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:36:18,756 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:36:24,944 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:36:24,970 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:36:24,971 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:39:38,746 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:39:41,016 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:39:41,016 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:39:41,016 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:39:45,539 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:39:45,543 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:39:45,544 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:40:05,969 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:40:07,707 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:40:11,133 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:40:11,156 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:40:11,157 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:40:38,550 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:40:39,880 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:40:39,881 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:40:39,881 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:40:51,307 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:40:51,312 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:40:51,312 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:41:17,709 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:41:19,702 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:41:21,923 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:41:21,962 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:41:21,962 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:45:16,148 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:45:17,851 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:45:17,851 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:45:17,851 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:45:24,879 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 01:45:24,885 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:45:24,885 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:45:42,769 - DataFetcher - INFO - train数据集 - 记录数: 126853, SKU数: 170, 日期范围: 2023-01-01至2025-02-22, 平均价格: 55.01, 价格变动次数: 34009
+2025-05-23 01:45:45,275 - DataFetcher - INFO - val数据集 - 记录数: 8087, SKU数: 170, 日期范围: 2025-02-23至2025-04-23, 平均价格: 51.60, 价格变动次数: 2276
+2025-05-23 01:45:47,886 - DataFetcher - INFO - test数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63, 价格变动次数: 333
+2025-05-23 01:45:47,913 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:45:47,913 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-02-22, 验证集: 2025-02-22至2025-04-23, 测试集: 2025-04-23至2025-05-23
+2025-05-23 01:45:47,934 - DataFetcher - INFO - DataFetcher资源清理完成
+2025-05-23 01:47:36,155 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:47:37,757 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:47:37,758 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:47:37,758 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:47:51,791 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 01:47:51,800 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:47:51,801 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:48:10,593 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): 'date'
+2025-05-23 01:48:10,595 - DataFetcher - INFO - DataFetcher资源清理完成
+2025-05-23 01:48:23,006 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:48:24,566 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:48:24,568 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:48:24,568 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:48:36,716 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 01:48:36,737 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:48:36,739 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:48:54,928 - DataFetcher - INFO - train数据集 - 记录数: 126853, SKU数: 170, 日期范围: 2023-01-01至2025-02-22, 平均价格: 55.01, 价格变动次数: 34009
+2025-05-23 01:48:57,421 - DataFetcher - INFO - val数据集 - 记录数: 8087, SKU数: 170, 日期范围: 2025-02-23至2025-04-23, 平均价格: 51.60, 价格变动次数: 2276
+2025-05-23 01:49:04,212 - DataFetcher - INFO - test数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63, 价格变动次数: 333
+2025-05-23 01:49:04,237 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:49:04,237 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-02-22, 验证集: 2025-02-22至2025-04-23, 测试集: 2025-04-23至2025-05-23
+2025-05-23 01:49:04,328 - DataFetcher - INFO - DataFetcher资源清理完成
+2025-05-23 01:49:17,784 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:49:19,168 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:49:19,169 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:49:19,169 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:49:27,268 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 01:49:27,275 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:49:27,275 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:49:43,952 - DataFetcher - INFO - train数据集 - 记录数: 134940, SKU数: 170, 日期范围: 2023-01-01至2025-04-23, 平均价格: 54.81, 价格变动次数: 36157
+2025-05-23 01:49:46,242 - DataFetcher - INFO - val数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63, 价格变动次数: 333
+2025-05-23 01:49:48,708 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:49:48,734 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:49:48,735 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23

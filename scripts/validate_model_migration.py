@@ -8,6 +8,21 @@ import logging
 # 添加项目根目录到路径
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+# 调试模型导入
+try:
+    from models.base_model import BaseModel
+    logging.info("成功导入BaseModel")
+except ImportError as e:
+    logging.error(f"导入BaseModel失败: {e}")
+    logging.info("当前models目录内容:")
+    models_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'models')
+    if os.path.exists(models_dir):
+        for f in os.listdir(models_dir):
+            logging.info(f" - {f}")
+    else:
+        logging.error(f"models目录不存在: {models_dir}")
+    raise
+
 from src.validation.run_validation import run_full_validation
 
 def main():

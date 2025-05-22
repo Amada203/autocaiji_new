@@ -243,7 +243,7 @@ class PriceModel:
     
     def _calculate_change_flags(self, df):
         """
-        计算价格变化标志
+        计算价格变化标志（严格使用discount_price）
         
         Args:
             df: 包含价格数据的DataFrame
@@ -251,17 +251,18 @@ class PriceModel:
         Returns:
             添加change_flag列的DataFrame
         """
+        # 确保使用discount_price作为价格源
+        if 'discount_price' not in df.columns:
+            raise ValueError("输入数据必须包含discount_price列")
+            
         # 按SKU分组计算前一日价格（如果有sku_id列）
         if 'sku_id' in df.columns:
-            df['prev_y'] = df.groupby('sku_id')['y'].shift(1)
+            df['prev_price'] = df.groupby('sku_id')['discount_price'].shift(1)
         else:
-            df['prev_y'] = df['y'].shift(1)
+            df['prev_price'] = df['discount_price'].shift(1)
         
-        # 计算相对变化比例（保留用于其他可能的分析）
-        df['change_ratio'] = (df['y'] - df['prev_y']) / (df['prev_y'] + 1e-10)
-        
-        # 修改为严格不等判定
-        df['change_flag'] = (df['y'] != df['prev_y']).astype(int)
+        # 计算价格变化标志（严格不等判定）
+        df['change_flag'] = (df['discount_price'] != df['prev_price']).astype(int)
         
         # 第一个数据点没有前值，设为0
         df['change_flag'] = df['change_flag'].fillna(0)
@@ -341,16 +342,16 @@ class PriceModel:
                         window, min_periods=1
                     ).mean().fillna(0)
         
-        # 计算价格波动特征
-        if 'y' in features.columns:
+        # 计算价格波动特征（使用discount_price）
+        if 'discount_price' in features.columns:
             if 'sku_id' in features.columns:
-                features['price_volatility_7d'] = features.groupby('sku_id')['y'].transform(
+                features['price_volatility_7d'] = features.groupby('sku_id')['discount_price'].transform(
                     lambda x: x.rolling(7, min_periods=1).std() / (x.rolling(7, min_periods=1).mean() + 1e-10)
                 ).fillna(0)
             else:
-                features['price_volatility_7d'] = features['y'].rolling(
+                features['price_volatility_7d'] = features['discount_price'].rolling(
                     7, min_periods=1
-                ).std() / (features['y'].rolling(7, min_periods=1).mean() + 1e-10).fillna(0)
+                ).std() / (features['discount_price'].rolling(7, min_periods=1).mean() + 1e-10).fillna(0)
         
         # 移除非特征列并确保无NA
         feature_cols = [col for col in features.columns 

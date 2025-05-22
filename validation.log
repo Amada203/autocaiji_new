@@ -1,9 +1,45 @@
+2025-05-22 21:28:47,726 - INFO - 开始环境验证
+2025-05-22 21:28:47,726 - INFO - 检查Python依赖包...
+2025-05-22 21:28:48,129 - INFO - NumExpr defaulting to 8 threads.
+2025-05-22 21:28:48,446 - INFO - ✅ pandas               已安装 (版本: 1.5.3)
+2025-05-22 21:28:48,447 - INFO - ✅ mysql-connector-python 已安装 (版本: 8.0.33)
+2025-05-22 21:28:48,894 - INFO - ✅ impyla               已安装 (版本: 0.21.0)
+2025-05-22 21:28:49,964 - INFO - ✅ scikit-learn         已安装 (版本: 1.3.2)
+2025-05-22 21:28:49,964 - INFO - ✅ joblib               已安装 (版本: 1.4.2)
+2025-05-22 21:28:49,964 - INFO - 检查配置文件...
+2025-05-22 21:28:49,965 - INFO - ✅ 配置项正常: impala.host = impala.db.yimiandata.com
+2025-05-22 21:28:49,965 - INFO - ✅ 配置项正常: mysql.host = localhost
+2025-05-22 21:28:49,966 - INFO - 基本检查通过，开始验证数据管道
+2025-05-22 21:28:49,966 - INFO - 验证数据管道...
+2025-05-22 21:28:52,142 - INFO - 初始化数据管道...
+2025-05-22 21:28:52,392 - INFO - 监控服务器启动在端口 8001
+2025-05-22 21:28:52,392 - INFO - 运行测试管道...
+2025-05-22 21:28:52,392 - INFO - 启动数据管道
+2025-05-22 21:28:52,393 - INFO - 阶段1: 数据获取 (尝试 1/3)
+validate_environment.py:50: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  import pkg_resources
+/Users/apple/opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/base/tsa_model.py:7: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import (to_datetime, Int64Index, DatetimeIndex, Period,
+/Users/apple/opt/anaconda3/lib/python3.8/site-packages/statsmodels/tsa/base/tsa_model.py:7: FutureWarning: pandas.Float64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import (to_datetime, Int64Index, DatetimeIndex, Period,
+INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 21:28:52,393 - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-22 21:28:53,653 - INFO - Using database ms_libai as default
 Traceback (most recent call last):
-  File "scripts/validate_model_migration.py", line 11, in <module>
-    from src.validation.run_validation import run_full_validation
-  File "/Users/ruixue.li/lrx/automore/autocaiji/src/validation/__init__.py", line 6, in <module>
-    from .model_validator import validate_model_migration, compare_model_performance
-  File "/Users/ruixue.li/lrx/automore/autocaiji/src/validation/model_validator.py", line 55
-    [保留原有的函数实现...]
-              ^
-SyntaxError: invalid syntax
+  File "validate_environment.py", line 152, in <module>
+    main()
+  File "validate_environment.py", line 138, in main
+    pipeline_ok = _data_pipeline(logger)
+  File "validate_environment.py", line 115, in _data_pipeline
+    success = pipeline.run_full_pipeline()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_pipeline.py", line 95, in run_full_pipeline
+    raw_data = self._fetch_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_pipeline.py", line 174, in _fetch_data
+    return fetcher.fetch_training_data(train_end=train_end, val_end=val_end, test_end=test_end)
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_fetcher.py", line 155, in fetch_training_data
+    cursor.execute(query)
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/impala/hiveserver2.py", line 394, in execute
+    self._wait_to_finish()  # make execute synchronous
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/impala/hiveserver2.py", line 500, in _wait_to_finish
+    time.sleep(sleep_time - rpc_time)
+KeyboardInterrupt

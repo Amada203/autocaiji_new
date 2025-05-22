@@ -1,0 +1,1232 @@
+2025-05-23 00:50:00,432 - __main__ - INFO - 监控服务器启动在端口 8000
+2025-05-23 00:50:00,432 - __main__ - INFO - 启动数据管道
+2025-05-23 00:50:00,432 - __main__ - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 00:50:00,560 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:50:01,050 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:50:02,234 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:50:02,235 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:50:02,235 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:50:02,564 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:50:06,805 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:50:06,810 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:50:06,810 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:50:08,068 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:50:31,815 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 00:50:31,895 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:50:35,131 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 00:50:35,206 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:50:39,498 - DataFetcher - WARNING - test数据集为空
+2025-05-23 00:50:39,543 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 00:50:39,543 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 00:50:39,545 - __main__ - INFO - 阶段2: 数据处理 (尝试 1/3)
+2025-05-23 00:50:39,592 - __main__ - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 00:50:39,625 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 00:50:39,768 - src.data.data_processor - INFO - 数据清洗后形状: (135772, 10)
+2025-05-23 00:50:39,861 - src.data.data_processor - INFO - 特征工程后形状: (135772, 14)
+2025-05-23 00:50:40,957 - src.data.data_processor - INFO - 价格变动特征计算完成
+2025-05-23 00:50:40,957 - src.data.data_processor - INFO - 最终处理完成，数据形状: (135772, 27)
+2025-05-23 00:50:40,981 - __main__ - INFO - 处理后数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 27,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.78449582780201,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012558
+}
+2025-05-23 00:50:43,453 - __main__ - INFO - 阶段3: 模型训练 (尝试 1/3)
+2025-05-23 00:50:44,402 - __main__ - ERROR - 模型训练失败: cannot import name 'ProphetLGBMFusion' from 'src.models.fusion_model' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/fusion_model.py)
+2025-05-23 00:50:44,402 - __main__ - ERROR - 阶段执行失败: cannot import name 'ProphetLGBMFusion' from 'src.models.fusion_model' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/fusion_model.py)
+2025-05-23 00:50:44,403 - __main__ - INFO - 等待 10 秒后重试...
+2025-05-23 00:50:54,406 - __main__ - INFO - 阶段3: 模型训练 (尝试 2/3)
+2025-05-23 00:50:54,406 - __main__ - ERROR - 模型训练失败: cannot import name 'ProphetLGBMFusion' from 'src.models.fusion_model' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/fusion_model.py)
+2025-05-23 00:50:54,406 - __main__ - ERROR - 阶段执行失败: cannot import name 'ProphetLGBMFusion' from 'src.models.fusion_model' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/fusion_model.py)
+2025-05-23 00:50:54,406 - __main__ - INFO - 等待 20 秒后重试...
+2025-05-23 00:51:14,410 - __main__ - INFO - 阶段3: 模型训练 (尝试 3/3)
+2025-05-23 00:51:14,410 - __main__ - ERROR - 模型训练失败: cannot import name 'ProphetLGBMFusion' from 'src.models.fusion_model' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/fusion_model.py)
+2025-05-23 00:51:14,410 - __main__ - ERROR - 阶段执行失败: cannot import name 'ProphetLGBMFusion' from 'src.models.fusion_model' (/Users/ruixue.li/lrx/automore/autocaiji/src/models/fusion_model.py)
+2025-05-23 00:51:14,410 - __main__ - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 00:54:51,841 - __main__ - INFO - 开始执行定时任务
+2025-05-23 00:54:51,842 - __main__ - INFO - 系统资源检查通过
+2025-05-23 00:54:52,062 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 00:54:52,063 - __main__ - INFO - 开始运行数据管道
+2025-05-23 00:54:52,122 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 00:54:52,122 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 00:54:52,122 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 00:54:52,123 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 00:54:52,123 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 00:54:52,123 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 00:54:52,491 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:54:53,417 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 00:54:53,419 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 00:54:53,419 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 00:54:53,846 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:54:57,783 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 00:54:57,789 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 00:54:57,790 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 00:54:58,192 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:55:14,969 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 00:55:15,053 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:55:16,645 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 00:55:16,723 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 00:55:18,209 - DataFetcher - WARNING - test数据集为空
+2025-05-23 00:55:18,237 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 00:55:18,238 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 00:55:18,243 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 1/3)
+2025-05-23 00:55:18,293 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 00:55:18,355 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 00:55:18,528 - src.data.data_processor - INFO - 数据清洗后形状: (135772, 10)
+2025-05-23 00:55:18,582 - src.data.data_processor - INFO - 特征工程后形状: (135772, 14)
+2025-05-23 00:55:19,656 - src.data.data_processor - INFO - 价格变动特征计算完成
+2025-05-23 00:55:19,656 - src.data.data_processor - INFO - 最终处理完成，数据形状: (135772, 27)
+2025-05-23 00:55:19,680 - src.data.data_pipeline - INFO - 处理后数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 27,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.78449582780201,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012558
+}
+2025-05-23 00:55:22,229 - src.data.data_pipeline - INFO - 阶段3: 模型训练 (尝试 1/3)
+2025-05-23 00:55:23,242 - src.data.data_pipeline - INFO - 开始训练新模型...
+2025-05-23 00:55:23,242 - src.models.fusion_model - INFO - 开始训练价格变动预测模型
+2025-05-23 00:55:23,308 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-23 00:55:23,491 - src.data.data_pipeline - ERROR - 模型训练失败: Found NaN in column ds.
+2025-05-23 00:55:23,492 - src.data.data_pipeline - ERROR - 阶段执行失败: Found NaN in column ds.
+2025-05-23 00:55:23,492 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 00:55:33,506 - src.data.data_pipeline - INFO - 阶段3: 模型训练 (尝试 2/3)
+2025-05-23 00:55:33,506 - src.data.data_pipeline - INFO - 开始训练新模型...
+2025-05-23 00:55:33,507 - src.models.fusion_model - INFO - 开始训练价格变动预测模型
+2025-05-23 00:55:33,585 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-23 00:55:33,649 - src.data.data_pipeline - ERROR - 模型训练失败: Found NaN in column ds.
+2025-05-23 00:55:33,649 - src.data.data_pipeline - ERROR - 阶段执行失败: Found NaN in column ds.
+2025-05-23 00:55:33,649 - src.data.data_pipeline - INFO - 等待 20 秒后重试...
+2025-05-23 00:55:53,662 - src.data.data_pipeline - INFO - 阶段3: 模型训练 (尝试 3/3)
+2025-05-23 00:55:53,662 - src.data.data_pipeline - INFO - 开始训练新模型...
+2025-05-23 00:55:53,662 - src.models.fusion_model - INFO - 开始训练价格变动预测模型
+2025-05-23 00:55:53,726 - src.models.fusion_model - INFO - 训练Prophet模型...
+2025-05-23 00:55:53,787 - src.data.data_pipeline - ERROR - 模型训练失败: Found NaN in column ds.
+2025-05-23 00:55:53,788 - src.data.data_pipeline - ERROR - 阶段执行失败: Found NaN in column ds.
+2025-05-23 00:55:53,788 - src.data.data_pipeline - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 00:55:53,813 - __main__ - ERROR - 数据管道运行失败
+2025-05-23 00:55:53,814 - __main__ - ERROR - 定时任务执行失败
+2025-05-23 01:02:39,677 - __main__ - INFO - 开始执行定时任务
+2025-05-23 01:02:39,678 - __main__ - INFO - 系统资源检查通过
+2025-05-23 01:02:39,764 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 01:02:39,764 - __main__ - INFO - 开始运行数据管道
+2025-05-23 01:02:39,823 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 01:02:39,823 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 01:02:39,823 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 01:02:39,823 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:02:39,824 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 01:02:39,824 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:02:40,677 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:02:42,632 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:02:42,633 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:02:42,634 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:02:43,044 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:02:47,327 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:02:47,330 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:02:47,331 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:02:47,783 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:03:06,049 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:03:06,117 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:03:09,226 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:03:09,305 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:03:10,773 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:03:10,799 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:03:10,799 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:03:10,802 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 1/3)
+2025-05-23 01:03:10,854 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:03:10,907 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:03:10,932 - src.data.data_processor - WARNING - 发现 135772 条记录的日期无效，将被移除
+2025-05-23 01:03:10,936 - src.data.data_processor - ERROR - 移除无效日期后数据为空
+2025-05-23 01:03:10,937 - src.data.data_processor - INFO - 数据清洗后形状: (0, 10)
+2025-05-23 01:03:10,949 - src.data.data_processor - INFO - 特征工程后形状: (0, 14)
+2025-05-23 01:03:10,949 - src.data.data_processor - WARNING - 无有效数据可计算价格变动
+2025-05-23 01:03:10,949 - src.data.data_processor - INFO - 最终处理完成，数据形状: (0, 14)
+2025-05-23 01:03:10,949 - src.data.data_pipeline - ERROR - 数据处理失败: 数据处理结果为空, 部分处理数据形状: (0, 14)
+2025-05-23 01:03:10,950 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 数据处理结果为空, 部分处理数据形状: (0, 14)
+2025-05-23 01:03:10,950 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 01:03:20,959 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 2/3)
+2025-05-23 01:03:20,994 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:03:21,026 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:03:21,057 - src.data.data_processor - WARNING - 发现 135772 条记录的日期无效，将被移除
+2025-05-23 01:03:21,060 - src.data.data_processor - ERROR - 移除无效日期后数据为空
+2025-05-23 01:03:21,061 - src.data.data_processor - INFO - 数据清洗后形状: (0, 10)
+2025-05-23 01:03:21,066 - src.data.data_processor - INFO - 特征工程后形状: (0, 14)
+2025-05-23 01:03:21,067 - src.data.data_processor - WARNING - 无有效数据可计算价格变动
+2025-05-23 01:03:21,067 - src.data.data_processor - INFO - 最终处理完成，数据形状: (0, 14)
+2025-05-23 01:03:21,068 - src.data.data_pipeline - ERROR - 数据处理失败: 数据处理结果为空, 部分处理数据形状: (0, 14)
+2025-05-23 01:03:21,068 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 数据处理结果为空, 部分处理数据形状: (0, 14)
+2025-05-23 01:03:21,068 - src.data.data_pipeline - INFO - 等待 20 秒后重试...
+2025-05-23 01:03:41,075 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 3/3)
+2025-05-23 01:03:41,105 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:03:41,132 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:03:41,158 - src.data.data_processor - WARNING - 发现 135772 条记录的日期无效，将被移除
+2025-05-23 01:03:41,161 - src.data.data_processor - ERROR - 移除无效日期后数据为空
+2025-05-23 01:03:41,162 - src.data.data_processor - INFO - 数据清洗后形状: (0, 10)
+2025-05-23 01:03:41,166 - src.data.data_processor - INFO - 特征工程后形状: (0, 14)
+2025-05-23 01:03:41,166 - src.data.data_processor - WARNING - 无有效数据可计算价格变动
+2025-05-23 01:03:41,166 - src.data.data_processor - INFO - 最终处理完成，数据形状: (0, 14)
+2025-05-23 01:03:41,167 - src.data.data_pipeline - ERROR - 数据处理失败: 数据处理结果为空, 部分处理数据形状: (0, 14)
+2025-05-23 01:03:41,167 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 数据处理结果为空, 部分处理数据形状: (0, 14)
+2025-05-23 01:03:41,167 - src.data.data_pipeline - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 01:03:41,182 - __main__ - ERROR - 数据管道运行失败
+2025-05-23 01:03:41,183 - __main__ - ERROR - 定时任务执行失败
+2025-05-23 01:09:24,450 - __main__ - INFO - 开始执行定时任务
+2025-05-23 01:09:24,451 - __main__ - INFO - 系统资源检查通过
+2025-05-23 01:09:24,551 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 01:09:24,552 - __main__ - INFO - 开始运行数据管道
+2025-05-23 01:09:24,608 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 01:09:24,608 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 01:09:24,609 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 01:09:24,609 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:09:24,609 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 01:09:24,610 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:09:24,988 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:09:26,056 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:09:26,057 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:09:26,057 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:09:26,425 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:09:30,585 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:09:30,590 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:09:30,591 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:09:31,019 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:09:51,770 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:09:51,849 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:09:53,671 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:09:53,747 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:09:55,343 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:09:55,368 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:09:55,368 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:09:55,371 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 1/3)
+2025-05-23 01:09:55,408 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:09:55,441 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:09:55,455 - src.data.data_processor - INFO - 已将dt列重命名为date
+2025-05-23 01:09:55,464 - src.data.data_processor - ERROR - 数据处理失败: cannot assemble with duplicate keys
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 75, in _clean_data
+    self.df['date'] = pd.to_datetime(
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/pandas/core/tools/datetimes.py", line 1071, in to_datetime
+    result = _assemble_from_unit_mappings(arg, errors, tz)
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/pandas/core/tools/datetimes.py", line 1165, in _assemble_from_unit_mappings
+    raise ValueError("cannot assemble with duplicate keys")
+ValueError: cannot assemble with duplicate keys
+2025-05-23 01:09:55,468 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (135772, 10)
+2025-05-23 01:09:55,468 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (135772, 10)
+2025-05-23 01:09:55,468 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 01:10:05,480 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 2/3)
+2025-05-23 01:10:05,523 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:10:05,553 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:10:05,563 - src.data.data_processor - INFO - 已将dt列重命名为date
+2025-05-23 01:10:05,566 - src.data.data_processor - ERROR - 数据处理失败: cannot assemble with duplicate keys
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 75, in _clean_data
+    self.df['date'] = pd.to_datetime(
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/pandas/core/tools/datetimes.py", line 1071, in to_datetime
+    result = _assemble_from_unit_mappings(arg, errors, tz)
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/pandas/core/tools/datetimes.py", line 1165, in _assemble_from_unit_mappings
+    raise ValueError("cannot assemble with duplicate keys")
+ValueError: cannot assemble with duplicate keys
+2025-05-23 01:10:05,568 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (135772, 10)
+2025-05-23 01:10:05,568 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (135772, 10)
+2025-05-23 01:10:05,568 - src.data.data_pipeline - INFO - 等待 20 秒后重试...
+2025-05-23 01:10:25,579 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 3/3)
+2025-05-23 01:10:25,622 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:10:25,653 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:10:25,661 - src.data.data_processor - INFO - 已将dt列重命名为date
+2025-05-23 01:10:25,664 - src.data.data_processor - ERROR - 数据处理失败: cannot assemble with duplicate keys
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 75, in _clean_data
+    self.df['date'] = pd.to_datetime(
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/pandas/core/tools/datetimes.py", line 1071, in to_datetime
+    result = _assemble_from_unit_mappings(arg, errors, tz)
+  File "/Users/apple/opt/anaconda3/lib/python3.8/site-packages/pandas/core/tools/datetimes.py", line 1165, in _assemble_from_unit_mappings
+    raise ValueError("cannot assemble with duplicate keys")
+ValueError: cannot assemble with duplicate keys
+2025-05-23 01:10:25,668 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (135772, 10)
+2025-05-23 01:10:25,669 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (135772, 10)
+2025-05-23 01:10:25,669 - src.data.data_pipeline - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 01:10:25,693 - __main__ - ERROR - 数据管道运行失败
+2025-05-23 01:10:25,693 - __main__ - ERROR - 定时任务执行失败
+2025-05-23 01:12:38,166 - __main__ - INFO - 开始执行定时任务
+2025-05-23 01:12:38,166 - __main__ - INFO - 系统资源检查通过
+2025-05-23 01:12:38,217 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 01:12:38,218 - __main__ - INFO - 开始运行数据管道
+2025-05-23 01:12:38,272 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 01:12:38,272 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 01:12:38,272 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 01:12:38,272 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:12:38,272 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 01:12:38,273 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:12:39,219 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:12:40,789 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:12:40,790 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:12:40,790 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:12:41,702 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:12:47,430 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:12:47,435 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:12:47,436 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:12:47,876 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:13:07,725 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:13:07,775 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:13:11,433 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:13:11,507 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:13:13,245 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:13:13,333 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:13:13,333 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:13:13,336 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 1/3)
+2025-05-23 01:13:13,392 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:13:13,430 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:13:13,432 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期，将保留第一条
+2025-05-23 01:13:13,459 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:13:13,460 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:13:13,461 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 99, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:13:13,462 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:13:13,462 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:13:13,462 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 01:13:23,472 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 2/3)
+2025-05-23 01:13:23,510 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:13:23,538 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:13:23,541 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期，将保留第一条
+2025-05-23 01:13:23,553 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:13:23,553 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:13:23,553 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 99, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:13:23,554 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:13:23,554 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:13:23,554 - src.data.data_pipeline - INFO - 等待 20 秒后重试...
+2025-05-23 01:13:43,559 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 3/3)
+2025-05-23 01:13:43,590 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:13:43,614 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:13:43,616 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期，将保留第一条
+2025-05-23 01:13:43,624 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:13:43,624 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:13:43,624 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 99, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:13:43,625 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:13:43,625 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:13:43,625 - src.data.data_pipeline - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 01:13:43,636 - __main__ - ERROR - 数据管道运行失败
+2025-05-23 01:13:43,636 - __main__ - ERROR - 定时任务执行失败
+2025-05-23 01:27:18,416 - __main__ - INFO - 开始执行定时任务
+2025-05-23 01:27:18,417 - __main__ - INFO - 系统资源检查通过
+2025-05-23 01:27:18,503 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 01:27:18,503 - __main__ - INFO - 开始运行数据管道
+2025-05-23 01:27:18,576 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 01:27:18,576 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 01:27:18,576 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 01:27:18,576 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:27:18,576 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 01:27:18,577 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:27:19,357 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:27:20,428 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:27:20,429 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:27:20,429 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:27:20,868 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:27:29,844 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:27:29,850 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:27:29,852 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:27:30,281 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:27:53,580 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-23 01:27:53,581 - src.data.data_pipeline - ERROR - 数据获取失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:27:53,581 - src.data.data_pipeline - ERROR - 阶段执行失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:27:53,581 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 01:28:03,587 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:28:03,588 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 2/3)
+2025-05-23 01:28:03,590 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:28:04,053 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:28:04,939 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:28:04,940 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:28:04,940 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:28:05,379 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:28:11,386 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:28:11,395 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:28:11,396 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:28:11,722 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:28:35,198 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-23 01:28:35,200 - src.data.data_pipeline - ERROR - 数据获取失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:28:35,200 - src.data.data_pipeline - ERROR - 阶段执行失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:28:35,200 - src.data.data_pipeline - INFO - 等待 20 秒后重试...
+2025-05-23 01:28:55,206 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:28:55,207 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 3/3)
+2025-05-23 01:28:55,208 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:28:56,499 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:28:58,276 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:28:58,276 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:28:58,277 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:28:58,717 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:29:03,171 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:29:03,176 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:29:03,177 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:29:03,548 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:29:27,466 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-23 01:29:27,466 - src.data.data_pipeline - ERROR - 数据获取失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:29:27,466 - src.data.data_pipeline - ERROR - 阶段执行失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:29:27,467 - src.data.data_pipeline - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 01:29:27,468 - __main__ - ERROR - 数据管道运行失败
+2025-05-23 01:29:27,469 - __main__ - ERROR - 定时任务执行失败
+2025-05-23 01:31:22,718 - __main__ - INFO - 开始执行定时任务
+2025-05-23 01:31:22,718 - __main__ - INFO - 系统资源检查通过
+2025-05-23 01:31:22,771 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 01:31:22,771 - __main__ - INFO - 开始运行数据管道
+2025-05-23 01:31:22,830 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 01:31:22,830 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 01:31:22,830 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 01:31:22,830 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:31:22,830 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 01:31:22,831 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:31:23,611 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:31:24,564 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:31:24,565 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:31:24,565 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:31:24,999 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:31:29,526 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:31:29,533 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:31:29,533 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:31:30,144 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:31:54,043 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:31:54,133 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:31:56,745 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:31:56,838 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:31:58,256 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:31:58,760 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): Object of type Timestamp is not JSON serializable
+2025-05-23 01:31:58,761 - src.data.data_pipeline - ERROR - 数据获取失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:31:58,761 - src.data.data_pipeline - ERROR - 阶段执行失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:31:58,761 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 01:32:08,767 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:32:08,768 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 2/3)
+2025-05-23 01:32:08,769 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:32:09,649 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:32:10,445 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:32:10,448 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:32:10,448 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:32:10,877 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:32:15,299 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:32:15,314 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:32:15,314 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:32:16,594 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:32:35,192 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:32:35,283 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:32:38,379 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:32:38,459 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:32:40,066 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:32:40,339 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): Object of type Timestamp is not JSON serializable
+2025-05-23 01:32:40,339 - src.data.data_pipeline - ERROR - 数据获取失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:32:40,339 - src.data.data_pipeline - ERROR - 阶段执行失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:32:40,339 - src.data.data_pipeline - INFO - 等待 20 秒后重试...
+2025-05-23 01:33:00,344 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:33:00,344 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 3/3)
+2025-05-23 01:33:00,346 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:33:02,108 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:33:02,836 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:33:02,837 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:33:02,837 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:33:04,312 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:33:08,063 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:33:08,067 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:33:08,068 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:33:09,520 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:33:29,485 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:33:29,547 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:33:31,269 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24 00:00:00",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30 00:00:00",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:33:31,344 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:33:33,243 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:33:33,440 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): Object of type Timestamp is not JSON serializable
+2025-05-23 01:33:33,440 - src.data.data_pipeline - ERROR - 数据获取失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:33:33,440 - src.data.data_pipeline - ERROR - 阶段执行失败: 经过 1 次尝试后仍无法获取数据
+2025-05-23 01:33:33,441 - src.data.data_pipeline - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 01:33:33,447 - __main__ - ERROR - 数据管道运行失败
+2025-05-23 01:33:33,451 - __main__ - ERROR - 定时任务执行失败
+2025-05-23 01:35:47,645 - __main__ - INFO - 开始执行定时任务
+2025-05-23 01:35:47,645 - __main__ - INFO - 系统资源检查通过
+2025-05-23 01:35:47,692 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 01:35:47,692 - __main__ - INFO - 开始运行数据管道
+2025-05-23 01:35:47,743 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 01:35:47,744 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 01:35:47,744 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 01:35:47,744 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:35:47,744 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 01:35:47,745 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:35:48,161 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:35:49,182 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:35:49,183 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:35:49,183 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:35:49,637 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:35:53,239 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:35:53,246 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:35:53,247 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:35:53,681 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:36:14,390 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:36:14,460 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:36:18,756 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:36:18,840 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:36:24,944 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:36:24,970 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:36:24,971 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:36:24,973 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 1/3)
+2025-05-23 01:36:25,013 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:36:25,075 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:36:25,101 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id          dt  discount_price is_promotion  ...  price_change_amount  price_change_ratio  price_change_direction  date
+0  206942  2023-01-01       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+1  206942  2023-01-02       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+2  206942  2023-01-03       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+
+[3 rows x 10 columns]
+2025-05-23 01:36:25,106 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:36:25,111 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:36:25,121 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:36:25,122 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:36:25,122 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 107, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:36:25,124 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:36:25,124 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:36:25,125 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 01:36:35,131 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 2/3)
+2025-05-23 01:36:35,161 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:36:35,188 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:36:35,201 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id          dt  discount_price is_promotion  ...  price_change_amount  price_change_ratio  price_change_direction  date
+0  206942  2023-01-01       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+1  206942  2023-01-02       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+2  206942  2023-01-03       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+
+[3 rows x 10 columns]
+2025-05-23 01:36:35,205 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:36:35,212 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:36:35,220 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:36:35,223 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:36:35,223 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 107, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:36:35,224 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:36:35,224 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:36:35,224 - src.data.data_pipeline - INFO - 等待 20 秒后重试...
+2025-05-23 01:36:55,234 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 3/3)
+2025-05-23 01:36:55,272 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:36:55,310 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:36:55,330 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id          dt  discount_price is_promotion  ...  price_change_amount  price_change_ratio  price_change_direction  date
+0  206942  2023-01-01       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+1  206942  2023-01-02       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+2  206942  2023-01-03       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+
+[3 rows x 10 columns]
+2025-05-23 01:36:55,334 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:36:55,340 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:36:55,350 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:36:55,351 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:36:55,352 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 107, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:36:55,353 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:36:55,353 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:36:55,354 - src.data.data_pipeline - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 01:36:55,368 - __main__ - ERROR - 数据管道运行失败
+2025-05-23 01:36:55,369 - __main__ - ERROR - 定时任务执行失败
+2025-05-23 01:39:38,621 - __main__ - INFO - 开始执行定时任务
+2025-05-23 01:39:38,621 - __main__ - INFO - 系统资源检查通过
+2025-05-23 01:39:38,682 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 01:39:38,683 - __main__ - INFO - 开始运行数据管道
+2025-05-23 01:39:38,745 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 01:39:38,745 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 01:39:38,745 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 01:39:38,746 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:39:38,746 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 01:39:38,746 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:39:39,905 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:39:41,016 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:39:41,016 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:39:41,016 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:39:41,452 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:39:45,539 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:39:45,543 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:39:45,544 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:39:46,832 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:40:05,969 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:40:06,028 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:40:07,707 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:40:07,784 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:40:11,133 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:40:11,156 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:40:11,157 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:40:11,160 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 1/3)
+2025-05-23 01:40:11,202 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:40:11,233 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:40:11,248 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id          dt  discount_price is_promotion  ...  price_change_amount  price_change_ratio  price_change_direction  date
+0  206942  2023-01-01       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+1  206942  2023-01-02       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+2  206942  2023-01-03       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+
+[3 rows x 10 columns]
+2025-05-23 01:40:11,252 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:40:11,257 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:40:11,266 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:40:11,267 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:40:11,267 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 107, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:40:11,271 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:40:11,271 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:40:11,271 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 01:40:38,382 - __main__ - INFO - 开始执行定时任务
+2025-05-23 01:40:38,383 - __main__ - INFO - 系统资源检查通过
+2025-05-23 01:40:38,475 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 01:40:38,475 - __main__ - INFO - 开始运行数据管道
+2025-05-23 01:40:38,548 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 01:40:38,549 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 01:40:38,549 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 01:40:38,549 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:40:38,549 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 01:40:38,550 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:40:38,941 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:40:39,880 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:40:39,881 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:40:39,881 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:40:40,502 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:40:51,307 - DataFetcher - INFO - 数据完整性统计: {
+  "\u603bSKU\u6570": 170,
+  "\u5e73\u5747\u5b8c\u6574\u7387": "93.85%",
+  "\u6700\u4f4e\u5b8c\u6574\u7387": "90.01%",
+  "\u6700\u9ad8\u5b8c\u6574\u7387": "99.18%"
+}
+2025-05-23 01:40:51,312 - DataFetcher - INFO - 完整性报告已保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:40:51,312 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:40:51,689 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:41:17,709 - DataFetcher - INFO - train数据集统计: {
+  "\u8bb0\u5f55\u6570": 134940,
+  "SKU\u6570\u91cf": 170,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-23",
+  "\u5e73\u5747\u4ef7\u683c": "54.81",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "36157"
+}
+2025-05-23 01:41:17,807 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:41:19,702 - DataFetcher - INFO - val数据集统计: {
+  "\u8bb0\u5f55\u6570": 832,
+  "SKU\u6570\u91cf": 169,
+  "\u5f00\u59cb\u65e5\u671f": "2025-04-24",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "\u5e73\u5747\u4ef7\u683c": "50.63",
+  "\u4ef7\u683c\u53d8\u52a8\u6b21\u6570": "333"
+}
+2025-05-23 01:41:19,789 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:41:21,923 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:41:21,962 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:41:21,962 - DataFetcher - INFO - 数据集划分: {
+  "\u8bad\u7ec3\u96c6": "[2023-01-01, 2025-04-23]",
+  "\u9a8c\u8bc1\u96c6": "(2025-04-23, 2025-05-08]",
+  "\u6d4b\u8bd5\u96c6": "(2025-05-08, 2025-05-23]"
+}
+2025-05-23 01:41:21,965 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 1/3)
+2025-05-23 01:41:22,020 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:41:22,058 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:41:22,100 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id          dt  discount_price is_promotion  ...  price_change_amount  price_change_ratio  price_change_direction  date
+0  206942  2023-01-01       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+1  206942  2023-01-02       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+2  206942  2023-01-03       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+
+[3 rows x 10 columns]
+2025-05-23 01:41:22,104 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:41:22,114 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:41:22,125 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:41:22,128 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:41:22,128 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 107, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:41:22,138 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:41:22,138 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:41:22,138 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 01:41:32,141 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 2/3)
+2025-05-23 01:41:32,177 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:41:32,202 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:41:32,223 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id          dt  discount_price is_promotion  ...  price_change_amount  price_change_ratio  price_change_direction  date
+0  206942  2023-01-01       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+1  206942  2023-01-02       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+2  206942  2023-01-03       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+
+[3 rows x 10 columns]
+2025-05-23 01:41:32,228 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:41:32,237 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:41:32,250 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:41:32,252 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:41:32,252 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 107, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:41:32,252 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:41:32,252 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:41:32,253 - src.data.data_pipeline - INFO - 等待 20 秒后重试...
+2025-05-23 01:41:52,261 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 3/3)
+2025-05-23 01:41:52,301 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:41:52,329 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 10)
+2025-05-23 01:41:52,346 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id          dt  discount_price is_promotion  ...  price_change_amount  price_change_ratio  price_change_direction  date
+0  206942  2023-01-01       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+1  206942  2023-01-02       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+2  206942  2023-01-03       10.610059            1  ...                  0.0                 0.0                     0.0   NaN
+
+[3 rows x 10 columns]
+2025-05-23 01:41:52,355 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:41:52,361 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:41:52,374 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:41:52,375 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:41:52,376 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 107, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:41:52,376 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:41:52,376 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 10)
+2025-05-23 01:41:52,376 - src.data.data_pipeline - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 01:41:52,391 - __main__ - ERROR - 数据管道运行失败
+2025-05-23 01:41:52,392 - __main__ - ERROR - 定时任务执行失败
+2025-05-23 01:49:17,675 - __main__ - INFO - 开始执行定时任务
+2025-05-23 01:49:17,675 - __main__ - INFO - 系统资源检查通过
+2025-05-23 01:49:17,724 - __main__ - INFO - 数据库连接测试成功
+2025-05-23 01:49:17,725 - __main__ - INFO - 开始运行数据管道
+2025-05-23 01:49:17,783 - src.data.data_pipeline - INFO - 监控服务器启动在端口 8000
+2025-05-23 01:49:17,783 - __main__ - INFO - 数据管道初始化成功，开始处理数据
+2025-05-23 01:49:17,783 - src.data.data_pipeline - INFO - 启动数据管道
+2025-05-23 01:49:17,783 - src.data.data_pipeline - INFO - 从较高恢复点启动，重新获取数据...
+2025-05-23 01:49:17,784 - src.data.data_pipeline - INFO - 阶段1: 数据获取 (尝试 1/3)
+2025-05-23 01:49:17,784 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 01:49:18,271 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:49:19,168 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 01:49:19,169 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 01:49:19,169 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 01:49:19,599 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:49:27,268 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 01:49:27,275 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 01:49:27,275 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 01:49:27,579 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:49:43,952 - DataFetcher - INFO - train数据集 - 记录数: 134940, SKU数: 170, 日期范围: 2023-01-01至2025-04-23, 平均价格: 54.81, 价格变动次数: 36157
+2025-05-23 01:49:44,017 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:49:46,242 - DataFetcher - INFO - val数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63, 价格变动次数: 333
+2025-05-23 01:49:46,320 - impala.hiveserver2 - INFO - Using database ms_libai as default
+2025-05-23 01:49:48,708 - DataFetcher - WARNING - test数据集为空
+2025-05-23 01:49:48,734 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 01:49:48,735 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23
+2025-05-23 01:49:48,738 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 1/3)
+2025-05-23 01:49:48,820 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:49:48,892 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 9)
+2025-05-23 01:49:48,921 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id  discount_price is_promotion  prev_price  price_change  price_change_amount  price_change_ratio  price_change_direction date
+0  206942       10.610059            1   10.610059           1.0                  0.0                 0.0                     0.0  NaN
+1  206942       10.610059            1   10.610059           0.0                  0.0                 0.0                     0.0  NaN
+2  206942       10.610059            1   10.610059           0.0                  0.0                 0.0                     0.0  NaN
+2025-05-23 01:49:48,928 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:49:48,939 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:49:48,955 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:49:48,957 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:49:48,957 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 110, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:49:48,960 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 9)
+2025-05-23 01:49:48,960 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 9)
+2025-05-23 01:49:48,960 - src.data.data_pipeline - INFO - 等待 10 秒后重试...
+2025-05-23 01:49:58,970 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 2/3)
+2025-05-23 01:49:59,004 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:49:59,046 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 9)
+2025-05-23 01:49:59,057 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id  discount_price is_promotion  prev_price  price_change  price_change_amount  price_change_ratio  price_change_direction date
+0  206942       10.610059            1   10.610059           1.0                  0.0                 0.0                     0.0  NaN
+1  206942       10.610059            1   10.610059           0.0                  0.0                 0.0                     0.0  NaN
+2  206942       10.610059            1   10.610059           0.0                  0.0                 0.0                     0.0  NaN
+2025-05-23 01:49:59,061 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:49:59,068 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:49:59,078 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:49:59,078 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:49:59,078 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 110, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:49:59,079 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 9)
+2025-05-23 01:49:59,079 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 9)
+2025-05-23 01:49:59,079 - src.data.data_pipeline - INFO - 等待 20 秒后重试...
+2025-05-23 01:50:19,087 - src.data.data_pipeline - INFO - 阶段2: 数据处理 (尝试 3/3)
+2025-05-23 01:50:19,123 - src.data.data_pipeline - INFO - 原始数据统计: {
+  "\u8bb0\u5f55\u6570": 135772,
+  "\u5217\u6570": 10,
+  "\u5f00\u59cb\u65e5\u671f": "2023-01-01",
+  "\u7ed3\u675f\u65e5\u671f": "2025-04-30",
+  "SKU\u6570\u91cf": 170,
+  "\u5e73\u5747\u4ef7\u683c": 54.784495827802026,
+  "\u4ef7\u683c\u6807\u51c6\u5dee": 36.0888382012556
+}
+2025-05-23 01:50:19,162 - src.data.data_processor - INFO - 开始处理数据，初始形状: (135772, 9)
+2025-05-23 01:50:19,173 - src.data.data_processor - INFO - 数据前3行样本:
+   sku_id  discount_price is_promotion  prev_price  price_change  price_change_amount  price_change_ratio  price_change_direction date
+0  206942       10.610059            1   10.610059           1.0                  0.0                 0.0                     0.0  NaN
+1  206942       10.610059            1   10.610059           0.0                  0.0                 0.0                     0.0  NaN
+2  206942       10.610059            1   10.610059           0.0                  0.0                 0.0                     0.0  NaN
+2025-05-23 01:50:19,178 - src.data.data_processor - INFO - 日期列前5个唯一值: [nan]
+2025-05-23 01:50:19,184 - src.data.data_processor - WARNING - 发现 135772 条记录有重复日期（示例值：nan），将保留第一条
+2025-05-23 01:50:19,192 - src.data.data_processor - WARNING - 发现 1 条记录的日期无效（示例值：NaT），将被移除
+2025-05-23 01:50:19,193 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+2025-05-23 01:50:19,193 - src.data.data_processor - ERROR - 数据处理失败: 数据处理后数据为空
+Traceback (most recent call last):
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 23, in process
+    self._clean_data()
+  File "/Users/ruixue.li/lrx/automore/autocaiji/src/data/data_processor.py", line 110, in _clean_data
+    raise ValueError("数据处理后数据为空")
+ValueError: 数据处理后数据为空
+2025-05-23 01:50:19,194 - src.data.data_pipeline - ERROR - 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 9)
+2025-05-23 01:50:19,194 - src.data.data_pipeline - ERROR - 阶段执行失败: 数据处理失败: 'bool' object has no attribute 'empty', 部分处理数据形状: (0, 9)
+2025-05-23 01:50:19,194 - src.data.data_pipeline - ERROR - 经过 3 次尝试后仍失败
+2025-05-23 01:50:19,208 - __main__ - ERROR - 数据管道运行失败
+2025-05-23 01:50:19,209 - __main__ - ERROR - 定时任务执行失败

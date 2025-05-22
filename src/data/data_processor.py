@@ -15,7 +15,7 @@ class DataProcessor:
             # 验证输入数据
             if not self._validate_input():
                 self.logger.error("输入数据验证失败")
-                return pd.DataFrame()
+                return False
                 
             self.logger.info(f"开始处理数据，初始形状: {self.df.shape}")
             
@@ -35,78 +35,161 @@ class DataProcessor:
             
         except Exception as e:
             self.logger.error(f"数据处理失败: {str(e)}", exc_info=True)
-            # 返回已处理的部分数据而非空DataFrame
-            return self.df if hasattr(self, 'df') else pd.DataFrame()
+            return False
     
     def _validate_input(self):
-        """验证输入数据"""
+        """验证输入数据（严格使用discount_price作为唯一价格源）"""
         if self.df is None or self.df.empty:
-            self.logger.error("输入数据为空")
-            raise ValueError("输入数据为空")
+            self.logger.warning("输入数据为空")
+            return False
             
-        required_columns = ['sku_id', 'dt', 'page_price', 'discount_price']
+        # 统一处理日期字段名（确保只保留date列）
+        if 'dt' in self.df.columns:
+            if 'date' not in self.df.columns:
+                self.df = self.df.rename(columns={'dt': 'date'})
+            else:
+                self.df = self.df.drop(columns=['dt'])
+            
+        # 严格使用discount_price作为价格数据源
+        required_columns = ['sku_id', 'date', 'discount_price', 'is_promotion']
         missing_cols = [col for col in required_columns if col not in self.df.columns]
         
         if missing_cols:
-            self.logger.error(f"缺少必要列: {missing_cols}")
-            raise ValueError(f"缺少必要列: {missing_cols}")
+            self.logger.error(f"缺少必要列（必须包含discount_price）: {missing_cols}")
+            return False
+            
+        # 检查discount_price有效性
+        if self.df['discount_price'].isnull().all():
+            self.logger.error("discount_price列全部为空值")
+            return False
             
         return True
     
     def _clean_data(self):
-        """数据清洗"""
-        # 记录原始行数
-        original_rows = len(self.df)
+        """数据清洗（严格使用discount_price作为唯一价格源）"""
+        try:
+            # 1. 记录数据样本
+            self.logger.info("数据前3行样本:\n" + str(self.df.head(3)))
+            
+            # 2. 确保date列存在且类型正确
+            if 'date' not in self.df.columns:
+                self.logger.error("数据列名: " + str(self.df.columns.tolist()))
+                raise ValueError("数据中缺少date列")
+                
+            # 3. 检查并处理日期列重复值
+            self.logger.info("日期列前5个唯一值: " + str(self.df['date'].unique()[:5]))
+            duplicate_dates = self.df.duplicated(subset=['date'], keep=False)
+            if duplicate_dates.any():
+                dup_count = duplicate_dates.sum()
+                sample_dup = self.df.loc[duplicate_dates, 'date'].iloc[0]
+                self.logger.warning(
+                    f"发现 {dup_count} 条记录有重复日期（示例值：{sample_dup}），将保留第一条"
+                )
+                self.df = self.df.drop_duplicates(subset=['date'], keep='first')
+            
+            # 3. 日期格式转换
+            self.df['date'] = pd.to_datetime(
+                self.df['date'],
+                format='mixed',
+                dayfirst=False,
+                yearfirst=True,
+                errors='coerce'
+            )
+            
+            # 4. 处理无效日期
+            invalid_dates = self.df['date'].isna()
+            if invalid_dates.any():
+                invalid_count = invalid_dates.sum()
+                sample_invalid = self.df.loc[invalid_dates, 'date'].iloc[0]
+                self.logger.warning(
+                    f"发现 {invalid_count} 条记录的日期无效（示例值：{sample_invalid}），将被移除"
+                )
+                self.df = self.df[~invalid_dates]
+                
+            if isinstance(self.df, bool) or self.df.empty:
+                raise ValueError("数据处理后数据为空")
+                
+        except Exception as e:
+            self.logger.error(f"数据处理失败: {str(e)}")
+            raise
+            
+        if self.df.empty:
+            self.logger.error("移除无效日期后数据为空")
+            return
+            
+        # 2. 按SKU和日期排序
+        self.df = self.df.sort_values(['sku_id', 'date'])
         
-        # 转换数据类型（更安全的转换方式）
-        self.df['dt'] = pd.to_datetime(self.df['dt'], errors='coerce')
-        self.df['page_price'] = pd.to_numeric(self.df['page_price'], errors='coerce')
-        self.df['discount_price'] = pd.to_numeric(self.df['discount_price'], errors='coerce')
+        # 3. 处理缺失值（前向优先，后向补充）
+        self.df['discount_price'] = self.df.groupby('sku_id')['discount_price'].transform(
+            lambda x: x.ffill().bfill()
+        )
         
-        # 填充空值而不是直接删除
-        price_median = self.df['page_price'].median()
-        discount_median = self.df['discount_price'].median()
+        # 4. 移除任何可能存在的page_price处理
+        if 'page_price' in self.df.columns:
+            self.df = self.df.drop(columns=['page_price'])
+            self.logger.info("已移除page_price列，确保只使用discount_price")
         
-        self.df['page_price'] = self.df['page_price'].fillna(price_median)
-        self.df['discount_price'] = self.df['discount_price'].fillna(discount_median)
-        self.df['dt'] = self.df['dt'].fillna(pd.to_datetime('today'))
-        
-        # 只删除dt和page_price都为空的记录
-        self.df = self.df.dropna(subset=['dt', 'page_price'], how='all')
-        
-        # 记录处理情况
-        removed_rows = original_rows - len(self.df)
-        if removed_rows > 0:
-            self.logger.warning(f"移除了 {removed_rows} 条无效记录")
+        # 5. 确保is_promotion为布尔类型
+        if 'is_promotion' in self.df.columns:
+            self.df['is_promotion'] = self.df['is_promotion'].astype(bool)
         
     def _feature_engineering(self):
-        """特征工程"""
-        # 添加时间特征
-        self.df['day_of_week'] = self.df['dt'].dt.dayofweek
-        self.df['month'] = self.df['dt'].dt.month
+        """特征工程（严格对齐指南要求）"""
+        # 1. 时间特征
+        self.df['day_of_week'] = self.df['date'].dt.dayofweek
+        self.df['month'] = self.df['date'].dt.month
+        self.df['day'] = self.df['date'].dt.day
+        self.df['is_weekend'] = self.df['day_of_week'].isin([5, 6]).astype(int)
         
-        # 添加价格差异特征（处理可能的除零情况）
+        # 2. 价格变动特征（严格防泄漏）
+        self.df['prev_price'] = self.df.groupby('sku_id')['discount_price'].shift(1)
+        
+        # 计算价格变动标签
+        self.df['price_change'] = (self.df['discount_price'] != self.df['prev_price']).astype(int)
+        
+        # 计算其他价格变动特征
+        self.df['price_change_amount'] = self.df['discount_price'] - self.df['prev_price']
+        
         with np.errstate(divide='ignore', invalid='ignore'):
-            price_diff = self.df['page_price'] - self.df['discount_price']
-            self.df['price_diff'] = np.where(
-                (self.df['page_price'] > 0) & (self.df['discount_price'] > 0),
-                price_diff,
-                np.nan
-            )
+            self.df['price_change_ratio'] = (
+                self.df['price_change_amount'] / self.df['prev_price']
+            ).replace([np.inf, -np.inf], np.nan)
+            
+        self.df['price_change_direction'] = np.sign(self.df['price_change_amount'])
         
     def _calculate_price_changes(self):
-        """计算价格变动"""
+        """计算价格变动（严格遵循指南要求）"""
         if len(self.df) == 0:
             self.logger.warning("无有效数据可计算价格变动")
             return
             
-        # 按SKU分组计算价格变动
-        self.df = self.df.sort_values(['sku_id', 'dt'])
+        # 1. 确保使用discount_price作为唯一价格数据源
+        self.df = self.df.sort_values(['sku_id', 'date'])
         
-        # 更安全的pct_change计算
-        self.df['price_change'] = self.df.groupby('sku_id')['page_price'].apply(
-            lambda x: x.pct_change().fillna(0)
+        # 2. 滑动窗口特征（按指南要求）
+        windows = [3, 7, 14, 30]
+        for window in windows:
+            # 价格统计特征
+            self.df[f'price_mean_{window}d'] = (
+                self.df.groupby('sku_id')['discount_price']
+                .transform(lambda x: x.rolling(window, min_periods=1).mean())
+            )
+            self.df[f'price_std_{window}d'] = (
+                self.df.groupby('sku_id')['discount_price']
+                .transform(lambda x: x.rolling(window, min_periods=1).std())
+            )
+            
+            # 价格变动频率特征
+            self.df[f'change_freq_{window}d'] = (
+                self.df.groupby('sku_id')['price_change']
+                .transform(lambda x: x.rolling(window, min_periods=1).mean())
+            )
+            
+        # 3. 距离上次价格变动的天数
+        self.df['days_since_last_change'] = (
+            self.df.groupby('sku_id')['price_change']
+            .transform(lambda x: x.cumsum().groupby(x.cumsum()).cumcount())
         )
         
-        # 标记显著变动(>5%)
-        self.df['significant_change'] = (self.df['price_change'].abs() > 0.05).astype(int)
+        self.logger.info("价格变动特征计算完成")

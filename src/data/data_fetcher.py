@@ -1,11 +1,15 @@
 import pandas as pd
+import numpy as np
 import logging
 import os
 import json
 import time
+import sys
+from datetime import datetime, timedelta
 from impala.dbapi import connect
 from impala.util import as_pandas
-from typing import Dict, Any
+from typing import Dict, Any, Optional, Union, List, Set, Tuple
+from pathlib import Path
 
 class DataFetcher:
     def __init__(self):
@@ -13,10 +17,12 @@ class DataFetcher:
         self.logger = self._setup_logger()
         self.config = self._load_config()
         self.status_file = "logs/pipeline_status.json"
-        
-    def _get_last_run_date(self):
+        self.earliest_date = "2023-01-01"
+        self.backup_data_path = "/Users/ruixue.li/lrx/automore/autocaiji/data/query-impala-1632023.csv"
+
+    def _get_last_run_date(self) -> str:
         """获取上次成功运行的日期"""
-        default_date = "2025-04-19"  # 默认起始日期
+        default_date = self.earliest_date
         try:
             with open(self.status_file, "r") as f:
                 status = json.load(f)
@@ -24,8 +30,9 @@ class DataFetcher:
         except (FileNotFoundError, json.JSONDecodeError):
             return default_date
             
-    def _update_last_run_date(self, date):
+    def _update_last_run_date(self, date: str) -> None:
         """更新最后运行日期"""
+        os.makedirs(os.path.dirname(self.status_file), exist_ok=True)
         status = {"last_success_date": date}
         with open(self.status_file, "w") as f:
             json.dump(status, f)
@@ -39,7 +46,6 @@ class DataFetcher:
                 config = json.load(f)
                 impala_config = config.get('impala', {})
                 
-                # 关键配置校验
                 required_keys = ['host', 'port', 'database']
                 missing = [k for k in required_keys if k not in impala_config]
                 if missing:
@@ -51,21 +57,18 @@ class DataFetcher:
             self.logger.error(f"加载配置文件失败: {str(e)}")
             raise
 
-    def _setup_logger(self):
+    def _setup_logger(self) -> logging.Logger:
         """设置日志记录器"""
         logger = logging.getLogger('DataFetcher')
         logger.setLevel(logging.INFO)
         
-        # 确保日志目录存在
         os.makedirs('logs', exist_ok=True)
         
-        # 文件日志
         file_handler = logging.FileHandler('logs/data_fetcher.log')
         file_handler.setFormatter(logging.Formatter(
             '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
         ))
         
-        # 控制台日志
         console_handler = logging.StreamHandler()
         console_handler.setFormatter(logging.Formatter(
             '%(levelname)s - %(message)s'
@@ -75,22 +78,27 @@ class DataFetcher:
         logger.addHandler(console_handler)
         return logger
 
+    def _get_connection(self, timeout: int = 30) -> connect:
+        """获取Impala连接"""
+        conn_params = {
+            'host': self.config['host'],
+            'port': self.config['port'],
+            'database': self.config['database'],
+            'user': self.config.get('user'),
+            'password': self.config.get('password'),
+            'auth_mechanism': 'PLAIN',
+            'timeout': timeout
+        }
+        return connect(**conn_params)
+
     def test_connection(self) -> bool:
         """测试Impala连接是否可用"""
         self.logger.info("测试Impala连接...")
         try:
-            conn_params = {
-                'host': self.config['host'],
-                'port': self.config['port'],
-                'database': self.config['database'],
-                'user': self.config.get('user'),
-                'password': self.config.get('password'),
-                'auth_mechanism': 'PLAIN',
-                'timeout': 5
-            }
-            self.logger.debug(f"尝试连接参数: {conn_params}")
-            
-            conn = connect(**conn_params)
+            conn = self._get_connection(timeout=5)
+            cursor = conn.cursor()
+            cursor.execute("SELECT 1")
+            cursor.close()
             conn.close()
             self.logger.info("Impala连接测试成功")
             return True
@@ -98,303 +106,124 @@ class DataFetcher:
             self.logger.error(f"Impala连接测试失败: {str(e)}")
             return False
 
-    def fetch_training_data(self, train_end, val_end, test_end, max_retries=3, retry_delay=60) -> Dict[str, pd.DataFrame]:
-        """获取训练数据，按时间轴划分数据集
-        
-        Args:
-            train_end: 训练集结束日期 (YYYY-MM-DD)
-            val_end: 验证集结束日期 (YYYY-MM-DD)
-            test_end: 测试集结束日期 (YYYY-MM-DD)
-            max_retries: 最大重试次数
-            retry_delay: 重试延迟(秒)
+    def _get_valid_skus(self, start_date: Optional[str] = None, end_date: Optional[str] = None) -> Set[int]:
+        """获取数据完整性符合要求的SKU列表"""
+        if start_date is None:
+            start_date = self.earliest_date
+        if end_date is None:
+            end_date = datetime.now().strftime('%Y-%m-%d')
             
-        Returns:
-            Dict[str, pd.DataFrame]: 包含三个数据集的字典
-        """
-        for attempt in range(max_retries):
-            try:
-                self.logger.info(f"尝试获取训练数据 (第{attempt+1}次尝试)")
-                
-                # 基础查询 - 获取所有必要字段
-                base_query = """
-                SELECT 
-                    sku_id,
-                    dt AS date,
-                    page_price AS discount_price,
-                    category,
-                    CASE WHEN raw_promotion_detail IS NOT NULL THEN 1 ELSE 0 END AS is_promotion
-                FROM jd_daily_price
-                WHERE dt BETWEEN '{start_date}' AND '{end_date}'
-                ORDER BY sku_id, dt
-                """
-                
-                # 获取三个时间段的数据
-                datasets = {}
-                date_ranges = {
-                    'train': (None, train_end),
-                    'val': (train_end, val_end),
-                    'test': (val_end, test_end)
-                }
-                
-                for name, (start, end) in date_ranges.items():
-                    query = base_query.format(
-                        start_date=start if start else '2000-01-01',  # 默认最早日期
-                        end_date=end
-                    )
-                    
-                    # 执行查询
-                    conn = connect(
-                        host=self.config['host'],
-                        port=self.config['port'],
-                        database=self.config['database'],
-                        user=self.config.get('user'),
-                        password=self.config.get('password'),
-                        auth_mechanism='PLAIN',
-                        timeout=60
-                    )
-                    cursor = conn.cursor()
-                    cursor.execute(query)
-                    df = as_pandas(cursor)
-                    
-                    # 验证数据
-                    if df.empty:
-                        self.logger.warning(f"{name}数据集为空")
-                    else:
-                        # 添加价格变动特征
-                        df = self._add_price_change_features(df)
-                        
-                        # 记录统计信息
-                        stats = {
-                            "记录数": len(df),
-                            "SKU数量": df['sku_id'].nunique(),
-                            "开始日期": df['date'].min(),
-                            "结束日期": df['date'].max()
-                        }
-                        self.logger.info(f"{name}数据集统计: {json.dumps(stats, indent=2, default=str)}")
-                    
-                    datasets[name] = df
-                    conn.close()
-                
-                # 建立连接
-                conn_params = {
-                    'host': self.config['host'],
-                    'port': self.config['port'],
-                    'database': self.config['database'],
-                    'user': self.config.get('user'),
-                    'password': self.config.get('password'),
-                    'auth_mechanism': 'PLAIN',
-                    'timeout': 60  # 增加超时时间
-                }
-                
-                conn = connect(**conn_params)
-                cursor = conn.cursor()
-                cursor.execute(query)
-                df = as_pandas(cursor)
-                
-                if df.empty:
-                    raise ValueError("获取的数据为空")
-                
-                # 验证获取的列
-                required_columns = ['sku_id', 'ds', 'y', 'is_promotion']
-                missing_cols = [col for col in required_columns if col not in df.columns]
-                if missing_cols:
-                    raise ValueError(f"查询结果缺少必要列: {missing_cols}")
-                
-                # 重命名列以匹配处理器期望的格式
-                df = df.rename(columns={
-                    'ds': 'dt',
-                    'y': 'page_price',
-                    'is_promotion': 'discount_price'  # 临时映射，实际需要调整查询
-                })
-                
-                # 计算价格变化标志
-                df['change_flag'] = (df.groupby('sku_id')['page_price'].diff() != 0).astype(int)
-                
-                # 记录数据统计信息
-                stats = {
-                    "记录数": len(df),
-                    "SKU数量": df['sku_id'].nunique(),
-                    "开始日期": df['dt'].min(),
-                    "结束日期": df['dt'].max(),
-                    "平均价格": df['page_price'].mean(),
-                    "价格标准差": df['page_price'].std()
-                }
-                self.logger.info(f"获取数据统计: {json.dumps(stats, indent=2, default=str)}")
-                
-                # 获取最新日期作为下次运行的起始点
-                latest_date = df['dt'].max()
-                self._update_last_run_date(latest_date)
-                
-                self.logger.info(f"成功获取 {len(df)} 条记录，最新日期: {latest_date}")
-                return df
-                
-            except Exception as e:
-                self.logger.error(f"获取数据失败 (尝试 {attempt+1}/{max_retries}): {str(e)}")
-                if attempt < max_retries - 1:
-                    self.logger.info(f"等待 {retry_delay} 秒后重试...")
-                    time.sleep(retry_delay)
-                else:
-                    raise RuntimeError(f"经过 {max_retries} 次尝试后仍无法获取数据")
-            
-            if 'conn' in locals():
-                conn.close()
-
-    def generate_sampling_dataset(self, categories=None, start_date=None, end_date=None, output_path=None) -> pd.DataFrame:
-        """生成采样数据集
+        self.logger.info(f"开始检查SKU数据完整性 ({start_date} 至 {end_date})")
         
-        参数:
-            categories: 可选，商品类别列表
-            start_date: 可选，开始日期(YYYY-MM-DD格式)
-            end_date: 可选，结束日期(YYYY-MM-DD格式)
-            output_path: 可选，保存数据集的路径
-            
-        返回:
-            pandas.DataFrame: 采样数据集
-        """
-        self.logger.info(f"开始生成采样数据集: start_date={start_date}, end_date={end_date}")
-        
+        conn = None
         try:
-            # 建立连接
-            conn = connect(
-                host=self.config['host'],
-                port=self.config['port'],
-                database=self.config['database'],
-                user=self.config.get('user'),
-                password=self.config.get('password'),
-                auth_mechanism='PLAIN',
-                timeout=30
-            )
+            conn = self._get_connection(timeout=60)
             
-            # 构建基础查询
-            query = """
-            SELECT 
-                sku_id,
-                dt AS date,
-                page_price,
-                discount_price,
-                CASE WHEN raw_promotion_detail IS NOT NULL THEN 1 ELSE 0 END AS is_promotion
-            FROM jd_daily_price
-            WHERE 1=1
-            """
-            
-            # 添加日期条件
-            if start_date and end_date:
-                query += f" AND dt BETWEEN '{start_date}' AND '{end_date}'"
-            elif start_date:
-                query += f" AND dt >= '{start_date}'"
-            elif end_date:
-                query += f" AND dt <= '{end_date}'"
-                
-            # 添加类别条件
-            if categories:
-                category_condition = " OR ".join([f"category LIKE '%{cat}%'" for cat in categories])
-                query += f" AND ({category_condition})"
-            
-            cursor = conn.cursor()
-            cursor.execute(query)
-            df = as_pandas(cursor)
-            
-            # 保存结果
-            if output_path:
-                df.to_csv(output_path, index=False)
-                self.logger.info(f"数据集已保存至: {output_path}")
-                
-            self.logger.info(f"成功生成采样数据集，记录数: {len(df)}")
-            return df
-            
-        except Exception as e:
-            self.logger.error(f"生成采样数据集失败: {str(e)}")
-            raise
-        finally:
-            if 'conn' in locals():
-                conn.close()
-
-    def get_recent_data(self, days=30) -> pd.DataFrame:
-        """获取最近N天的价格数据用于验证
-        
-        Args:
-            days: 要获取的天数
-            
-        Returns:
-            pd.DataFrame: 包含日期(ds)、价格(y)、商品ID(sku_id)和变化标志(change_flag)的数据
-        """
-        self.logger.info(f"开始获取最近{days}天的价格数据")
-        
-        try:
-            # 建立连接
-            conn = connect(
-                host=self.config['host'],
-                port=self.config['port'],
-                database=self.config['database'],
-                user=self.config.get('user'),
-                password=self.config.get('password'),
-                auth_mechanism='PLAIN',
-                timeout=30
-            )
-            
-            # 执行查询获取最近N天的原始价格数据
-            query = f"""
-            WITH recent_data AS (
+            completeness_query = """
+            WITH date_range AS (
+                SELECT DISTINCT dt FROM jd_daily_price 
+                WHERE dt BETWEEN %(start_date)s AND %(end_date)s
+            ),
+            expected_counts AS (
+                SELECT COUNT(*) as total_days FROM date_range
+            ),
+            sku_completeness AS (
                 SELECT 
-                    sku_id,
-                    dt AS ds,
-                    page_price AS y,
-                    LAG(page_price) OVER (PARTITION BY sku_id ORDER BY dt) AS prev_price
-                FROM jd_daily_price
-                WHERE dt >= DATE_SUB(FROM_UNIXTIME(UNIX_TIMESTAMP()), {days})
+                    p.sku_id,
+                    COUNT(*) as actual_records,
+                    e.total_days as expected_records,
+                    (COUNT(*) * 100.0 / e.total_days) as completeness_ratio
+                FROM jd_daily_price p
+                CROSS JOIN expected_counts e
+                WHERE dt BETWEEN %(start_date)s AND %(end_date)s
+                GROUP BY p.sku_id, e.total_days
+                HAVING completeness_ratio >= 90
             )
             SELECT 
                 sku_id,
-                ds,
-                y,
-                CASE 
-                    WHEN prev_price IS NULL THEN 0
-                    WHEN y != prev_price THEN 1
-                    ELSE 0
-                END AS change_flag
-            FROM recent_data
-            ORDER BY sku_id, ds
+                actual_records,
+                expected_records,
+                completeness_ratio
+            FROM sku_completeness
+            ORDER BY completeness_ratio DESC
             """
             
             cursor = conn.cursor()
-            cursor.execute(query)
-            df = as_pandas(cursor)
+            cursor.execute(completeness_query, {
+                'start_date': start_date,
+                'end_date': end_date
+            })
             
-            self.logger.info(f"成功获取 {len(df)} 条最近{days}天的价格记录")
+            completeness_df = as_pandas(cursor)
+            cursor.close()
+            
+            if completeness_df.empty:
+                self.logger.warning("未找到符合完整性要求的SKU")
+                return set()
+            
+            avg = completeness_df['completeness_ratio'].mean()
+            min_ratio = completeness_df['completeness_ratio'].min()
+            max_ratio = completeness_df['completeness_ratio'].max()
+            
+            self.logger.info(f"SKU完整性检查完成 - 总数: {len(completeness_df)}, 完整率: {avg:.2f}% (范围: {min_ratio:.2f}%-{max_ratio:.2f}%)")
+            
+            report_path = "data/raw/sku_completeness_report.csv"
+            os.makedirs(os.path.dirname(report_path), exist_ok=True)
+            completeness_df.to_csv(report_path, index=False)
+            self.logger.info(f"报告保存至: {report_path}")
+            
+            return set(completeness_df['sku_id'].astype(int))
+            
+        except Exception as e:
+            self.logger.error(f"获取有效SKU列表失败: {str(e)}")
+            raise
+        finally:
+            if conn is not None:
+                conn.close()
+
+    def _load_backup_data(self) -> pd.DataFrame:
+        """从备用CSV文件加载数据"""
+        self.logger.info(f"从备用文件加载数据: {self.backup_data_path}")
+        try:
+            if not os.path.exists(self.backup_data_path):
+                raise FileNotFoundError(f"备用数据文件不存在: {self.backup_data_path}")
+                
+            df = pd.read_csv(self.backup_data_path)
+            
+            required_cols = ['sku_id', 'dt', 'discount_price']
+            missing_cols = [col for col in required_cols if col not in df.columns]
+            if missing_cols:
+                raise ValueError(f"备用数据文件缺少必要的列: {missing_cols}")
+                
+            # 统一列名处理，确保只保留date列
+            if 'dt' in df.columns:
+                df = df.rename(columns={'dt': 'date'})
+            if 'date' in df.columns and 'dt' in df.columns:
+                df = df.drop(columns=['dt'])
+                
+            if 'is_promotion' not in df.columns:
+                df['is_promotion'] = 0
+                
+            self.logger.info(f"成功从备用文件加载数据，记录数: {len(df)}")
             return df
             
         except Exception as e:
-            self.logger.error(f"获取最近价格数据失败: {str(e)}")
+            self.logger.error(f"加载备用数据失败: {str(e)}")
             raise
-        finally:
-            if 'conn' in locals():
-                conn.close()
 
     def _add_price_change_features(self, df: pd.DataFrame) -> pd.DataFrame:
-        """添加价格变动相关特征
-        
-        Args:
-            df: 原始数据框
-            
-        Returns:
-            添加了特征的数据框
-        """
+        """添加价格变动相关特征"""
         if df.empty:
             return df
             
-        # 确保按SKU和日期排序
         df = df.sort_values(['sku_id', 'date'])
         
-        # 计算价格变动标志
         df['prev_price'] = df.groupby('sku_id')['discount_price'].shift(1)
         df['price_change'] = (df['discount_price'] != df['prev_price']).astype(int)
-        
-        # 计算价格变动量和比率
         df['price_change_amount'] = df['discount_price'] - df['prev_price']
-        df['price_change_ratio'] = df['price_change_amount'] / df['prev_price']
+        df['price_change_ratio'] = df['price_change_amount'] / df['prev_price'].replace(0, np.nan)
         df['price_change_direction'] = np.sign(df['price_change_amount'])
         
-        # 填充第一个记录的NaN值
         df = df.fillna({
             'prev_price': df['discount_price'],
             'price_change': 0,
@@ -405,15 +234,192 @@ class DataFetcher:
         
         return df
 
+    def fetch_training_data(self, 
+                          train_end: Optional[str] = None,
+                          val_end: Optional[str] = None,
+                          test_end: Optional[str] = None,
+                          max_retries: int = 1,
+                          retry_delay: int = 20) -> Dict[str, pd.DataFrame]:
+        """获取训练数据，按时间轴划分数据集"""
+        if not all([train_end, val_end, test_end]):
+            end_date = datetime.now()
+            test_end = end_date.strftime('%Y-%m-%d')
+            val_end = (end_date - timedelta(days=30)).strftime('%Y-%m-%d')
+            train_end = (end_date - timedelta(days=90)).strftime('%Y-%m-%d')
+
+        try:
+            datetime.strptime(train_end, '%Y-%m-%d')
+            datetime.strptime(val_end, '%Y-%m-%d')
+            datetime.strptime(test_end, '%Y-%m-%d')
+            
+            if not (self.earliest_date <= train_end < val_end < test_end):
+                raise ValueError(
+                    f"日期顺序错误: {self.earliest_date} <= {train_end} < {val_end} < {test_end}"
+                )
+        except ValueError as e:
+            self.logger.error(f"日期格式或顺序错误: {str(e)}")
+            raise
+
+        for attempt in range(max_retries):
+            conn = None
+            try:
+                self.logger.info(f"尝试获取训练数据 (第{attempt+1}次尝试)")
+                
+                valid_skus = self._get_valid_skus(self.earliest_date, test_end)
+                if not valid_skus:
+                    raise ValueError("没有找到符合完整性要求的SKU")
+                
+                self.logger.info(f"找到 {len(valid_skus)} 个符合完整性要求的SKU")
+                
+                queries = {
+                    'train': """
+                        SELECT 
+                            sku_id,
+                            dt,
+                            discount_price,
+                            CASE WHEN raw_promotion_detail IS NOT NULL THEN 1 ELSE 0 END AS is_promotion
+                        FROM jd_daily_price
+                        WHERE dt >= %(start_date)s AND dt <= %(end_date)s
+                        AND sku_id IN %(valid_skus)s
+                        ORDER BY sku_id, dt
+                    """,
+                    'val': """
+                        SELECT 
+                            sku_id,
+                            dt AS `date`,
+                            discount_price,
+                            CASE WHEN raw_promotion_detail IS NOT NULL THEN 1 ELSE 0 END AS is_promotion
+                        FROM jd_daily_price
+                        WHERE dt > %(start_date)s AND dt <= %(end_date)s
+                        AND sku_id IN %(valid_skus)s
+                        ORDER BY sku_id, dt
+                    """,
+                    'test': """
+                        SELECT 
+                            sku_id,
+                            dt AS `date`,
+                            discount_price,
+                            CASE WHEN raw_promotion_detail IS NOT NULL THEN 1 ELSE 0 END AS is_promotion
+                        FROM jd_daily_price
+                        WHERE dt > %(start_date)s AND dt <= %(end_date)s
+                        AND sku_id IN %(valid_skus)s
+                        ORDER BY sku_id, dt
+                    """
+                }
+                
+                date_ranges = {
+                    'train': (self.earliest_date, train_end),
+                    'val': (train_end, val_end),
+                    'test': (val_end, test_end)
+                }
+                
+                conn = self._get_connection(timeout=60)
+                datasets = {}
+                
+                for name, (start, end) in date_ranges.items():
+                    cursor = conn.cursor()
+                    # 确保只保留date列，移除dt列
+                    cursor.execute(queries[name], {
+                        'start_date': start,
+                        'end_date': end,
+                        'valid_skus': tuple(valid_skus)
+                    })
+                    df = as_pandas(cursor)
+                    cursor.close()
+                    
+                    if not df.empty:
+                        # 统一列名处理：优先使用date列，如果没有则使用dt列
+                        if 'date' not in df.columns and 'dt' in df.columns:
+                            df = df.rename(columns={'dt': 'date'})
+                        elif 'date' in df.columns and 'dt' in df.columns:
+                            df = df.drop(columns=['dt'])
+                    
+                    if df.empty:
+                        self.logger.warning(f"{name}数据集为空")
+                    else:
+                        min_date = df['date'].min()
+                        max_date = df['date'].max()
+                        if name == 'train':
+                            if not (self.earliest_date <= min_date <= max_date <= train_end):
+                                raise ValueError(f"训练集日期范围错误: {min_date} 到 {max_date}")
+                        elif name == 'val':
+                            if not (train_end < min_date <= max_date <= val_end):
+                                raise ValueError(f"验证集日期范围错误: {min_date} 到 {max_date}")
+                        else:
+                            if not (val_end < min_date <= max_date <= test_end):
+                                raise ValueError(f"测试集日期范围错误: {min_date} 到 {max_date}")
+                        
+                        df = self._add_price_change_features(df)
+                        
+                        self.logger.info(
+                            f"{name}数据集 - 记录数: {len(df)}, SKU数: {df['sku_id'].nunique()}, "
+                            f"日期范围: {df['date'].min()}至{df['date'].max()}, "
+                            f"平均价格: {df['discount_price'].mean():.2f}, "
+                            f"价格变动次数: {df['price_change'].sum()}"
+                        )
+                    
+                    datasets[name] = df
+                
+                if not datasets['train'].empty and not datasets['val'].empty:
+                    train_dates = set(datasets['train']['date'])
+                    val_dates = set(datasets['val']['date'])
+                    if train_dates & val_dates:
+                        raise ValueError(f"训练集和验证集日期有重叠: {train_dates & val_dates}")
+                
+                if not datasets['val'].empty and not datasets['test'].empty:
+                    val_dates = set(datasets['val']['date'])
+                    test_dates = set(datasets['test']['date'])
+                    if val_dates & test_dates:
+                        raise ValueError(f"验证集和测试集日期有重叠: {val_dates & test_dates}")
+                
+                latest_date = max(df['date'].max() for df in datasets.values() if not df.empty)
+                self._update_last_run_date(latest_date)
+                
+                self.logger.info(f"成功获取所有数据集，最新日期: {latest_date}")
+                
+                self.logger.info(
+                    f"数据集划分 - 训练集: {self.earliest_date}至{train_end}, "
+                    f"验证集: {train_end}至{val_end}, "
+                    f"测试集: {val_end}至{test_end}"
+                )
+                
+                return datasets
+                
+            except Exception as e:
+                self.logger.error(f"获取数据失败 (尝试 {attempt+1}/{max_retries}): {str(e)}")
+                if attempt < max_retries - 1:
+                    self.logger.info(f"等待 {retry_delay} 秒后重试...")
+                    time.sleep(retry_delay)
+                else:
+                    raise RuntimeError(f"经过 {max_retries} 次尝试后仍无法获取数据")
+            finally:
+                if conn is not None:
+                    conn.close()
+
     def close(self):
         """关闭资源"""
         self.logger.info("DataFetcher资源清理完成")
 
-if __name__ == "__main__":
-    # 测试数据获取
+def main():
+    """主函数，用于测试数据获取功能"""
     fetcher = DataFetcher()
     try:
-        data = fetcher.fetch_training_data()
-        print(f"获取数据成功，记录数: {len(data)}")
+        if not fetcher.test_connection():
+            raise RuntimeError("数据库连接测试失败")
+            
+        datasets = fetcher.fetch_training_data()
+        
+        for name, data in datasets.items():
+            print(f"\n{name.upper()}数据集统计:")
+            print(f"记录数: {len(data)}")
+            print(f"SKU数量: {data['sku_id'].nunique()}")
+            print(f"日期范围: {data['date'].min()} 至 {data['date'].max()}")
+            
     except Exception as e:
         print(f"测试失败: {str(e)}")
+        sys.exit(1)
+    finally:
+        fetcher.close()
+
+if __name__ == "__main__":
+    main()

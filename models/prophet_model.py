@@ -23,19 +23,23 @@ class ProphetModel(BaseModel):
         
     def fit(self, df, y=None):
         """
-        训练Prophet模型
+        训练Prophet模型（使用discount_price作为目标变量）
         
         参数:
-            df: 包含'ds'和'y'列的DataFrame
-        
+            df: 包含'ds'和'discount_price'列的DataFrame
+            y: 忽略，仅为接口兼容性保留
+            
         返回:
             self
         """
         # 确保数据格式正确
-        if 'ds' not in df.columns or 'y' not in df.columns:
-            raise ValueError("数据必须包含'ds'和'y'列")
+        if 'ds' not in df.columns or 'discount_price' not in df.columns:
+            raise ValueError("数据必须包含'ds'和'discount_price列")
             
-        self.model.fit(df)
+        # 准备Prophet格式数据
+        prophet_df = df[['ds', 'discount_price']].rename(columns={'discount_price': 'y'})
+            
+        self.model.fit(prophet_df)
         self.fitted = True
         return self
     

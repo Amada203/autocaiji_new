@@ -115,10 +115,17 @@ class PredictionService:
             )
             sku_info = cursor.fetchone()
             
-            # 获取最近预测数据
+            # 获取最近预测数据（使用discount_price）
             cursor.execute(
-                """SELECT * FROM sku_predictions 
-                WHERE sku = %s ORDER BY prediction_date DESC LIMIT 1""",
+                """SELECT 
+                    sku_id as sku,
+                    date as prediction_date,
+                    discount_price,
+                    probability,
+                    predicted_change
+                FROM sku_predictions 
+                WHERE sku_id = %s 
+                ORDER BY date DESC LIMIT 1""",
                 (sku,)
             )
             prediction = cursor.fetchone()
@@ -126,10 +133,19 @@ class PredictionService:
             cursor.close()
             conn.close()
             
+            if not prediction:
+                logger.warning(f"未找到SKU {sku}的预测数据")
+                return {
+                    "sku": sku,
+                    "status": "no_prediction_data"
+                }
+            
             return {
                 "sku": sku,
                 "category": sku_info.get('category'),
-                "last_prediction": prediction.get('predicted_price'),
+                "current_price": prediction.get('discount_price'),
+                "change_probability": prediction.get('probability'),
+                "predicted_change": prediction.get('predicted_change'),
                 "sample_size": self._calculate_sample_size(sku_info),
                 "sampling_interval": "weekly",
                 "next_sample_date": self._calculate_next_date()
