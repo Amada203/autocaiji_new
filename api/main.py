@@ -4,6 +4,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import uvicorn
+import logging
 
 # 导入路由
 from api.routers import (
@@ -74,6 +75,10 @@ async def stats_page(request: Request):
 @app.get("/api")
 async def api_root():
     return {"message": "价格变动预测系统API服务正常运行"}
+
+# 设置日志级别
+logging.getLogger("cmdstanpy").setLevel(logging.WARNING)
+logging.getLogger("prophet").setLevel(logging.WARNING)
 
 if __name__ == "__main__":
     uvicorn.run("api.main:app", host="0.0.0.0", port=8002, reload=True)

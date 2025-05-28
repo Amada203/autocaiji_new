@@ -1,6 +1,9 @@
 import mysql.connector
 import logging
 from typing import List, Dict, Any
+import pandas as pd
+from src.api.main import predict_api, history_api
+from src.api.schemas import PredictRequest, PredictBatchRequest
 
 logger = logging.getLogger(__name__)
 
@@ -51,7 +54,7 @@ class PredictionService:
             # 只查询真实的预测数据
             query = """
             SELECT * FROM sku_predictions 
-            ORDER BY prediction_date DESC 
+            ORDER BY date DESC 
             LIMIT %s
             """
             cursor.execute(query, (limit,))
@@ -166,3 +169,45 @@ class PredictionService:
         """计算下次采样日期(简化示例)"""
         from datetime import datetime, timedelta
         return (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d")
+
+    def predict_realtime(self, sku_list, days=1, end_date=None):
+        """
+        实时预测接口，调用新src/api/main.py的predict_batch_api
+        """
+        reqs = [PredictRequest(sku=sku, date=end_date or pd.Timestamp.now().strftime('%Y-%m-%d')) for sku in sku_list]
+        batch_req = PredictBatchRequest(items=reqs)
+        results = predict_batch_api(batch_req)
+        return [
+            {
+                "sku_id": r.sku,
+                "dates": [r.date],
+                "predicted": [r.predict_proba],
+                "actual": [None],
+            }
+            for r in results
+        ]
+
+    def _fetch_actuals(self, sku_list, date_list):
+        """从数据库获取实际价格，返回dict: (sku, date) -> actual_value"""
+        actuals = {}
+        try:
+            conn = self._get_connection()
+            cursor = conn.cursor(dictionary=True)
+            for sku in sku_list:
+                query = """
+                SELECT sku_id, date, discount_price FROM sku_history
+                WHERE sku_id = %s AND date IN (%s)
+                """
+                # 处理IN参数
+                date_strs = ','.join(['%s'] * len(date_list))
+                full_query = query.replace('(%s)', f'({date_strs})')
+                params = [sku] + list(date_list)
+                cursor.execute(full_query, params)
+                for row in cursor.fetchall():
+                    key = (row['sku_id'], row['date'].strftime('%Y-%m-%d') if hasattr(row['date'], 'strftime') else str(row['date']))
+                    actuals[key] = row['discount_price']
+            cursor.close()
+            conn.close()
+        except Exception as e:
+            logger.warning(f"获取实际值失败: {str(e)}")
+        return actuals

@@ -3,6 +3,9 @@ import numpy as np
 from typing import List, Dict, Optional
 from datetime import datetime, timedelta
 import warnings
+import logging
+
+logger = logging.getLogger("feature_engineering")
 
 class FeatureEngineer:
     """价格变动预测特征工程"""
@@ -63,26 +66,36 @@ class FeatureEngineer:
     
     def _preprocess_data(self, df: pd.DataFrame) -> pd.DataFrame:
         """数据预处理"""
+        # 采集次数统计（在填充前完成）
+        collect_counts = df.groupby(['sku_id', 'date']).size().reset_index(name='collect_count')
+        df = df.merge(collect_counts, on=['sku_id', 'date'], how='left')
         # 确保日期类型
         df['date'] = pd.to_datetime(df['date'])
-        
         # 按SKU和日期排序
         df = df.sort_values(['sku_id', 'date'])
-        
+        # 填充价格（前向优先，后向补充）
+        df['discount_price'] = df.groupby('sku_id')['discount_price'].transform(lambda x: x.ffill().bfill())
+        # 填充促销标志
+        if 'is_promotion' in df.columns:
+            df['is_promotion'] = df['is_promotion'].fillna(0)
+        else:
+            df['is_promotion'] = 0
+        # 填充后断言
+        missing = df.isnull().sum()
+        logger.info(f"填充后缺失统计: {{'discount_price': {missing['discount_price']}, 'is_promotion': {missing['is_promotion']}}}")
+        assert missing['discount_price'] == 0, "价格填充后仍有缺失"
         # 计算基础价格变动特征
         df['prev_price'] = df.groupby('sku_id')['discount_price'].shift(1)
         df['price_change'] = (df['discount_price'] != df['prev_price']).astype(int)
         df['price_change_amount'] = df['discount_price'] - df['prev_price']
         df['price_change_ratio'] = df['price_change_amount'] / df['prev_price']
-        
-        # 填充第一个记录的NaN
+        # 缺失变动特征填0
         df = df.fillna({
             'prev_price': df['discount_price'],
             'price_change': 0,
             'price_change_amount': 0,
             'price_change_ratio': 0
         })
-        
         return df
     
     def _build_time_features(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -109,25 +122,40 @@ class FeatureEngineer:
             df[f'price_std_{w}d'] = df.groupby('sku_id')['discount_price'].transform(
                 lambda x: x.rolling(w, min_periods=1).std()
             )
-            
         # 价格变动频率
         for w in [7, 30]:
             df[f'change_freq_{w}d'] = df.groupby('sku_id')['price_change'].transform(
                 lambda x: x.rolling(w, min_periods=1).mean()
             )
-            
         # 距离上次价格变动的天数
         df['days_since_last_change'] = df.groupby('sku_id').apply(
             lambda group: group['price_change'].cumsum().groupby(
                 group['price_change'].cumsum()).cumcount()
         ).reset_index(level=0, drop=True)
-        
         self.feature_columns.extend(
             [f'price_mean_{w}d' for w in windows] +
             [f'price_std_{w}d' for w in windows] +
             [f'change_freq_{w}d' for w in [7, 30]] +
             ['days_since_last_change']
         )
+        # --- 防泄漏断言：每个SKU随机抽查1-2个点 ---
+        sku_list = df['sku_id'].unique()
+        sample_skus = np.random.choice(sku_list, min(5, len(sku_list)), replace=False)
+        for sku in sample_skus:
+            sku_df = df[df['sku_id'] == sku]
+            if len(sku_df) == 0:
+                continue
+            sample_idx = np.random.choice(sku_df.index, min(2, len(sku_df)), replace=False)
+            for idx in sample_idx:
+                row = sku_df.loc[idx]
+                for w in windows:
+                    window_data = sku_df.loc[:idx, 'discount_price'].tail(w)
+                    calc = window_data.mean()
+                    val = row.get(f'price_mean_{w}d', None)
+                    if val is not None and not np.isclose(val, calc, atol=1e-6):
+                        logger.error(f"滑窗特征泄漏: sku={sku}, idx={idx}, window={w}, val={val}, calc={calc}")
+                        raise AssertionError("滑窗特征泄漏未来数据")
+        logger.info("滑窗防泄漏检查通过")
         return df
     
     def _build_trend_features(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -141,6 +169,15 @@ class FeatureEngineer:
             )
             
         self.feature_columns.extend([f'price_trend_{w}d' for w in [7, 14]])
+        # 合并 price_direction_consistency_7d 特征
+        if 'price_change_direction' in df.columns:
+            df['price_direction_consistency_7d'] = (
+                df.groupby('sku_id')['price_change_direction']
+                .transform(lambda x: x.rolling(7, min_periods=1).apply(
+                    lambda y: (y == y.iloc[0]).mean() if len(y) > 0 else 0
+                ))
+            )
+            self.feature_columns.append('price_direction_consistency_7d')
         return df
     
     def _postprocess_features(self, df: pd.DataFrame) -> pd.DataFrame:

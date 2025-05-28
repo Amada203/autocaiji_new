@@ -32,6 +32,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+logging.getLogger("cmdstanpy").setLevel(logging.WARNING)
+logging.getLogger("prophet").setLevel(logging.WARNING)
+
 class DataPipeline:
     def __init__(self):
         """初始化数据管道"""
@@ -225,7 +228,7 @@ class DataPipeline:
         
         Args:
             datasets: 包含训练集、验证集和测试集的字典
-            
+        
         Returns:
             pd.DataFrame: 处理后的数据
         """
@@ -233,24 +236,30 @@ class DataPipeline:
         try:
             # 合并数据集
             all_data = pd.concat(datasets.values(), ignore_index=True)
-            
+            # 字段名清理，去除空格并标准化日期列
+            all_data.columns = all_data.columns.str.strip()
+            if 'dt' in all_data.columns:
+                all_data = all_data.rename(columns={'dt': 'date'})
+            if 'datetime' in all_data.columns:
+                all_data = all_data.rename(columns={'datetime': 'date'})
+            if 'date' not in all_data.columns:
+                raise ValueError(f'输入数据缺少date列！实际字段：{list(all_data.columns)}')
+            all_data['date'] = pd.to_datetime(all_data['date'])
             # 记录原始数据统计信息
             self._log_data_stats(all_data, "原始数据")
-            
             # 处理数据
             from src.data.data_processor import DataProcessor
             processor = DataProcessor(all_data)
             processed_data = processor.process()
-            
+            # 特征工程：生成所有特征
+            from src.features.feature_generator import generate_all_features
+            processed_data = generate_all_features(processed_data)
             # 验证处理结果
             if processed_data is None or processed_data.empty:
                 raise ValueError("数据处理结果为空")
-                
             # 记录处理后数据统计信息
             self._log_data_stats(processed_data, "处理后数据")
-            
             return processed_data
-            
         except Exception as e:
             error_msg = f"数据处理失败: {str(e)}"
             if processor and hasattr(processor, 'df'):
@@ -463,6 +472,74 @@ class DataPipeline:
         recovery_file = "logs/recovery_point.json"
         if os.path.exists(recovery_file):
             os.remove(recovery_file)
+
+    def predict_on_skus(self, sku_list, days=1, end_date=None, output='mysql'):
+        """
+        批量预测指定sku在end_date后未来days天的价格变动，并写入MySQL
+        Args:
+            sku_list: 需要预测的sku_id列表
+            days: 预测未来天数
+            end_date: 预测起点日期（字符串'YYYY-MM-DD'或datetime），默认今天
+            output: 'return'（返回DataFrame）或'mysql'（写入数据库）
+        Returns:
+            pd.DataFrame: 预测结果
+        """
+        logger.info(f"批量预测SKU: {sku_list}，未来{days}天，起点日期: {end_date if end_date else '今天'}")
+        from src.data.data_fetcher import DataFetcher
+        from src.models.fusion_model import PriceChangePredictor
+        from src.data.mysql_writer import MySQLWriter
+        # 1. 拉取这些SKU在end_date前30天的历史数据
+        fetcher = DataFetcher()
+        latest_data = fetcher.fetch_latest_data_by_skus(sku_list, days=30, end_date=end_date)
+        if latest_data.empty:
+            logger.warning("未获取到指定SKU的历史数据")
+            return pd.DataFrame()
+        latest_data['date'] = pd.to_datetime(latest_data['dt'] if 'dt' in latest_data.columns else latest_data['date'])
+        # 2. 构造未来days天的预测DataFrame
+        if end_date is None:
+            last_date = latest_data.groupby('sku_id')['date'].max().max()
+            future_start = last_date + pd.Timedelta(days=1)
+        else:
+            future_start = pd.to_datetime(end_date) + pd.Timedelta(days=1)
+        future_dates = pd.date_range(start=future_start, periods=days)
+        future_df = pd.DataFrame({
+            'sku_id': np.repeat(sku_list, days),
+            'date': np.tile(future_dates, len(sku_list)),
+        })
+        # 用最新价格填充
+        latest_prices = latest_data.sort_values('date').groupby('sku_id')['discount_price'].last()
+        future_df['discount_price'] = future_df['sku_id'].map(latest_prices)
+        # 3. 拼接历史和未来数据，整体做特征工程
+        all_df = pd.concat([latest_data, future_df], ignore_index=True)
+        all_df = all_df.sort_values(['sku_id', 'date'])
+        # 4. 加载最新模型，批量预测未来天数
+        model = PriceChangePredictor()
+        model_path = os.path.join(self.models_dir, "fusion_model.pkl")
+        if os.path.exists(model_path):
+            import pickle
+            with open(model_path, 'rb') as f:
+                loaded = pickle.load(f)
+                model.lgbm_model = loaded.lgbm_model if hasattr(loaded, 'lgbm_model') else loaded['lgbm_model']
+                model.prophet_models = loaded.prophet_models if hasattr(loaded, 'prophet_models') else loaded['prophet_models']
+                model.threshold = loaded.threshold if hasattr(loaded, 'threshold') else loaded.get('threshold', 0.5)
+                model.fitted = True
+        else:
+            logger.error(f"模型文件不存在: {model_path}")
+            return pd.DataFrame()
+        # 5. 只对未来天数做预测
+        future_mask = all_df['date'] > latest_data['date'].max()
+        pred_result = model.predict(all_df[future_mask])
+        all_df.loc[future_mask, 'probability'] = pred_result['probability']
+        all_df.loc[future_mask, 'predicted_change'] = pred_result['predicted_change']
+        result_df = all_df[future_mask].copy()
+        # 6. 输出并写入MySQL
+        mysql_writer = MySQLWriter()
+        mysql_writer.write_predictions(result_df)
+        logger.info("预测结果已写入MySQL")
+        if output == 'return':
+            return result_df
+        else:
+            return None
 
 if __name__ == "__main__":
     pipeline = DataPipeline()

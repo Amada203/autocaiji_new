@@ -132,46 +132,69 @@ class DataProcessor:
         """完整数据清洗流程"""
         # 重置索引确保唯一性
         self.df = self.df.reset_index(drop=True)
-
+        
         # 检查索引唯一性
         if not self.df.index.is_unique:
             self.logger.warning("发现重复索引，已重置索引")
             self.df = self.df.reset_index(drop=True)
 
         # 1. 标准化日期格式 (严格处理输入)
-        self.logger.info(f"原始date列样例: {list(self.df['date'].head(3).squeeze())}")
-        self.df['date'] = pd.to_datetime(self.df['date'], errors='coerce')
+        def parse_date(series):
+            # 确保输入是Series且重置索引
+            if not isinstance(series, pd.Series):
+                series = pd.Series(series)
+            series = series.reset_index(drop=True)
+            
+            try:
+                # 尝试解析为datetime（自动识别常见格式）
+                parsed = pd.to_datetime(series, errors='coerce')
+                
+                # 检查解析结果
+                if parsed.isna().all():
+                    # 尝试强制转换为字符串再解析
+                    str_series = series.astype(str)
+                    parsed = pd.to_datetime(str_series, errors='coerce')
+                
+                # 记录解析失败的情况
+                na_count = parsed.isna().sum()
+                if na_count > 0:
+                    sample_errors = series[parsed.isna()].sample(min(3, na_count)).tolist()
+                    self.logger.warning(
+                        f"日期解析失败 {na_count} 条记录，示例: {sample_errors}"
+                    )
+                
+                return parsed
+            except Exception as e:
+                self.logger.error(f"日期解析异常: {str(e)}")
+                return pd.Series([pd.NaT] * len(series), index=series.index)
+        
+        self.df['date'] = self.df['date'].apply(parse_date)
+        
+        # 记录无效日期记录
         invalid_mask = self.df['date'].isna()
-        invalid_dates = self.df[invalid_mask].copy().reset_index(drop=True)
-
-        na_count = invalid_mask.sum()
-        if na_count > 0:
-            sample_errors = list(self.df.loc[invalid_mask, 'date'].head(3).squeeze())
-            self.logger.warning(
-                f"日期解析失败 {na_count} 条记录，示例: {sample_errors}"
-            )
-
+        invalid_dates = self.df[invalid_mask].copy()
+        
         # 过滤掉无效日期记录
-        self.df = self.df[~invalid_mask].copy().reset_index(drop=True)
-
+        self.df = self.df[~invalid_mask].copy()
+        
         if len(self.df) == 0:
-            raise ValueError(f"所有记录的日期都无法解析，请检查数据源。原始date样例: {list(self.df['date'].head(3).squeeze())}")
-
+            raise ValueError("所有记录的日期都无法解析，请检查数据源")
+        
         # 2. 按SKU和日期排序
         self.df = self.df.sort_values(['sku_id', 'date'])
-
+        
         # 3. 处理缺失值 (前向后向填充)
         self.df['discount_price'] = (self.df.groupby('sku_id')['discount_price']
                                    .transform(lambda x: x.ffill().bfill()))
-
+        
         # 4. 移除异常值
         self.df = self.df[(self.df['discount_price'] > 0) & 
                          (self.df['discount_price'] < 1e6)]
-
+        
         # 5. 计算基础价格特征
         self.df['prev_price'] = self.df.groupby('sku_id')['discount_price'].shift(1)
         self.df['price_change'] = (self.df['discount_price'] != self.df['prev_price']).astype(int)
-
+        
         return invalid_dates
     
     def _calculate_price_features(self):
@@ -254,6 +277,9 @@ def main():
     except Exception as e:
         logger.error(f"处理失败: {str(e)}", exc_info=True)
         sys.exit(1)
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()

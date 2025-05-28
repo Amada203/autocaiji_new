@@ -35,6 +35,9 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+logging.getLogger("cmdstanpy").setLevel(logging.WARNING)
+logging.getLogger("prophet").setLevel(logging.WARNING)
+
 def load_database_config() -> Dict[str, Any]:
     """加载MySQL数据库配置"""
     try:

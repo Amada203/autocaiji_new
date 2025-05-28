@@ -15,17 +15,19 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 class MySQLWriter:
-    def __init__(self, host='localhost', user='root', 
-                 password='mypassword123', database='price_prediction', port=13306):
-        """初始化MySQL写入器
-        
-        Args:
-            host: 数据库主机地址
-            user: 数据库用户名
-            password: 数据库密码
-            database: 数据库名称
-            port: 数据库端口
-        """
+    def __init__(self, host=None, user=None, password=None, database=None, port=None, config_path=None):
+        """初始化MySQL写入器，支持自动读取config/database.json"""
+        if not all([host, user, password, database]):
+            # 自动读取配置
+            config_path = config_path or os.path.join(os.path.dirname(__file__), '../../config/database.json')
+            with open(config_path) as f:
+                db_config = json.load(f)
+            mysql_config = db_config.get("mysql", {})
+            host = host or mysql_config.get("host")
+            user = user or mysql_config.get("user")
+            password = password or mysql_config.get("password")
+            database = database or mysql_config.get("database")
+            port = port or mysql_config.get("port", 13306)
         self.connection = None
         self.db_config = {
             'host': host,
@@ -55,44 +57,30 @@ class MySQLWriter:
             return False
 
     def write_predictions(self, predictions_df: pd.DataFrame, rebuild_table=False) -> bool:
-        """写入预测数据到sku_predictions表，使用批量插入提高性能
-        
-        Args:
-            predictions_df: 包含预测数据的DataFrame，需包含以下字段:
-                - sku_id: SKU标识
-                - date: 预测日期
-                - discount_price: 折扣价格
-                - probability: 价格变动概率 (0-1)
-                - predicted_change: 预测是否变动 (0或1)
-            rebuild_table: 是否重建表，默认为False（增量更新）
-        """
-        # 强制限制为1000条
-        predictions_df = predictions_df.head(1000)
-        
-        # 验证必需字段
-        required_fields = ['sku_id', 'date', 'discount_price', 'probability', 'predicted_change']
-        missing_fields = [field for field in required_fields if field not in predictions_df.columns]
+        """写入预测数据到sku_predictions表，字段对齐：sku_id, date, discount_price, change_probability"""
+        # 字段自动映射
+        df = predictions_df.rename(columns={
+            'sku': 'sku_id',
+            'price': 'discount_price',
+            'probability': 'change_probability',
+            'confidence': 'change_probability'
+        })
+        required_fields = ['sku_id', 'date', 'discount_price', 'change_probability']
+        missing_fields = [field for field in required_fields if field not in df.columns]
         if missing_fields:
             logger.error(f"缺少必需字段: {missing_fields}")
             return False
-            
+        df = df[required_fields].head(1000)
         if not self.connect():
             return False
-
         try:
             cursor = self.connection.cursor()
-            
-            # 设置会话超时
-            cursor.execute("SET SESSION wait_timeout=300")  # 5分钟超时
-            cursor.execute("SET SESSION innodb_lock_wait_timeout=50")  # 50秒锁等待超时
-            
-            # 检查表是否存在
+            cursor.execute("SET SESSION wait_timeout=300")
+            cursor.execute("SET SESSION innodb_lock_wait_timeout=50")
             cursor.execute("SHOW TABLES LIKE 'sku_predictions'")
             table_exists = cursor.fetchone() is not None
-            
             if rebuild_table or not table_exists:
                 if table_exists:
-                    # 如果表存在且选择重建，先备份数据
                     logger.info("备份现有预测数据...")
                     try:
                         cursor.execute("CREATE TABLE IF NOT EXISTS sku_predictions_backup LIKE sku_predictions")
@@ -101,20 +89,16 @@ class MySQLWriter:
                         logger.info("预测数据备份完成")
                     except Exception as e:
                         logger.warning(f"备份数据失败: {str(e)}")
-                    
-                    # 清空表而不是删除重建
                     logger.info("清空sku_predictions表...")
                     cursor.execute("TRUNCATE TABLE sku_predictions")
                 else:
-                    # 表不存在，创建新表
                     logger.info("创建sku_predictions表...")
                     cursor.execute("""
                         CREATE TABLE sku_predictions (
                             sku_id VARCHAR(50),
                             date DATE,
                             discount_price DECIMAL(10,2),
-                            probability FLOAT,
-                            predicted_change TINYINT,
+                            change_probability FLOAT,
                             PRIMARY KEY (sku_id, date),
                             INDEX idx_date (date),
                             INDEX idx_sku (sku_id)
@@ -123,65 +107,47 @@ class MySQLWriter:
                 logger.info("表准备完成")
             else:
                 logger.info("使用现有sku_predictions表（增量更新模式）")
-
-            # 准备批量插入（使用REPLACE INTO支持增量更新）
             insert_sql = """
-                REPLACE INTO sku_predictions (sku_id, date, discount_price, probability, predicted_change)
-                VALUES (%s, %s, %s, %s, %s)
+                REPLACE INTO sku_predictions (sku_id, date, discount_price, change_probability)
+                VALUES (%s, %s, %s, %s)
             """
-            
-            # 批量处理，每1000条提交一次
             batch_size = 1000
             records = []
             success_count = 0
-            total_records = len(predictions_df)
-            
-            # 处理每行数据
-            for _, row in predictions_df.iterrows():
+            total_records = len(df)
+            for _, row in df.iterrows():
                 try:
-                    # 处理日期字段
                     date_value = row['date']
                     if hasattr(date_value, 'strftime'):
                         date_str = date_value.strftime('%Y-%m-%d')
                     else:
                         date_str = str(date_value)
-                    
-                    # 验证数据
-                    probability = float(row['probability'])
-                    if not 0 <= probability <= 1:
-                        logger.warning(f"SKU {row['sku_id']} 的概率值超出范围: {probability}")
-                        probability = max(0, min(1, probability))  # 强制限制在0-1之间
-                    
+                    prob = float(row['change_probability'])
+                    if not 0 <= prob <= 1:
+                        logger.warning(f"SKU {row['sku_id']} 的概率值超出范围: {prob}")
+                        prob = max(0, min(1, prob))
                     record = (
                         str(row['sku_id']),
                         date_str,
                         float(row['discount_price']),
-                        probability,
-                        int(bool(row['predicted_change']))  # 确保是0或1
+                        prob
                     )
                     records.append(record)
-                    
-                    # 每达到批量大小就执行一次批量插入
                     if len(records) >= batch_size:
                         cursor.executemany(insert_sql, records)
                         success_count += len(records)
-                        self.connection.commit()  # 提交事务
+                        self.connection.commit()
                         records = []
                         logger.info(f"已处理 {success_count}/{total_records} 条记录 ({(success_count/total_records*100):.2f}%)")
-                        
                 except Exception as e:
                     logger.error(f"处理行数据时出错 - SKU: {row.get('sku_id', 'N/A')}, 错误: {str(e)}")
                     continue
-
-            # 处理剩余记录
             if records:
                 cursor.executemany(insert_sql, records)
                 success_count += len(records)
                 self.connection.commit()
-            
             logger.info(f"成功写入 {success_count}/{total_records} 条记录")
             return success_count > 0
-
         except MySQLError as e:
             logger.error(f"MySQL错误: {str(e)}", exc_info=True)
             if self.connection:
@@ -461,10 +427,10 @@ if __name__ == "__main__":
 
     # 测试数据 - 预测结果
     test_pred = pd.DataFrame({
-        'sku': ['test_001', 'test_002'],  # 使用'sku'而不是'sku_id'
+        'sku_id': ['test_001', 'test_002'],
         'date': [datetime.now().date(), datetime.now().date()],
-        'price': [99.9, 199.9],
-        'confidence': [0.85, 0.72]
+        'discount_price': [99.9, 199.9],
+        'change_probability': [0.85, 0.72]
     })
     logger.info("测试预测数据字段: %s", test_pred.columns.tolist())
 

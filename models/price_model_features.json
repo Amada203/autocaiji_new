@@ -1,0 +1,1 @@
+["day_of_week", "is_weekend", "month", "day", "price_mean_7d", "price_std_7d", "price_mean_14d", "price_std_14d", "days_since_last_change", "change_freq_7d", "change_freq_30d", "price_trend_7d", "price_trend_14d", "prophet_trend", "prophet_yhat"]

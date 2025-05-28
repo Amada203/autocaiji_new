@@ -268,7 +268,7 @@ class DataFetcher:
                     'val': """
                         SELECT 
                             sku_id,
-                            dt AS `date`,
+                            dt,
                             discount_price,
                             CASE WHEN raw_promotion_detail IS NOT NULL THEN 1 ELSE 0 END AS is_promotion
                         FROM jd_daily_price
@@ -279,7 +279,7 @@ class DataFetcher:
                     'test': """
                         SELECT 
                             sku_id,
-                            dt AS `date`,
+                            dt,
                             discount_price,
                             CASE WHEN raw_promotion_detail IS NOT NULL THEN 1 ELSE 0 END AS is_promotion
                         FROM jd_daily_price
@@ -300,65 +300,52 @@ class DataFetcher:
                 
                 for name, (start, end) in date_ranges.items():
                     cursor = conn.cursor()
-                    # 确保只保留date列，移除dt列
-                    cursor.execute(queries[name], {
+                    # 修复SQL拼接，保证sku_id IN (...)全部为数字（不加引号）
+                    sku_str = '(' + ','.join([str(sku) for sku in valid_skus]) + ')'
+                    query = queries[name].replace('%(valid_skus)s', sku_str)
+                    cursor.execute(query, {
                         'start_date': start,
-                        'end_date': end,
-                        'valid_skus': tuple(valid_skus)
+                        'end_date': end
                     })
                     df = as_pandas(cursor)
                     cursor.close()
-                    
-                    if not df.empty:
-                        # 统一列名处理：优先使用date列，如果没有则使用dt列
-                        if 'date' not in df.columns and 'dt' in df.columns:
-                            df = df.rename(columns={'dt': 'date'})
-                        elif 'date' in df.columns and 'dt' in df.columns:
-                            df = df.drop(columns=['dt'])
-                    
+                    # 保持dt字段为str类型，不做任何转换
+                    if 'dt' in df.columns:
+                        df['dt'] = df['dt'].astype(str)
+                    # 不做任何date/dt重命名和类型转换
                     if df.empty:
                         self.logger.warning(f"{name}数据集为空")
                     else:
-                        min_date = df['date'].min()
-                        max_date = df['date'].max()
-                        if name == 'train':
-                            if not (self.earliest_date <= min_date <= max_date <= train_end):
-                                raise ValueError(f"训练集日期范围错误: {min_date} 到 {max_date}")
-                        elif name == 'val':
-                            if not (train_end < min_date <= max_date <= val_end):
-                                raise ValueError(f"验证集日期范围错误: {min_date} 到 {max_date}")
-                        else:
-                            if not (val_end < min_date <= max_date <= test_end):
-                                raise ValueError(f"测试集日期范围错误: {min_date} 到 {max_date}")
-                        
+                        min_date = df['dt'].min()
+                        max_date = df['dt'].max()
                         self.logger.info(
                             f"{name}数据集 - 记录数: {len(df)}, SKU数: {df['sku_id'].nunique()}, "
-                            f"日期范围: {df['date'].min()}至{df['date'].max()}, "
+                            f"日期范围: {min_date}至{max_date}, "
                             f"平均价格: {df['discount_price'].mean():.2f}"
                         )
-                        
                         if not df.empty:
-                            first_row = df.iloc[0][['sku_id', 'date', 'discount_price', 'is_promotion']].to_dict()
+                            first_row = df.iloc[0][['sku_id', 'dt', 'discount_price', 'is_promotion']].to_dict()
                             self.logger.info(
                                 f"{name}数据集首行预览 - " +
                                 ", ".join([f"{k}: {v}" for k, v in first_row.items()])
                             )
-                    
                     datasets[name] = df
                 
+                # 检查数据集日期是否有重叠
                 if not datasets['train'].empty and not datasets['val'].empty:
-                    train_dates = set(datasets['train']['date'])
-                    val_dates = set(datasets['val']['date'])
+                    train_dates = set(datasets['train']['dt'])
+                    val_dates = set(datasets['val']['dt'])
                     if train_dates & val_dates:
                         raise ValueError(f"训练集和验证集日期有重叠: {train_dates & val_dates}")
                 
                 if not datasets['val'].empty and not datasets['test'].empty:
-                    val_dates = set(datasets['val']['date'])
-                    test_dates = set(datasets['test']['date'])
+                    val_dates = set(datasets['val']['dt'])
+                    test_dates = set(datasets['test']['dt'])
                     if val_dates & test_dates:
                         raise ValueError(f"验证集和测试集日期有重叠: {val_dates & test_dates}")
                 
-                latest_date = max(df['date'].max() for df in datasets.values() if not df.empty)
+                # 取所有数据集的最大dt作为last_run_date，保持str类型
+                latest_date = max(df['dt'].max() for df in datasets.values() if not df.empty)
                 self._update_last_run_date(latest_date)
                 
                 self.logger.info(f"成功获取所有数据集，最新日期: {latest_date}")
@@ -386,6 +373,43 @@ class DataFetcher:
         """关闭资源"""
         self.logger.info("DataFetcher资源清理完成")
 
+    def fetch_latest_data_by_skus(self, sku_list, days=30, end_date=None):
+        """
+        拉取指定sku在end_date前days天的历史数据
+        Args:
+            sku_list: 需要拉取的sku_id列表
+            days: 拉取的天数，默认30天
+            end_date: 截止日期（字符串'YYYY-MM-DD'或datetime），默认今天
+        Returns:
+            pd.DataFrame: 包含sku_id、dt、discount_price、raw_promotion_detail等字段的DataFrame
+        """
+        if not sku_list:
+            self.logger.warning("sku_list为空，无法拉取数据")
+            return pd.DataFrame()
+        if end_date is None:
+            end_date = datetime.now().strftime('%Y-%m-%d')
+        elif isinstance(end_date, datetime):
+            end_date = end_date.strftime('%Y-%m-%d')
+        start_date = (pd.to_datetime(end_date) - timedelta(days=days)).strftime('%Y-%m-%d')
+        # 构造SQL
+        sku_str = ','.join([str(sku) for sku in sku_list])
+        query = f"""
+            SELECT sku_id, dt, discount_price, raw_promotion_detail
+            FROM jd_daily_price
+            WHERE sku_id IN ({sku_str})
+            AND dt BETWEEN '{start_date}' AND '{end_date}'
+            ORDER BY sku_id, dt
+        """
+        conn = self._get_connection(timeout=60)
+        try:
+            df = pd.read_sql(query, conn)
+        finally:
+            conn.close()
+        # 兼容性处理
+        if 'dt' in df.columns:
+            df['date'] = df['dt']
+        return df
+
 def main():
     """主函数，用于测试数据获取功能"""
     fetcher = DataFetcher()
@@ -399,7 +423,7 @@ def main():
             print(f"\n{name.upper()}数据集统计:")
             print(f"记录数: {len(data)}")
             print(f"SKU数量: {data['sku_id'].nunique()}")
-            print(f"日期范围: {data['date'].min()} 至 {data['date'].max()}")
+            print(f"日期范围: {data['dt'].min()} 至 {data['dt'].max()}")
             
     except Exception as e:
         print(f"测试失败: {str(e)}")

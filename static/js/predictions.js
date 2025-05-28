@@ -33,6 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
             filterAndDisplayPredictions();
         });
     });
+
+    const btn = document.getElementById('realtimePredictBtn');
+    if (btn) {
+        btn.addEventListener('click', predictRealtime);
+    }
 });
 
 // 加载预测结果
@@ -422,5 +427,64 @@ function formatDate(dateStr) {
     return date.toLocaleDateString('zh-CN', {
         month: '2-digit',
         day: '2-digit'
+    });
+}
+
+// 实时预测功能
+async function predictRealtime() {
+    const skuInput = document.getElementById('skuInput').value.trim();
+    const skuList = skuInput.split(',').map(s => s.trim()).filter(Boolean);
+    const date = document.getElementById('endDateInput').value || (new Date()).toISOString().slice(0,10);
+
+    // 预测前清空结果区
+    const container = document.getElementById('resultsContainer');
+    container.innerHTML = '';
+
+    if (skuList.length === 0) {
+        alert('请输入至少一个SKU');
+        return;
+    }
+
+    const btn = document.getElementById('realtimePredictBtn');
+    btn.disabled = true;
+    btn.textContent = '预测中...';
+
+    try {
+        const response = await fetch('/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                items: skuList.map(sku => ({ sku, date }))
+            })
+        });
+        if (!response.ok) throw new Error('预测请求失败');
+        const results = await response.json();
+        displayPredictionResults(results);
+    } catch (e) {
+        alert('预测失败: ' + e.message);
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '实时预测';
+    }
+}
+
+function displayPredictionResults(results) {
+    const container = document.getElementById('resultsContainer');
+    container.innerHTML = '';
+    if (!results || results.length === 0) {
+        container.innerHTML = '<div class="alert alert-warning">无预测结果</div>';
+        return;
+    }
+    results.forEach(res => {
+        const color = res.predict_proba === -1 ? 'text-danger' : (res.predict_proba >= 0.8 ? 'text-danger' : (res.predict_proba >= 0.5 ? 'text-warning' : 'text-success'));
+        container.innerHTML += `
+            <div class="card mb-2">
+                <div class="card-body">
+                    <b>SKU:</b> ${res.sku} <b>日期:</b> ${res.date}
+                    <span class="${color} ms-3"><b>${res.sampling_plan}</b></span>
+                    ${res.predict_proba !== -1 ? `<span class="ms-3">概率: ${(res.predict_proba*100).toFixed(2)}%</span>` : ''}
+                </div>
+            </div>
+        `;
     });
 }

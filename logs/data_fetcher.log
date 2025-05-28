@@ -1609,3 +1609,552 @@ price_change_direction: 0.0
 2025-05-23 07:56:14,556 - DataFetcher - WARNING - test数据集为空
 2025-05-23 07:56:14,591 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
 2025-05-23 07:56:14,591 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23
+2025-05-23 11:05:43,068 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 11:05:44,280 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 11:05:44,281 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 11:05:44,281 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 11:06:12,411 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 11:06:12,421 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 11:06:12,422 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 11:06:37,655 - DataFetcher - INFO - train数据集 - 记录数: 134940, SKU数: 170, 日期范围: 2023-01-01至2025-04-23, 平均价格: 54.81
+2025-05-23 11:06:37,665 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-23 11:06:42,282 - DataFetcher - INFO - val数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-23 11:06:42,284 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-23 11:06:57,068 - DataFetcher - WARNING - test数据集为空
+2025-05-23 11:06:57,103 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 11:06:57,104 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23
+2025-05-23 11:41:51,292 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 11:41:52,365 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 11:41:52,366 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 11:41:52,367 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 11:42:11,376 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 11:42:11,381 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 11:42:11,383 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 11:42:49,751 - DataFetcher - INFO - train数据集 - 记录数: 134940, SKU数: 170, 日期范围: 2023-01-01至2025-04-23, 平均价格: 54.81
+2025-05-23 11:42:49,768 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-23 11:43:04,024 - DataFetcher - INFO - val数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-23 11:43:04,026 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-23 11:43:07,139 - DataFetcher - WARNING - test数据集为空
+2025-05-23 11:43:07,175 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 11:43:07,176 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23
+2025-05-23 14:54:47,750 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 14:54:48,827 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 14:54:48,828 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 14:54:48,828 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 14:54:56,846 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 14:54:56,851 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 14:54:56,851 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 14:55:16,766 - DataFetcher - INFO - train数据集 - 记录数: 134940, SKU数: 170, 日期范围: 2023-01-01至2025-04-23, 平均价格: 54.81
+2025-05-23 14:55:16,771 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-23 14:55:18,697 - DataFetcher - INFO - val数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-23 14:55:18,698 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-23 14:55:20,725 - DataFetcher - WARNING - test数据集为空
+2025-05-23 14:55:20,753 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 14:55:20,753 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23
+2025-05-23 15:45:40,346 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 15:45:41,453 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 15:45:41,454 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 15:45:41,454 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 15:45:47,515 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 15:45:47,520 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 15:45:47,521 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 15:46:06,241 - DataFetcher - INFO - train数据集 - 记录数: 134940, SKU数: 170, 日期范围: 2023-01-01至2025-04-23, 平均价格: 54.81
+2025-05-23 15:46:06,247 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-23 15:46:11,220 - DataFetcher - INFO - val数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-23 15:46:11,221 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-23 15:46:13,315 - DataFetcher - WARNING - test数据集为空
+2025-05-23 15:46:13,348 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 15:46:13,349 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23
+2025-05-23 16:57:14,690 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 16:57:15,782 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 16:57:15,783 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 16:57:15,783 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 16:57:22,366 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 16:57:22,378 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 16:57:22,379 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 16:57:44,151 - DataFetcher - INFO - train数据集 - 记录数: 134940, SKU数: 170, 日期范围: 2023-01-01至2025-04-23, 平均价格: 54.81
+2025-05-23 16:57:44,312 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-23 16:57:53,330 - DataFetcher - INFO - val数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-23 16:57:53,336 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-23 16:57:59,622 - DataFetcher - WARNING - test数据集为空
+2025-05-23 16:57:59,673 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 16:57:59,674 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23
+2025-05-23 17:18:37,149 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 17:18:39,210 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 17:18:39,210 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 17:18:39,210 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 17:18:46,561 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 17:18:46,573 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 17:18:46,574 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 17:19:03,473 - DataFetcher - INFO - train数据集 - 记录数: 134940, SKU数: 170, 日期范围: 2023-01-01至2025-04-23, 平均价格: 54.81
+2025-05-23 17:19:03,478 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-23 17:19:08,993 - DataFetcher - INFO - val数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-23 17:19:08,994 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-23 17:19:15,201 - DataFetcher - WARNING - test数据集为空
+2025-05-23 17:19:15,225 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 17:19:15,226 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23
+2025-05-23 18:14:19,568 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 18:14:19,570 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-23 18:14:24,539 - DataFetcher - INFO - 测试Impala连接...
+2025-05-23 18:14:25,696 - DataFetcher - INFO - Impala连接测试成功
+2025-05-23 18:14:25,697 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-23 18:14:25,697 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-23)
+2025-05-23 18:14:27,541 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 18:14:27,546 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 18:14:27,548 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 18:14:32,350 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-23 18:14:32,353 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-23 18:14:32,354 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-23 18:14:40,998 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-23 18:14:41,001 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-23 18:14:44,767 - DataFetcher - INFO - val数据集 - 记录数: 13769, SKU数: 170, 日期范围: 2025-01-01至2025-03-31, 平均价格: 53.66
+2025-05-23 18:14:44,768 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-23 18:14:46,949 - DataFetcher - INFO - test数据集 - 记录数: 3417, SKU数: 170, 日期范围: 2025-04-01至2025-04-30, 平均价格: 50.66
+2025-05-23 18:14:46,951 - DataFetcher - INFO - test数据集首行预览 - sku_id: 206942, date: 2025-04-01, discount_price: 13.8, is_promotion: 0
+2025-05-23 18:14:46,989 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 18:14:46,989 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-03-31, 测试集: 2025-03-31至2025-04-30
+2025-05-23 18:14:47,127 - DataFetcher - INFO - train数据集 - 记录数: 134940, SKU数: 170, 日期范围: 2023-01-01至2025-04-23, 平均价格: 54.81
+2025-05-23 18:14:47,134 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-23 18:14:52,704 - DataFetcher - INFO - val数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-23 18:14:52,706 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-23 18:14:55,395 - DataFetcher - WARNING - test数据集为空
+2025-05-23 18:14:55,421 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-23 18:14:55,422 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-23, 验证集: 2025-04-23至2025-05-08, 测试集: 2025-05-08至2025-05-23
+2025-05-24 09:25:12,492 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-24 09:25:12,493 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-24 09:25:18,164 - DataFetcher - INFO - 测试Impala连接...
+2025-05-24 09:25:19,335 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-24 09:25:19,342 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-24 09:25:19,344 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-24 09:25:20,385 - DataFetcher - INFO - Impala连接测试成功
+2025-05-24 09:25:20,386 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-24 09:25:20,386 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-24)
+2025-05-24 09:25:24,608 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-24 09:25:24,611 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-24 09:25:24,613 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-24 09:25:34,802 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-24 09:25:34,803 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-24 09:25:37,568 - DataFetcher - INFO - val数据集 - 记录数: 13769, SKU数: 170, 日期范围: 2025-01-01至2025-03-31, 平均价格: 53.66
+2025-05-24 09:25:37,570 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-24 09:25:39,601 - DataFetcher - INFO - test数据集 - 记录数: 3417, SKU数: 170, 日期范围: 2025-04-01至2025-04-30, 平均价格: 50.66
+2025-05-24 09:25:39,603 - DataFetcher - INFO - test数据集首行预览 - sku_id: 206942, date: 2025-04-01, discount_price: 13.8, is_promotion: 0
+2025-05-24 09:25:39,632 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-24 09:25:39,633 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-03-31, 测试集: 2025-03-31至2025-04-30
+2025-05-24 09:25:43,105 - DataFetcher - INFO - train数据集 - 记录数: 135103, SKU数: 170, 日期范围: 2023-01-01至2025-04-24, 平均价格: 54.81
+2025-05-24 09:25:43,106 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, date: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-24 09:25:44,547 - DataFetcher - INFO - val数据集 - 记录数: 669, SKU数: 169, 日期范围: 2025-04-25至2025-04-30, 平均价格: 50.54
+2025-05-24 09:25:44,548 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, date: 2025-04-25, discount_price: 11.086666666666666, is_promotion: 1
+2025-05-24 09:25:45,826 - DataFetcher - WARNING - test数据集为空
+2025-05-24 09:25:45,859 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-24 09:25:45,859 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-24, 验证集: 2025-04-24至2025-05-09, 测试集: 2025-05-09至2025-05-24
+2025-05-24 22:46:36,906 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-24 22:46:36,907 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-24 22:46:45,787 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-24 22:46:45,833 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-24 22:46:45,835 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-24 22:46:46,182 - DataFetcher - INFO - 测试Impala连接...
+2025-05-24 22:46:48,050 - DataFetcher - INFO - Impala连接测试成功
+2025-05-24 22:46:48,067 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-24 22:46:48,088 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-24)
+2025-05-24 22:46:55,391 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-24 22:46:55,395 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-24 22:46:55,397 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-24 22:47:11,411 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-24 22:47:26,777 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-24 22:47:36,784 - DataFetcher - INFO - 测试Impala连接...
+2025-05-24 22:47:36,784 - DataFetcher - INFO - 测试Impala连接...
+2025-05-24 22:47:39,637 - DataFetcher - INFO - Impala连接测试成功
+2025-05-24 22:47:39,637 - DataFetcher - INFO - Impala连接测试成功
+2025-05-24 22:47:39,638 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-24 22:47:39,638 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-24 22:47:39,638 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-24)
+2025-05-24 22:47:39,638 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-24)
+2025-05-24 22:47:45,971 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-24 22:47:45,971 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-24 22:47:45,975 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-24 22:47:45,975 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-24 22:47:45,976 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-24 22:47:45,976 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-24 22:48:17,774 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-24 22:48:17,774 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-24 22:48:37,782 - DataFetcher - INFO - 测试Impala连接...
+2025-05-24 22:48:37,782 - DataFetcher - INFO - 测试Impala连接...
+2025-05-24 22:48:37,782 - DataFetcher - INFO - 测试Impala连接...
+2025-05-24 22:48:39,313 - DataFetcher - INFO - Impala连接测试成功
+2025-05-24 22:48:39,313 - DataFetcher - INFO - Impala连接测试成功
+2025-05-24 22:48:39,313 - DataFetcher - INFO - Impala连接测试成功
+2025-05-24 22:48:39,314 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-24 22:48:39,314 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-24 22:48:39,314 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-24 22:48:39,314 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-24)
+2025-05-24 22:48:39,314 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-24)
+2025-05-24 22:48:39,314 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-24)
+2025-05-24 22:48:45,327 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-24 22:48:45,327 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-24 22:48:45,327 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-24 22:48:45,330 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-24 22:48:45,330 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-24 22:48:45,330 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-24 22:48:45,331 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-24 22:48:45,331 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-24 22:48:45,331 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-24 22:49:16,430 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-24 22:49:16,430 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-24 22:49:16,430 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): '<=' not supported between instances of 'str' and 'Timestamp'
+2025-05-26 15:43:19,352 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-26 15:43:19,352 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-26 15:43:24,143 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-26 15:43:24,154 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-26 15:43:24,155 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-26 15:43:24,789 - DataFetcher - INFO - 测试Impala连接...
+2025-05-26 15:43:26,155 - DataFetcher - INFO - Impala连接测试成功
+2025-05-26 15:43:26,156 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-26 15:43:26,156 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-26)
+2025-05-26 15:43:32,487 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-26 15:43:32,490 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-26 15:43:32,491 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-26 15:43:37,667 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-26 15:43:37,672 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-26 15:43:41,001 - DataFetcher - INFO - val数据集 - 记录数: 13769, SKU数: 170, 日期范围: 2025-01-01至2025-03-31, 平均价格: 53.66
+2025-05-26 15:43:41,002 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-26 15:43:42,758 - DataFetcher - INFO - test数据集 - 记录数: 3417, SKU数: 170, 日期范围: 2025-04-01至2025-04-30, 平均价格: 50.66
+2025-05-26 15:43:42,759 - DataFetcher - INFO - test数据集首行预览 - sku_id: 206942, dt: 2025-04-01, discount_price: 13.8, is_promotion: 0
+2025-05-26 15:43:42,783 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-26 15:43:42,783 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-03-31, 测试集: 2025-03-31至2025-04-30
+2025-05-26 15:43:46,121 - DataFetcher - INFO - train数据集 - 记录数: 135396, SKU数: 170, 日期范围: 2023-01-01至2025-04-26, 平均价格: 54.80
+2025-05-26 15:43:46,123 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-26 15:43:47,490 - DataFetcher - INFO - val数据集 - 记录数: 376, SKU数: 168, 日期范围: 2025-04-27至2025-04-30, 平均价格: 50.16
+2025-05-26 15:43:47,499 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-04-27, discount_price: 13.8, is_promotion: 0
+2025-05-26 15:43:49,945 - DataFetcher - WARNING - test数据集为空
+2025-05-26 15:43:49,968 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-26 15:43:49,969 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-26, 验证集: 2025-04-26至2025-05-11, 测试集: 2025-05-11至2025-05-26
+2025-05-26 16:40:07,940 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-26 16:40:07,940 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-26 16:40:13,044 - DataFetcher - INFO - 测试Impala连接...
+2025-05-26 16:40:14,234 - DataFetcher - INFO - Impala连接测试成功
+2025-05-26 16:40:14,236 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-26 16:40:14,236 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-26)
+2025-05-26 16:40:29,346 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-26 16:40:29,353 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-26 16:40:29,354 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-26 16:40:48,005 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-26 16:40:48,008 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-26 16:40:48,009 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-26 16:40:59,210 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-26 16:40:59,211 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-26 16:41:02,543 - DataFetcher - INFO - val数据集 - 记录数: 13769, SKU数: 170, 日期范围: 2025-01-01至2025-03-31, 平均价格: 53.66
+2025-05-26 16:41:02,544 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-26 16:41:04,256 - DataFetcher - INFO - test数据集 - 记录数: 3417, SKU数: 170, 日期范围: 2025-04-01至2025-04-30, 平均价格: 50.66
+2025-05-26 16:41:04,258 - DataFetcher - INFO - test数据集首行预览 - sku_id: 206942, dt: 2025-04-01, discount_price: 13.8, is_promotion: 0
+2025-05-26 16:41:04,283 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-26 16:41:04,283 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-03-31, 测试集: 2025-03-31至2025-04-30
+2025-05-26 16:41:04,315 - DataFetcher - INFO - train数据集 - 记录数: 135396, SKU数: 170, 日期范围: 2023-01-01至2025-04-26, 平均价格: 54.80
+2025-05-26 16:41:04,317 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-26 16:41:06,274 - DataFetcher - INFO - val数据集 - 记录数: 376, SKU数: 168, 日期范围: 2025-04-27至2025-04-30, 平均价格: 50.16
+2025-05-26 16:41:06,276 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-04-27, discount_price: 13.8, is_promotion: 0
+2025-05-26 16:41:07,530 - DataFetcher - WARNING - test数据集为空
+2025-05-26 16:41:07,560 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-26 16:41:07,560 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-26, 验证集: 2025-04-26至2025-05-11, 测试集: 2025-05-11至2025-05-26
+2025-05-26 17:04:30,524 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-26 17:04:30,525 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-26 17:04:34,936 - DataFetcher - INFO - 测试Impala连接...
+2025-05-26 17:04:37,059 - DataFetcher - INFO - Impala连接测试成功
+2025-05-26 17:04:37,062 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-26 17:04:37,063 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-26)
+2025-05-26 17:05:28,085 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-26 17:05:28,089 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-26 17:05:28,090 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-26 17:05:29,611 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-26 17:05:29,615 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-26 17:05:29,616 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-26 17:05:58,386 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-26 17:05:58,387 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-26 17:06:01,238 - DataFetcher - INFO - train数据集 - 记录数: 135396, SKU数: 170, 日期范围: 2023-01-01至2025-04-26, 平均价格: 54.80
+2025-05-26 17:06:01,239 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-26 17:06:07,204 - DataFetcher - INFO - val数据集 - 记录数: 13769, SKU数: 170, 日期范围: 2025-01-01至2025-03-31, 平均价格: 53.66
+2025-05-26 17:06:07,206 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-26 17:06:07,804 - DataFetcher - INFO - val数据集 - 记录数: 376, SKU数: 168, 日期范围: 2025-04-27至2025-04-30, 平均价格: 50.16
+2025-05-26 17:06:07,806 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-04-27, discount_price: 13.8, is_promotion: 0
+2025-05-26 17:06:13,603 - DataFetcher - WARNING - test数据集为空
+2025-05-26 17:06:13,643 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-26 17:06:13,643 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-26, 验证集: 2025-04-26至2025-05-11, 测试集: 2025-05-11至2025-05-26
+2025-05-26 17:06:13,901 - DataFetcher - INFO - test数据集 - 记录数: 3417, SKU数: 170, 日期范围: 2025-04-01至2025-04-30, 平均价格: 50.66
+2025-05-26 17:06:13,903 - DataFetcher - INFO - test数据集首行预览 - sku_id: 206942, dt: 2025-04-01, discount_price: 13.8, is_promotion: 0
+2025-05-26 17:06:13,934 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-26 17:06:13,935 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-03-31, 测试集: 2025-03-31至2025-04-30
+2025-05-27 23:58:36,109 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-27 23:58:36,110 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-27 23:58:42,785 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-27 23:58:42,799 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-27 23:58:42,800 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-27 23:59:55,387 - DataFetcher - INFO - train数据集 - 记录数: 489218, SKU数: 999, 日期范围: 2023-01-01至2024-05-31, 平均价格: 56.78
+2025-05-27 23:59:55,393 - DataFetcher - INFO - train数据集首行预览 - sku_id: 186430, dt: 2023-01-01, discount_price: 186.33333333333334, is_promotion: 1
+2025-05-27 23:59:57,814 - DataFetcher - INFO - val数据集 - 记录数: 5395, SKU数: 988, 日期范围: 2024-06-01至2024-06-07, 平均价格: 65.52
+2025-05-27 23:59:57,815 - DataFetcher - INFO - val数据集首行预览 - sku_id: 186430, dt: 2024-06-01, discount_price: 185.0, is_promotion: 0
+2025-05-27 23:59:59,680 - DataFetcher - INFO - test数据集 - 记录数: 4299, SKU数: 986, 日期范围: 2024-06-08至2024-06-14, 平均价格: 68.81
+2025-05-27 23:59:59,681 - DataFetcher - INFO - test数据集首行预览 - sku_id: 186430, dt: 2024-06-09, discount_price: 220.0, is_promotion: 0
+2025-05-27 23:59:59,794 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2024-06-14
+2025-05-27 23:59:59,794 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-05-31, 验证集: 2024-05-31至2024-06-07, 测试集: 2024-06-07至2024-06-14
+2025-05-28 00:06:45,242 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 00:06:45,243 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-28 00:06:49,663 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-28 00:06:49,677 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 00:06:49,680 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-28 00:08:01,838 - DataFetcher - INFO - train数据集 - 记录数: 489218, SKU数: 999, 日期范围: 2023-01-01至2024-05-31, 平均价格: 56.78
+2025-05-28 00:08:01,848 - DataFetcher - INFO - train数据集首行预览 - sku_id: 186430, dt: 2023-01-01, discount_price: 186.33333333333334, is_promotion: 1
+2025-05-28 00:08:04,073 - DataFetcher - INFO - val数据集 - 记录数: 5395, SKU数: 988, 日期范围: 2024-06-01至2024-06-07, 平均价格: 65.52
+2025-05-28 00:08:04,075 - DataFetcher - INFO - val数据集首行预览 - sku_id: 186430, dt: 2024-06-01, discount_price: 185.0, is_promotion: 0
+2025-05-28 00:08:08,370 - DataFetcher - INFO - test数据集 - 记录数: 4299, SKU数: 986, 日期范围: 2024-06-08至2024-06-14, 平均价格: 68.81
+2025-05-28 00:08:08,372 - DataFetcher - INFO - test数据集首行预览 - sku_id: 186430, dt: 2024-06-09, discount_price: 220.0, is_promotion: 0
+2025-05-28 00:08:08,466 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2024-06-14
+2025-05-28 00:08:08,466 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-05-31, 验证集: 2024-05-31至2024-06-07, 测试集: 2024-06-07至2024-06-14
+2025-05-28 00:45:49,917 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 00:45:49,918 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-28 00:45:55,562 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-28 00:45:55,598 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 00:45:55,601 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-28 00:47:03,535 - DataFetcher - INFO - train数据集 - 记录数: 489218, SKU数: 999, 日期范围: 2023-01-01至2024-05-31, 平均价格: 56.78
+2025-05-28 00:47:03,538 - DataFetcher - INFO - train数据集首行预览 - sku_id: 186430, dt: 2023-01-01, discount_price: 186.33333333333334, is_promotion: 1
+2025-05-28 00:47:08,001 - DataFetcher - INFO - val数据集 - 记录数: 5395, SKU数: 988, 日期范围: 2024-06-01至2024-06-07, 平均价格: 65.52
+2025-05-28 00:47:08,004 - DataFetcher - INFO - val数据集首行预览 - sku_id: 186430, dt: 2024-06-01, discount_price: 185.0, is_promotion: 0
+2025-05-28 00:47:10,642 - DataFetcher - INFO - test数据集 - 记录数: 4299, SKU数: 986, 日期范围: 2024-06-08至2024-06-14, 平均价格: 68.81
+2025-05-28 00:47:10,644 - DataFetcher - INFO - test数据集首行预览 - sku_id: 186430, dt: 2024-06-09, discount_price: 220.0, is_promotion: 0
+2025-05-28 00:47:10,753 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2024-06-14
+2025-05-28 00:47:10,753 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-05-31, 验证集: 2024-05-31至2024-06-07, 测试集: 2024-06-07至2024-06-14
+2025-05-28 01:14:32,461 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 01:14:32,465 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-28 01:14:39,442 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-28 01:14:39,453 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 01:14:39,454 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-28 01:15:51,788 - DataFetcher - INFO - train数据集 - 记录数: 489218, SKU数: 999, 日期范围: 2023-01-01至2024-05-31, 平均价格: 56.78
+2025-05-28 01:15:51,799 - DataFetcher - INFO - train数据集首行预览 - sku_id: 186430, dt: 2023-01-01, discount_price: 186.33333333333334, is_promotion: 1
+2025-05-28 01:15:57,021 - DataFetcher - INFO - val数据集 - 记录数: 5395, SKU数: 988, 日期范围: 2024-06-01至2024-06-07, 平均价格: 65.52
+2025-05-28 01:15:57,023 - DataFetcher - INFO - val数据集首行预览 - sku_id: 186430, dt: 2024-06-01, discount_price: 185.0, is_promotion: 0
+2025-05-28 01:15:59,382 - DataFetcher - INFO - test数据集 - 记录数: 4299, SKU数: 986, 日期范围: 2024-06-08至2024-06-14, 平均价格: 68.81
+2025-05-28 01:15:59,383 - DataFetcher - INFO - test数据集首行预览 - sku_id: 186430, dt: 2024-06-09, discount_price: 220.0, is_promotion: 0
+2025-05-28 01:15:59,485 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2024-06-14
+2025-05-28 01:15:59,485 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-05-31, 验证集: 2024-05-31至2024-06-07, 测试集: 2024-06-07至2024-06-14
+2025-05-28 01:31:34,492 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 01:31:34,493 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-28 01:31:40,325 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-28 01:31:40,342 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 01:31:40,343 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-28 01:32:51,051 - DataFetcher - INFO - train数据集 - 记录数: 489218, SKU数: 999, 日期范围: 2023-01-01至2024-05-31, 平均价格: 56.78
+2025-05-28 01:32:51,052 - DataFetcher - INFO - train数据集首行预览 - sku_id: 186430, dt: 2023-01-01, discount_price: 186.33333333333334, is_promotion: 1
+2025-05-28 01:33:19,398 - DataFetcher - INFO - val数据集 - 记录数: 5395, SKU数: 988, 日期范围: 2024-06-01至2024-06-07, 平均价格: 65.52
+2025-05-28 01:33:19,400 - DataFetcher - INFO - val数据集首行预览 - sku_id: 186430, dt: 2024-06-01, discount_price: 185.0, is_promotion: 0
+2025-05-28 01:33:37,941 - DataFetcher - INFO - test数据集 - 记录数: 4299, SKU数: 986, 日期范围: 2024-06-08至2024-06-14, 平均价格: 68.81
+2025-05-28 01:33:37,943 - DataFetcher - INFO - test数据集首行预览 - sku_id: 186430, dt: 2024-06-09, discount_price: 220.0, is_promotion: 0
+2025-05-28 01:33:38,139 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2024-06-14
+2025-05-28 01:33:38,139 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-05-31, 验证集: 2024-05-31至2024-06-07, 测试集: 2024-06-07至2024-06-14
+2025-05-28 02:06:06,501 - DataFetcher - INFO - 测试Impala连接...
+2025-05-28 02:06:07,870 - DataFetcher - INFO - Impala连接测试成功
+2025-05-28 02:06:07,873 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 02:06:07,880 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-28)
+2025-05-28 02:06:15,631 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 02:06:15,639 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 02:06:15,640 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 02:06:50,157 - DataFetcher - INFO - train数据集 - 记录数: 135447, SKU数: 170, 日期范围: 2023-01-01至2025-04-27, 平均价格: 54.79
+2025-05-28 02:06:50,168 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 02:06:52,840 - DataFetcher - INFO - val数据集 - 记录数: 325, SKU数: 168, 日期范围: 2025-04-29至2025-04-30, 平均价格: 51.38
+2025-05-28 02:06:52,851 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-04-29, discount_price: 11.420000000000002, is_promotion: 1
+2025-05-28 02:06:54,956 - DataFetcher - WARNING - test数据集为空
+2025-05-28 02:06:55,012 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 02:06:55,012 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-28, 验证集: 2025-04-28至2025-05-13, 测试集: 2025-05-13至2025-05-28
+2025-05-28 02:24:52,650 - DataFetcher - INFO - 测试Impala连接...
+2025-05-28 02:24:54,700 - DataFetcher - INFO - Impala连接测试成功
+2025-05-28 02:24:54,702 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 02:24:54,703 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-28)
+2025-05-28 02:25:05,342 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 02:25:05,353 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 02:25:05,354 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 02:25:29,643 - DataFetcher - INFO - train数据集 - 记录数: 135447, SKU数: 170, 日期范围: 2023-01-01至2025-04-27, 平均价格: 54.79
+2025-05-28 02:25:29,653 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 02:25:46,536 - DataFetcher - INFO - val数据集 - 记录数: 325, SKU数: 168, 日期范围: 2025-04-29至2025-04-30, 平均价格: 51.38
+2025-05-28 02:25:46,538 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-04-29, discount_price: 11.420000000000002, is_promotion: 1
+2025-05-28 02:25:48,183 - DataFetcher - WARNING - test数据集为空
+2025-05-28 02:25:48,220 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 02:25:48,220 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-28, 验证集: 2025-04-28至2025-05-13, 测试集: 2025-05-13至2025-05-28
+2025-05-28 02:41:26,376 - DataFetcher - INFO - 测试Impala连接...
+2025-05-28 02:41:27,761 - DataFetcher - INFO - Impala连接测试成功
+2025-05-28 02:41:27,762 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 02:41:27,762 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-28)
+2025-05-28 02:41:32,313 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 02:41:32,317 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 02:41:32,318 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 02:41:50,182 - DataFetcher - INFO - train数据集 - 记录数: 135447, SKU数: 170, 日期范围: 2023-01-01至2025-04-27, 平均价格: 54.79
+2025-05-28 02:41:50,185 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 02:41:51,790 - DataFetcher - INFO - val数据集 - 记录数: 325, SKU数: 168, 日期范围: 2025-04-29至2025-04-30, 平均价格: 51.38
+2025-05-28 02:41:51,792 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-04-29, discount_price: 11.420000000000002, is_promotion: 1
+2025-05-28 02:41:54,801 - DataFetcher - WARNING - test数据集为空
+2025-05-28 02:41:54,845 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 02:41:54,845 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-28, 验证集: 2025-04-28至2025-05-13, 测试集: 2025-05-13至2025-05-28
+2025-05-28 02:43:04,978 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 02:43:04,978 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-28 02:43:09,105 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-28 02:43:09,117 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 02:43:09,118 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-28 02:44:13,317 - DataFetcher - INFO - train数据集 - 记录数: 489218, SKU数: 999, 日期范围: 2023-01-01至2024-05-31, 平均价格: 56.78
+2025-05-28 02:44:13,321 - DataFetcher - INFO - train数据集首行预览 - sku_id: 186430, dt: 2023-01-01, discount_price: 186.33333333333334, is_promotion: 1
+2025-05-28 02:44:17,403 - DataFetcher - INFO - val数据集 - 记录数: 5395, SKU数: 988, 日期范围: 2024-06-01至2024-06-07, 平均价格: 65.52
+2025-05-28 02:44:17,404 - DataFetcher - INFO - val数据集首行预览 - sku_id: 186430, dt: 2024-06-01, discount_price: 185.0, is_promotion: 0
+2025-05-28 02:44:19,666 - DataFetcher - INFO - test数据集 - 记录数: 4299, SKU数: 986, 日期范围: 2024-06-08至2024-06-14, 平均价格: 68.81
+2025-05-28 02:44:19,668 - DataFetcher - INFO - test数据集首行预览 - sku_id: 186430, dt: 2024-06-09, discount_price: 220.0, is_promotion: 0
+2025-05-28 02:44:19,798 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2024-06-14
+2025-05-28 02:44:19,798 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-05-31, 验证集: 2024-05-31至2024-06-07, 测试集: 2024-06-07至2024-06-14
+2025-05-28 02:49:26,068 - DataFetcher - INFO - 测试Impala连接...
+2025-05-28 02:49:27,595 - DataFetcher - INFO - Impala连接测试成功
+2025-05-28 02:49:27,596 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 02:49:27,596 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-28)
+2025-05-28 02:49:32,906 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 02:49:32,916 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 02:49:32,916 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 02:49:57,595 - DataFetcher - INFO - train数据集 - 记录数: 135447, SKU数: 170, 日期范围: 2023-01-01至2025-04-27, 平均价格: 54.79
+2025-05-28 02:49:57,637 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 02:49:59,123 - DataFetcher - INFO - val数据集 - 记录数: 325, SKU数: 168, 日期范围: 2025-04-29至2025-04-30, 平均价格: 51.38
+2025-05-28 02:49:59,126 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-04-29, discount_price: 11.420000000000002, is_promotion: 1
+2025-05-28 02:50:00,434 - DataFetcher - WARNING - test数据集为空
+2025-05-28 02:50:00,501 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 02:50:00,501 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-28, 验证集: 2025-04-28至2025-05-13, 测试集: 2025-05-13至2025-05-28
+2025-05-28 03:10:08,932 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 03:10:08,934 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-28 03:10:12,566 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-28 03:10:12,575 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 03:10:12,576 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-28 03:11:11,060 - DataFetcher - INFO - train数据集 - 记录数: 489218, SKU数: 999, 日期范围: 2023-01-01至2024-05-31, 平均价格: 56.78
+2025-05-28 03:11:11,062 - DataFetcher - INFO - train数据集首行预览 - sku_id: 186430, dt: 2023-01-01, discount_price: 186.33333333333334, is_promotion: 1
+2025-05-28 03:11:13,232 - DataFetcher - INFO - val数据集 - 记录数: 5395, SKU数: 988, 日期范围: 2024-06-01至2024-06-07, 平均价格: 65.52
+2025-05-28 03:11:13,233 - DataFetcher - INFO - val数据集首行预览 - sku_id: 186430, dt: 2024-06-01, discount_price: 185.0, is_promotion: 0
+2025-05-28 03:11:17,095 - DataFetcher - INFO - test数据集 - 记录数: 4299, SKU数: 986, 日期范围: 2024-06-08至2024-06-14, 平均价格: 68.81
+2025-05-28 03:11:17,097 - DataFetcher - INFO - test数据集首行预览 - sku_id: 186430, dt: 2024-06-09, discount_price: 220.0, is_promotion: 0
+2025-05-28 03:11:17,213 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2024-06-14
+2025-05-28 03:11:17,214 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-05-31, 验证集: 2024-05-31至2024-06-07, 测试集: 2024-06-07至2024-06-14
+2025-05-28 12:59:14,239 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 12:59:14,240 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-28 12:59:20,324 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-28 12:59:20,333 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 12:59:20,334 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-28 12:59:22,238 - DataFetcher - ERROR - 获取数据失败 (尝试 1/1): AnalysisException: Syntax error in line 9:
+...            AND sku_id IN 100033753088,4524035,1000369...
+                             ^
+Encountered: INTEGER LITERAL
+Expected: (
+
+CAUSED BY: Exception: Syntax error
+
+2025-05-28 13:05:39,890 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 13:05:39,891 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-28 13:05:44,755 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-28 13:05:44,769 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 13:05:44,771 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-28 13:06:43,373 - DataFetcher - INFO - train数据集 - 记录数: 489218, SKU数: 999, 日期范围: 2023-01-01至2024-05-31, 平均价格: 56.78
+2025-05-28 13:06:43,393 - DataFetcher - INFO - train数据集首行预览 - sku_id: 186430, dt: 2023-01-01, discount_price: 186.33333333333334, is_promotion: 1
+2025-05-28 13:06:46,640 - DataFetcher - INFO - val数据集 - 记录数: 5395, SKU数: 988, 日期范围: 2024-06-01至2024-06-07, 平均价格: 65.52
+2025-05-28 13:06:46,641 - DataFetcher - INFO - val数据集首行预览 - sku_id: 186430, dt: 2024-06-01, discount_price: 185.0, is_promotion: 0
+2025-05-28 13:06:48,938 - DataFetcher - INFO - test数据集 - 记录数: 4299, SKU数: 986, 日期范围: 2024-06-08至2024-06-14, 平均价格: 68.81
+2025-05-28 13:06:48,939 - DataFetcher - INFO - test数据集首行预览 - sku_id: 186430, dt: 2024-06-09, discount_price: 220.0, is_promotion: 0
+2025-05-28 13:06:49,014 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2024-06-14
+2025-05-28 13:06:49,014 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-05-31, 验证集: 2024-05-31至2024-06-07, 测试集: 2024-06-07至2024-06-14
+2025-05-28 13:56:10,513 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 13:56:10,513 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2024-06-14)
+2025-05-28 13:56:41,522 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 999, 完整率: 94.05% (范围: 90.02%-99.81%)
+2025-05-28 13:56:41,530 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 13:56:41,531 - DataFetcher - INFO - 找到 999 个符合完整性要求的SKU
+2025-05-28 13:57:34,826 - DataFetcher - INFO - train数据集 - 记录数: 489218, SKU数: 999, 日期范围: 2023-01-01至2024-05-31, 平均价格: 56.78
+2025-05-28 13:57:34,829 - DataFetcher - INFO - train数据集首行预览 - sku_id: 186430, dt: 2023-01-01, discount_price: 186.33333333333334, is_promotion: 1
+2025-05-28 13:58:07,421 - DataFetcher - INFO - val数据集 - 记录数: 5395, SKU数: 988, 日期范围: 2024-06-01至2024-06-07, 平均价格: 65.52
+2025-05-28 13:58:07,423 - DataFetcher - INFO - val数据集首行预览 - sku_id: 186430, dt: 2024-06-01, discount_price: 185.0, is_promotion: 0
+2025-05-28 13:58:11,699 - DataFetcher - INFO - test数据集 - 记录数: 4299, SKU数: 986, 日期范围: 2024-06-08至2024-06-14, 平均价格: 68.81
+2025-05-28 13:58:11,700 - DataFetcher - INFO - test数据集首行预览 - sku_id: 186430, dt: 2024-06-09, discount_price: 220.0, is_promotion: 0
+2025-05-28 13:58:11,779 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2024-06-14
+2025-05-28 13:58:11,779 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-05-31, 验证集: 2024-05-31至2024-06-07, 测试集: 2024-06-07至2024-06-14
+2025-05-28 14:29:52,467 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 14:29:52,468 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-28 14:29:57,641 - DataFetcher - INFO - 测试Impala连接...
+2025-05-28 14:29:58,703 - DataFetcher - INFO - Impala连接测试成功
+2025-05-28 14:29:58,704 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 14:29:58,705 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-28)
+2025-05-28 14:30:03,142 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 14:30:03,168 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 14:30:03,169 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 14:30:05,154 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 14:30:05,157 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 14:30:05,158 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 14:30:16,546 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-28 14:30:16,549 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 14:30:31,701 - DataFetcher - INFO - train数据集 - 记录数: 135447, SKU数: 170, 日期范围: 2023-01-01至2025-04-27, 平均价格: 54.79
+2025-05-28 14:30:31,703 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 14:31:13,539 - DataFetcher - INFO - val数据集 - 记录数: 325, SKU数: 168, 日期范围: 2025-04-29至2025-04-30, 平均价格: 51.38
+2025-05-28 14:31:13,542 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-04-29, discount_price: 11.420000000000002, is_promotion: 1
+2025-05-28 14:31:15,322 - DataFetcher - INFO - val数据集 - 记录数: 13769, SKU数: 170, 日期范围: 2025-01-01至2025-03-31, 平均价格: 53.66
+2025-05-28 14:31:15,323 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-28 14:31:15,353 - DataFetcher - WARNING - test数据集为空
+2025-05-28 14:31:15,382 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 14:31:15,383 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2025-04-28, 验证集: 2025-04-28至2025-05-13, 测试集: 2025-05-13至2025-05-28
+2025-05-28 14:31:17,426 - DataFetcher - INFO - test数据集 - 记录数: 3417, SKU数: 170, 日期范围: 2025-04-01至2025-04-30, 平均价格: 50.66
+2025-05-28 14:31:17,427 - DataFetcher - INFO - test数据集首行预览 - sku_id: 206942, dt: 2025-04-01, discount_price: 13.8, is_promotion: 0
+2025-05-28 14:31:17,455 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 14:31:17,455 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-03-31, 测试集: 2025-03-31至2025-04-30
+2025-05-28 14:48:56,387 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 14:48:56,388 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-07)
+2025-05-28 14:49:07,813 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 14:49:07,819 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 14:49:07,820 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 14:49:23,426 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-28 14:49:23,430 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 14:49:29,537 - DataFetcher - INFO - val数据集 - 记录数: 17186, SKU数: 170, 日期范围: 2025-01-01至2025-04-30, 平均价格: 53.06
+2025-05-28 14:49:29,538 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-28 14:49:36,225 - DataFetcher - WARNING - test数据集为空
+2025-05-28 14:49:36,260 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 14:49:36,260 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-04-30, 测试集: 2025-04-30至2025-05-07
+2025-05-28 14:50:56,025 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 14:50:56,025 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-05-07)
+2025-05-28 14:51:26,352 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 14:51:26,359 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 14:51:26,359 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 14:51:44,771 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-28 14:51:44,773 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 14:51:49,280 - DataFetcher - INFO - val数据集 - 记录数: 17186, SKU数: 170, 日期范围: 2025-01-01至2025-04-30, 平均价格: 53.06
+2025-05-28 14:51:49,281 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-28 14:51:50,446 - DataFetcher - WARNING - test数据集为空
+2025-05-28 14:51:50,469 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 14:51:50,469 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-04-30, 测试集: 2025-04-30至2025-05-07
+2025-05-28 14:55:47,705 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 14:55:47,706 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-28 14:55:55,702 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 14:55:55,708 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 14:55:55,709 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 14:56:11,379 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-28 14:56:11,381 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 14:56:44,063 - DataFetcher - INFO - val数据集 - 记录数: 16354, SKU数: 170, 日期范围: 2025-01-01至2025-04-23, 平均价格: 53.18
+2025-05-28 14:56:44,070 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-28 14:56:47,976 - DataFetcher - INFO - test数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-28 14:56:47,978 - DataFetcher - INFO - test数据集首行预览 - sku_id: 206942, dt: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-28 14:56:48,036 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 14:56:48,037 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-04-23, 测试集: 2025-04-23至2025-04-30
+2025-05-28 15:39:32,537 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 15:39:32,538 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-28 15:39:41,380 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 15:39:41,388 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 15:39:41,388 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 15:40:04,197 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-28 15:40:04,200 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 15:40:08,481 - DataFetcher - INFO - val数据集 - 记录数: 16354, SKU数: 170, 日期范围: 2025-01-01至2025-04-23, 平均价格: 53.18
+2025-05-28 15:40:08,483 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-28 15:40:10,904 - DataFetcher - INFO - test数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-28 15:40:10,905 - DataFetcher - INFO - test数据集首行预览 - sku_id: 206942, dt: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-28 15:40:10,933 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 15:40:10,933 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-04-23, 测试集: 2025-04-23至2025-04-30
+2025-05-28 15:55:50,449 - DataFetcher - INFO - 尝试获取训练数据 (第1次尝试)
+2025-05-28 15:55:50,450 - DataFetcher - INFO - 开始检查SKU数据完整性 (2023-01-01 至 2025-04-30)
+2025-05-28 15:56:01,204 - DataFetcher - INFO - SKU完整性检查完成 - 总数: 170, 完整率: 93.85% (范围: 90.01%-99.18%)
+2025-05-28 15:56:01,212 - DataFetcher - INFO - 报告保存至: data/raw/sku_completeness_report.csv
+2025-05-28 15:56:01,213 - DataFetcher - INFO - 找到 170 个符合完整性要求的SKU
+2025-05-28 15:56:17,874 - DataFetcher - INFO - train数据集 - 记录数: 118586, SKU数: 170, 日期范围: 2023-01-01至2024-12-31, 平均价格: 55.03
+2025-05-28 15:56:17,875 - DataFetcher - INFO - train数据集首行预览 - sku_id: 206942, dt: 2023-01-01, discount_price: 10.610059171597634, is_promotion: 1
+2025-05-28 15:56:20,806 - DataFetcher - INFO - val数据集 - 记录数: 16354, SKU数: 170, 日期范围: 2025-01-01至2025-04-23, 平均价格: 53.18
+2025-05-28 15:56:20,808 - DataFetcher - INFO - val数据集首行预览 - sku_id: 206942, dt: 2025-01-01, discount_price: 13.8, is_promotion: 0
+2025-05-28 15:56:22,902 - DataFetcher - INFO - test数据集 - 记录数: 832, SKU数: 169, 日期范围: 2025-04-24至2025-04-30, 平均价格: 50.63
+2025-05-28 15:56:22,903 - DataFetcher - INFO - test数据集首行预览 - sku_id: 206942, dt: 2025-04-24, discount_price: 13.8, is_promotion: 0
+2025-05-28 15:56:22,930 - DataFetcher - INFO - 成功获取所有数据集，最新日期: 2025-04-30
+2025-05-28 15:56:22,930 - DataFetcher - INFO - 数据集划分 - 训练集: 2023-01-01至2024-12-31, 验证集: 2024-12-31至2025-04-23, 测试集: 2025-04-23至2025-04-30

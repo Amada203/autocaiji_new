@@ -138,6 +138,28 @@
                 </div>
             </div>
         </div>
+
+        <h1>实时预测</h1>
+        <div class="alert alert-info" style="font-size: 15px;">
+            支持单SKU或批量SKU实时预测。多个SKU请用英文逗号分隔，如 <b>SKU123,SKU456</b>。
+        </div>
+        <form id="realtimePredictForm" class="mb-4">
+            <div class="mb-3">
+                <label for="skuInput" class="form-label">SKU（可批量，逗号分隔）</label>
+                <input id="skuInput" class="form-control" placeholder="如 SKU123,SKU456">
+                <div class="form-text">支持多个SKU，英文逗号分隔</div>
+            </div>
+            <div class="mb-3">
+                <label for="daysInput" class="form-label">预测天数</label>
+                <input id="daysInput" type="number" class="form-control" value="1" min="1" max="30">
+            </div>
+            <div class="mb-3">
+                <label for="endDateInput" class="form-label">结束日期（可选）</label>
+                <input id="endDateInput" type="date" class="form-control">
+            </div>
+            <button type="button" class="btn btn-primary" id="realtimePredictBtn">实时预测</button>
+        </form>
+        <div id="resultsContainer" class="mt-4"></div>
     </div>
 
     <!-- SKU详情模态框 -->
