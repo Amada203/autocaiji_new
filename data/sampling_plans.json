@@ -3,7 +3,7 @@
     "date": "2025-05-29",
     "sku_ids": [],
     "sampling_rate": 0.0,
-    "estimated_capture_rate": 0.95,
+    "estimated_capture_rate": 0.89,
     "estimated_cost_saving": 1.0
   }
 ]

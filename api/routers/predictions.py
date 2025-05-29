@@ -3,6 +3,7 @@ from typing import List, Optional
 from datetime import date
 from api.services.prediction_service import PredictionService
 from api.routers.auth import get_current_active_user
+from src.api.services.stats_service import get_top_query_skus, get_top_change_skus, get_model_threshold
 
 router = APIRouter()
 prediction_service = PredictionService()
@@ -39,7 +40,16 @@ async def realtime_predict(
     """前端实时触发预测，支持批量SKU、天数、指定起点日期"""
     try:
         result = prediction_service.predict_realtime(sku_list, days=days, end_date=end_date)
-        return result
+        # 集成统计与阈值信息
+        top_query = get_top_query_skus()
+        top_change = get_top_change_skus()
+        threshold = get_model_threshold()
+        return {
+            "result": result,
+            "top_query_skus": [item.dict() for item in top_query],
+            "top_change_skus": [item.dict() for item in top_change],
+            "model_threshold": threshold
+        }
     except Exception as e:
         raise HTTPException(
             status_code=500,

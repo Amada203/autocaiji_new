@@ -86370,3 +86370,32 @@ unable to rollback
 2025-05-29 15:45:59,338 - api.services.prediction_service - INFO - 数据库连接测试成功
 2025-05-29 15:45:59,351 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
 2025-05-29 15:45:59,391 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 17:29:36,199 - model_predictor - INFO - 模型已加载: models/price_model.pkl
+2025-05-29 17:29:36,200 - model_predictor - INFO - 模型自带特征名: None
+2025-05-29 17:29:36,201 - model_predictor - INFO - 加载特征名列表: ['day_of_week', 'is_weekend', 'month', 'day', 'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d', 'days_since_last_change', 'change_freq_7d', 'change_freq_30d', 'price_trend_7d', 'price_trend_14d', 'prophet_trend', 'prophet_yhat']
+2025-05-29 17:29:36,235 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 17:29:36,430 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 17:29:36,437 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 17:29:36,519 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 17:30:04,163 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 17:30:04,297 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 17:30:10,313 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 17:30:10,601 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 17:30:19,155 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 17:30:19,255 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 17:30:19,285 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 17:30:19,330 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 17:30:33,846 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 17:30:33,930 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 17:30:33,941 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 17:30:33,988 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 17:30:37,423 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 17:30:37,505 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 17:30:37,513 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 17:30:37,650 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 17:30:38,484 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 17:30:38,563 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 17:32:42,458 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 17:32:42,549 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 17:32:42,615 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 17:32:42,692 - api.services.prediction_service - INFO - 查询到1000条预测数据
