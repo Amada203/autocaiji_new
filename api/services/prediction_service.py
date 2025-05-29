@@ -8,6 +8,29 @@ from src.api.schemas import PredictRequest, PredictBatchRequest
 logger = logging.getLogger(__name__)
 
 class PredictionService:
+    """
+    预测服务层，负责对接数据库和算法层，聚合业务逻辑。
+    
+    本服务直接调用 src/api/main.py 的高质量预测逻辑：
+    - predict_api 已支持单SKU和批量SKU预测，调用方式统一。
+    - 前端只需将多个 SKU 封装进 items 字段，POST 到 /predict 即可。
+
+    前端调用示例：
+    -------------------
+    POST /api/predictions/realtime
+    Content-Type: application/json
+    {
+        "sku_list": ["SKU001", "SKU002", "SKU003"],
+        "date": "2024-06-01"
+    }
+    返回：
+    [
+        {"sku": "SKU001", "date": "2024-06-01", "predict_proba": 0.8, "sampling_plan": "采集"},
+        {"sku": "SKU002", "date": "2024-06-01", "predict_proba": 0.3, "sampling_plan": "不采集"},
+        ...
+    ]
+    -------------------
+    """
     def __init__(self):
         self.config = {
             'host': 'localhost',
@@ -170,22 +193,33 @@ class PredictionService:
         from datetime import datetime, timedelta
         return (datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d")
 
-    def predict_realtime(self, sku_list, days=1, end_date=None):
+    def predict_realtime(self, sku_list, date=None):
         """
-        实时预测接口，调用新src/api/main.py的predict_batch_api
+        实时预测接口，支持单SKU和批量SKU预测。
+        Args:
+            sku_list (list): SKU列表
+            date (str): 预测日期，格式YYYY-MM-DD，默认今天
+        Returns:
+            list: 预测结果列表，每个元素为dict，包含sku, date, predict_proba, sampling_plan
+
+        前端调用示例：
+            fetch('/api/predictions/realtime', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ sku_list: ['SKU001', 'SKU002'], date: '2024-06-01' })
+            })
+            .then(res => res.json())
+            .then(data => console.log(data));
         """
-        reqs = [PredictRequest(sku=sku, date=end_date or pd.Timestamp.now().strftime('%Y-%m-%d')) for sku in sku_list]
-        batch_req = PredictBatchRequest(items=reqs)
-        results = predict_batch_api(batch_req)
-        return [
-            {
-                "sku_id": r.sku,
-                "dates": [r.date],
-                "predicted": [r.predict_proba],
-                "actual": [None],
-            }
-            for r in results
-        ]
+        import pandas as pd
+        if date is None:
+            date = pd.Timestamp.now().strftime('%Y-%m-%d')
+        req_items = [dict(sku=sku, date=date) for sku in sku_list]
+        request = PredictRequest(items=req_items)
+        # 调用 src.api.main.predict_api，统一处理单/批量
+        results = predict_api(request)
+        # 转换为dict便于前端处理
+        return [r.dict() for r in results]
 
     def _fetch_actuals(self, sku_list, date_list):
         """从数据库获取实际价格，返回dict: (sku, date) -> actual_value"""

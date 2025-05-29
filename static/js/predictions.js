@@ -322,7 +322,8 @@ async function showSkuDetail(prediction) {
         // 更新模态框内容
         document.getElementById('modalSkuId').textContent = skuDetail.sku_id;
         document.getElementById('modalSkuName').textContent = skuDetail.current_prediction.sku_name || `商品_${skuDetail.sku_id}`;
-        document.getElementById('modalCurrentPrice').textContent = `¥${skuDetail.current_prediction.current_price.toFixed(2)}`;
+        const price = Number(skuDetail.current_prediction.current_price);
+        document.getElementById('modalCurrentPrice').textContent = `¥${isNaN(price) ? '0.00' : price.toFixed(2)}`;
         
         const probElement = document.getElementById('modalPredictedProb');
         const probValue = (skuDetail.current_prediction.predicted_prob * 100).toFixed(2) + '%';
@@ -450,11 +451,12 @@ async function predictRealtime() {
     btn.textContent = '预测中...';
 
     try {
-        const response = await fetch('/predict', {
+        const response = await fetch('/api/predictions/realtime', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                items: skuList.map(sku => ({ sku, date }))
+                sku_list: skuList,
+                date: date
             })
         });
         if (!response.ok) throw new Error('预测请求失败');

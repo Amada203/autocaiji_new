@@ -5,6 +5,7 @@ import numpy as np
 import os
 import json
 import random
+from api.services.prediction_service import PredictionService
 
 class SamplingService:
     def __init__(self):
@@ -19,6 +20,8 @@ class SamplingService:
         if not os.path.exists(self.plans_path):
             with open(self.plans_path, 'w') as f:
                 json.dump([], f)
+        
+        self.prediction_service = PredictionService()
     
     def generate_plan(
         self, 
@@ -41,29 +44,26 @@ class SamplingService:
         if prediction_date is None:
             prediction_date = date.today()
             
-        # 获取所有SKU
-        all_skus = self._get_all_skus()
+        # 用真实数据
+        sku_probs = self._get_all_skus_and_probs()
+        all_skus = list(sku_probs.keys())
         
-        # 模拟预测概率
-        pred_probs = {sku_id: random.random() for sku_id in all_skus}
-        
-        # 根据概率选择SKU
-        threshold = 0.5  # 简化版本使用固定阈值
-        selected_skus = [sku_id for sku_id, prob in pred_probs.items() if prob >= threshold]
+        # 采样逻辑
+        threshold = 0.5  # 可根据业务调整
+        selected_skus = [sku for sku, prob in sku_probs.items() if prob >= threshold]
         
         # 限制采样数量
         if max_samples and len(selected_skus) > max_samples:
-            # 按概率排序
             sorted_pairs = sorted(
-                [(sku_id, pred_probs[sku_id]) for sku_id in all_skus],
+                [(sku, sku_probs[sku]) for sku in all_skus],
                 key=lambda x: x[1],
                 reverse=True
             )
             selected_skus = [pair[0] for pair in sorted_pairs[:max_samples]]
         
         # 计算采样率和成本节省
-        sampling_rate = len(selected_skus) / len(all_skus)
-        cost_saving = 1 - sampling_rate
+        sampling_rate = len(selected_skus) / len(all_skus) if all_skus else 0
+        cost_saving = 1 - sampling_rate if all_skus else 0
         
         # 构建计划
         plan = {
@@ -152,14 +152,21 @@ class SamplingService:
         
         return stats
     
+    def _get_all_skus_and_probs(self):
+        """从真实预测结果获取所有SKU及其预测概率"""
+        predictions = self.prediction_service.get_predictions(limit=10000)
+        sku_probs = {}
+        for p in predictions:
+            sku = p.get('sku_id') or p.get('sku')
+            prob = p.get('probability') or p.get('predicted_prob') or 0
+            if sku:
+                sku_probs[sku] = prob
+        return sku_probs
+
     def _get_all_skus(self):
-        """获取所有SKU
-        
-        Returns:
-            list: SKU ID列表
-        """
-        # 模拟数据，实际项目中应从数据库获取
-        return [f"SKU{i:06d}" for i in range(1, 1001)]
+        """获取所有SKU（真实数据）"""
+        sku_probs = self._get_all_skus_and_probs()
+        return list(sku_probs.keys())
     
     def _save_plan(self, plan):
         """保存采样计划
