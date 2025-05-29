@@ -118,14 +118,18 @@
                 <button class="btn btn-success me-2" id="generateBtn">
                     <i class="bi bi-plus-circle"></i> 生成新计划
                 </button>
-                <button class="btn btn-secondary" id="exportBtn">
+                <button class="btn btn-outline-info me-2" id="historyBtn">
+                    <i class="bi bi-clock-history"></i> 历史计划
+                </button>
+                <button class="btn btn-outline-success" id="exportBtn">
                     <i class="bi bi-download"></i> 导出
                 </button>
             </div>
         </div>
         <div class="card stat-card mb-4">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">今日采样计划概览</h5>
+                <button class="btn btn-outline-success btn-sm" id="exportOverviewBtn"><i class="bi bi-download"></i> 导出概览</button>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -157,8 +161,12 @@
             </div>
         </div>
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">SKU列表</h5>
+                <div>
+                    <button class="btn btn-outline-primary btn-sm me-2" id="filterBtn"><i class="bi bi-funnel"></i> 筛选</button>
+                    <button class="btn btn-outline-success btn-sm" id="exportTableBtn"><i class="bi bi-download"></i> 导出表格</button>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

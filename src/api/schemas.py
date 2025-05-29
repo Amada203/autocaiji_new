@@ -26,4 +26,17 @@ class PredictBatchResponseItem(BaseModel):
 class HistoryItem(BaseModel):
     date: str
     price: float
-    price_change: int 
+    price_change: int
+
+class TopSkuItem(BaseModel):
+    sku: str
+    count: int
+
+class CompareResult(BaseModel):
+    sku: str
+    date: str
+    real: float
+    pred: float
+
+class ModelThresholdResponse(BaseModel):
+    threshold: float 

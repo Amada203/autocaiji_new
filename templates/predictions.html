@@ -283,11 +283,47 @@
                                     <th>变动概率</th>
                                     <td id="modalPredictedProb">-</td>
                                 </tr>
+                                <tr>
+                                    <th>预测类型</th>
+                                    <td id="modalPredictedType">-</td>
+                                </tr>
+                                <tr>
+                                    <th>变动幅度</th>
+                                    <td id="modalChangeAmount">-</td>
+                                </tr>
+                                <tr>
+                                    <th>变动频率</th>
+                                    <td id="modalChangeFreq">-</td>
+                                </tr>
+                                <tr>
+                                    <th>连续变动天数</th>
+                                    <td id="modalChangeStreak">-</td>
+                                </tr>
                             </table>
                         </div>
                         <div class="col-md-6">
                             <h6>价格历史</h6>
                             <canvas id="modalPriceChart"></canvas>
+                            <div class="row mt-3 g-2">
+                                <div class="col-4">
+                                    <div class="card bg-light text-center p-2">
+                                        <div class="small text-muted">变动频率</div>
+                                        <div class="fw-bold" id="modalChangeFreqCard">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card bg-light text-center p-2">
+                                        <div class="small text-muted">变动幅度</div>
+                                        <div class="fw-bold" id="modalChangeAmountCard">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card bg-light text-center p-2">
+                                        <div class="small text-muted">连续天数</div>
+                                        <div class="fw-bold" id="modalChangeStreakCard">-</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

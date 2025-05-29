@@ -126,41 +126,105 @@
         </div>
     </nav>
     <div class="container mt-4">
-        <div class="jumbotron">
-            <h1 class="display-4">欢迎使用商品价格变动预测系统</h1>
-            <p class="lead">本系统通过机器学习算法预测商品价格变动概率，优化爬虫采样计划，降低采样成本。</p>
-            <hr class="my-4">
-            <p>系统目标：保证95%以上的价格变化捕捉率，同时降低20%以上的采样成本。</p>
-            <div class="main-btns d-flex flex-wrap">
-                <a class="btn btn-primary btn-lg me-2 mb-2" href="/sampling" role="button"><i class="bi bi-list-check me-1"></i> 查看采样计划</a>
-                <a class="btn btn-secondary btn-lg mb-2" href="/stats" role="button"><i class="bi bi-bar-chart-fill me-1"></i> 查看统计信息</a>
+        <div class="row mb-4 g-4">
+            <div class="col-md-3">
+                <div class="card stat-card text-center">
+                    <div class="card-body">
+                        <div class="stat-label">价格变动捕捉率</div>
+                        <div class="stat-number" id="captureRate">95.2%</div>
+                        <div class="stat-label text-success">目标≥95%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card text-center">
+                    <div class="card-body">
+                        <div class="stat-label">采样率</div>
+                        <div class="stat-number" id="samplingRate">32.8%</div>
+                        <div class="stat-label text-info">目标≤40%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card text-center">
+                    <div class="card-body">
+                        <div class="stat-label">采样成本节省</div>
+                        <div class="stat-number" id="costSaving">21.4%</div>
+                        <div class="stat-label text-primary">目标≥20%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stat-card text-center">
+                    <div class="card-body">
+                        <div class="stat-label">模型准确率</div>
+                        <div class="stat-number" id="modelAccuracy">89.7%</div>
+                        <div class="stat-label text-secondary">最新评估</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-md-4 mb-4">
-                <div class="card stat-card h-100">
+        <hr class="my-4" style="border-top:1.5px solid #e5e7eb;">
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-lightning-charge text-warning me-2"></i>最近动态</h5>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">今日采样计划</h5>
-                        <p class="card-text">查看今日需要采样的SKU列表，优化爬虫资源分配。</p>
-                        <a href="/sampling" class="btn btn-primary w-100">查看详情</a>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                昨日价格变动SKU数
+                                <span class="badge bg-primary rounded-pill">128</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                本周采样计划变更
+                                <span class="badge bg-info rounded-pill">3</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                模型最新训练时间
+                                <span class="badge bg-secondary rounded-pill">2024-06-10</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                系统公告
+                                <span class="badge bg-warning text-dark rounded-pill">无</span>
+                            </li>
+                        </ul>
+                        <div class="jumbotron mt-4">
+                            <h1 class="display-6">欢迎使用商品价格变动预测系统</h1>
+                            <p class="lead">本系统通过机器学习算法预测商品价格变动概率，优化爬虫采样计划，降低采样成本。</p>
+                            <hr class="my-3">
+                            <p>系统目标：保证95%以上的价格变化捕捉率，同时降低20%以上的采样成本。</p>
+                            <div class="main-btns d-flex flex-wrap">
+                                <a class="btn btn-primary btn-lg me-2 mb-2" href="/sampling" role="button"><i class="bi bi-list-check me-1"></i> 查看采样计划</a>
+                                <a class="btn btn-secondary btn-lg mb-2" href="/stats" role="button"><i class="bi bi-bar-chart-fill me-1"></i> 查看统计信息</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card stat-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">统计分析</h5>
-                        <p class="card-text">查看系统性能指标，包括捕捉率、采样率和成本节省。</p>
-                        <a href="/stats" class="btn btn-primary w-100">查看详情</a>
+            <div class="col-lg-4">
+                <div class="d-flex flex-column h-100 gap-4">
+                    <div class="card stat-card flex-fill">
+                        <div class="card-body">
+                            <h5 class="card-title">今日采样计划</h5>
+                            <p class="card-text">查看今日需要采样的SKU列表，优化爬虫资源分配。</p>
+                            <a href="/sampling" class="btn btn-primary w-100">查看详情</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card stat-card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">API文档</h5>
-                        <p class="card-text">查看系统API文档，了解如何与爬虫系统集成。</p>
-                        <a href="/docs" class="btn btn-primary w-100">查看文档</a>
+                    <div class="card stat-card flex-fill">
+                        <div class="card-body">
+                            <h5 class="card-title">统计分析</h5>
+                            <p class="card-text">查看系统性能指标，包括捕捉率、采样率和成本节省。</p>
+                            <a href="/stats" class="btn btn-primary w-100">查看详情</a>
+                        </div>
+                    </div>
+                    <div class="card stat-card flex-fill">
+                        <div class="card-body">
+                            <h5 class="card-title">API文档</h5>
+                            <p class="card-text">查看系统API文档，了解如何与爬虫系统集成。</p>
+                            <a href="/docs" class="btn btn-primary w-100">查看文档</a>
+                        </div>
                     </div>
                 </div>
             </div>

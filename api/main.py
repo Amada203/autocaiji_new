@@ -11,7 +11,8 @@ from api.routers import (
     auth,
     predictions,
     sampling_plans,
-    crawl_results
+    crawl_results,
+    stats
 )
 
 # 创建FastAPI应用
@@ -49,6 +50,7 @@ app.include_router(auth.router, prefix="/api/auth", tags=["认证"])
 app.include_router(predictions.router, prefix="/api/predictions", tags=["预测"])
 app.include_router(sampling_plans.router, prefix="/api/sampling-plans", tags=["采样计划"])
 app.include_router(crawl_results.router, prefix="/api/crawl-results", tags=["爬取结果"])
+app.include_router(stats.router, prefix="/api/stats", tags=["统计"])
 
 # 前端页面路由
 @app.get("/")

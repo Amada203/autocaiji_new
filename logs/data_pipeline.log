@@ -86168,3 +86168,205 @@ unable to rollback
 2025-05-29 11:02:16,871 - api.services.prediction_service - INFO - 查询到100条预测数据
 2025-05-29 11:02:16,881 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
 2025-05-29 11:02:16,923 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:12:23,841 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:12:23,907 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:12:23,923 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:12:23,998 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:12:59,682 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:12:59,739 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:12:59,752 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:12:59,804 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:13:04,341 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:13:04,406 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:25:38,176 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:25:38,281 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:25:45,341 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:25:45,422 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:25:45,431 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:25:45,601 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:28:20,888 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:28:20,963 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:28:20,974 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:28:21,039 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:28:49,430 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:28:49,467 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:29:01,112 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:29:01,193 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:29:05,101 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:29:05,145 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:29:05,154 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:29:05,199 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:29:11,954 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:29:12,015 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:29:12,035 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:29:12,129 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:29:17,282 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:29:17,396 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:29:26,267 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:29:26,336 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:29:27,614 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:29:27,668 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:29:27,678 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:29:27,715 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:30:10,945 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:30:11,026 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:30:28,182 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:30:28,235 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:30:51,017 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:30:51,174 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:30:51,190 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:30:51,240 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:31:00,778 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:31:00,891 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:31:17,205 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:31:17,287 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:31:17,298 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:31:17,353 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:31:19,742 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:31:19,782 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:31:39,436 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:31:39,502 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:32:14,276 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:32:14,320 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:33:48,806 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:33:48,887 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:33:48,899 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:33:49,071 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:47:42,616 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:47:42,703 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:47:42,718 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:47:42,898 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:47:44,733 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:47:44,773 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:47:50,670 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:47:50,705 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:47:59,365 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:47:59,466 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:47:59,474 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:47:59,573 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:48:14,372 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:48:14,468 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:48:14,477 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:48:14,545 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:48:19,215 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:48:19,285 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:48:19,295 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:48:19,341 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:48:21,655 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:48:21,778 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:48:21,787 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:48:21,973 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:49:19,679 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:49:19,761 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:49:19,781 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:49:19,830 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:49:27,639 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:49:27,734 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:49:27,743 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:49:27,789 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:49:54,180 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:49:54,225 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:49:54,232 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:49:54,267 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:50:17,380 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:50:17,408 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:56:19,396 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:56:19,468 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:56:19,477 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:56:19,538 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:56:24,439 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:56:24,468 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:58:22,450 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:58:22,523 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 11:58:33,620 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 11:58:33,712 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 11:58:33,721 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 11:58:33,876 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:35:26,310 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 13:35:26,448 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 13:35:26,461 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:35:26,535 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:35:27,932 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:35:27,969 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:35:33,153 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:35:33,192 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:35:45,536 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:35:45,571 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:35:50,062 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:35:50,099 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:37:34,034 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:37:34,167 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:37:38,836 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 13:37:38,880 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 13:37:38,895 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:37:38,941 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:40:05,079 - data_fetcher - ERROR - 拉取数据失败: unexpected exception
+2025-05-29 13:41:17,459 - data_fetcher - ERROR - 拉取数据失败: unexpected exception
+2025-05-29 13:57:30,884 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 13:57:30,932 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 13:57:30,952 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:57:31,068 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:57:47,999 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 13:57:48,119 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 13:57:48,149 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:57:48,218 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:58:31,273 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 13:58:31,392 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 13:58:31,410 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:58:31,588 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:58:33,235 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 13:58:33,320 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 13:58:33,329 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:58:33,372 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:58:45,140 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 13:58:45,215 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 13:58:45,224 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:58:45,258 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:59:27,351 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 13:59:27,519 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 13:59:27,528 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:59:27,565 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 13:59:31,500 - api.services.prediction_service - INFO - 正在查询预测数据，limit=100
+2025-05-29 13:59:31,542 - api.services.prediction_service - INFO - 查询到100条预测数据
+2025-05-29 13:59:31,550 - api.services.prediction_service - INFO - 正在查询预测数据，limit=10000
+2025-05-29 13:59:31,593 - api.services.prediction_service - INFO - 查询到1000条预测数据
+2025-05-29 15:45:30,207 - model_predictor - INFO - 模型已加载: models/price_model.pkl
+2025-05-29 15:45:30,207 - model_predictor - INFO - 模型已加载: models/price_model.pkl
+2025-05-29 15:45:30,207 - model_predictor - INFO - 模型自带特征名: None
+2025-05-29 15:45:30,207 - model_predictor - INFO - 模型自带特征名: None
+2025-05-29 15:45:30,208 - model_predictor - INFO - 加载特征名列表: ['day_of_week', 'is_weekend', 'month', 'day', 'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d', 'days_since_last_change', 'change_freq_7d', 'change_freq_30d', 'price_trend_7d', 'price_trend_14d', 'prophet_trend', 'prophet_yhat']
+2025-05-29 15:45:30,208 - model_predictor - INFO - 加载特征名列表: ['day_of_week', 'is_weekend', 'month', 'day', 'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d', 'days_since_last_change', 'change_freq_7d', 'change_freq_30d', 'price_trend_7d', 'price_trend_14d', 'prophet_trend', 'prophet_yhat']
+2025-05-29 15:45:30,216 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 15:45:30,358 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 15:45:30,367 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 15:45:30,392 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 15:45:43,114 - model_predictor - INFO - 模型已加载: models/price_model.pkl
+2025-05-29 15:45:43,114 - model_predictor - INFO - 模型自带特征名: None
+2025-05-29 15:45:43,115 - model_predictor - INFO - 加载特征名列表: ['day_of_week', 'is_weekend', 'month', 'day', 'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d', 'days_since_last_change', 'change_freq_7d', 'change_freq_30d', 'price_trend_7d', 'price_trend_14d', 'prophet_trend', 'prophet_yhat']
+2025-05-29 15:45:43,603 - model_predictor - INFO - 模型已加载: models/price_model.pkl
+2025-05-29 15:45:43,603 - model_predictor - INFO - 模型自带特征名: None
+2025-05-29 15:45:43,604 - model_predictor - INFO - 加载特征名列表: ['day_of_week', 'is_weekend', 'month', 'day', 'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d', 'days_since_last_change', 'change_freq_7d', 'change_freq_30d', 'price_trend_7d', 'price_trend_14d', 'prophet_trend', 'prophet_yhat']
+2025-05-29 15:45:43,612 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 15:45:43,813 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 15:45:43,839 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 15:45:43,872 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 15:45:52,508 - model_predictor - INFO - 模型已加载: models/price_model.pkl
+2025-05-29 15:45:52,508 - model_predictor - INFO - 模型自带特征名: None
+2025-05-29 15:45:52,508 - model_predictor - INFO - 加载特征名列表: ['day_of_week', 'is_weekend', 'month', 'day', 'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d', 'days_since_last_change', 'change_freq_7d', 'change_freq_30d', 'price_trend_7d', 'price_trend_14d', 'prophet_trend', 'prophet_yhat']
+2025-05-29 15:45:53,293 - model_predictor - INFO - 模型已加载: models/price_model.pkl
+2025-05-29 15:45:53,294 - model_predictor - INFO - 模型自带特征名: None
+2025-05-29 15:45:53,294 - model_predictor - INFO - 加载特征名列表: ['day_of_week', 'is_weekend', 'month', 'day', 'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d', 'days_since_last_change', 'change_freq_7d', 'change_freq_30d', 'price_trend_7d', 'price_trend_14d', 'prophet_trend', 'prophet_yhat']
+2025-05-29 15:45:53,306 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 15:45:53,390 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 15:45:53,400 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 15:45:53,427 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 15:45:58,597 - model_predictor - INFO - 模型已加载: models/price_model.pkl
+2025-05-29 15:45:58,613 - model_predictor - INFO - 模型自带特征名: None
+2025-05-29 15:45:58,614 - model_predictor - INFO - 加载特征名列表: ['day_of_week', 'is_weekend', 'month', 'day', 'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d', 'days_since_last_change', 'change_freq_7d', 'change_freq_30d', 'price_trend_7d', 'price_trend_14d', 'prophet_trend', 'prophet_yhat']
+2025-05-29 15:45:59,204 - model_predictor - INFO - 模型已加载: models/price_model.pkl
+2025-05-29 15:45:59,207 - model_predictor - INFO - 模型自带特征名: None
+2025-05-29 15:45:59,229 - model_predictor - INFO - 加载特征名列表: ['day_of_week', 'is_weekend', 'month', 'day', 'price_mean_7d', 'price_std_7d', 'price_mean_14d', 'price_std_14d', 'days_since_last_change', 'change_freq_7d', 'change_freq_30d', 'price_trend_7d', 'price_trend_14d', 'prophet_trend', 'prophet_yhat']
+2025-05-29 15:45:59,255 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 15:45:59,338 - api.services.prediction_service - INFO - 数据库连接测试成功
+2025-05-29 15:45:59,351 - api.services.prediction_service - INFO - 初始化PredictionService，数据库配置: {'host': 'localhost', 'port': 13306, 'user': 'root', 'database': 'price_prediction'}
+2025-05-29 15:45:59,391 - api.services.prediction_service - INFO - 数据库连接测试成功
